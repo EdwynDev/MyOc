@@ -5,7 +5,7 @@ namespace Controllers;
 class BaseController {
     protected function view($view, $data = []) {
         extract($data);
-        include "/../../views/{$view}.php";
+        include __DIR__ . '/../../views/' . $view . '.php';
     }
     
     protected function redirect($path) {
