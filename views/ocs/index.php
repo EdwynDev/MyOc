@@ -17,6 +17,28 @@ ob_start();
         </a>
     </div>
     
+    <!-- Avertissement si aucune race -->
+    <div id="no-races-alert" class="hidden mb-8 bg-amber-50 border border-amber-200 rounded-lg p-6">
+        <div class="flex items-start">
+            <svg class="w-6 h-6 text-amber-600 mt-0.5 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+            </svg>
+            <div class="flex-1">
+                <h3 class="font-medium text-amber-800 mb-2">Aucune race disponible</h3>
+                <p class="text-sm text-amber-700 mb-4">
+                    Pour créer des OCs plus détaillés, nous recommandons de créer d'abord quelques races. 
+                    Cela vous permettra de mieux organiser vos personnages.
+                </p>
+                <a href="/races/create" class="inline-flex items-center px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                    Créer une race
+                </a>
+            </div>
+        </div>
+    </div>
+    
     <!-- Filtres et recherche -->
     <div class="bg-white p-6 rounded-lg shadow-lg border mb-8">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
@@ -70,8 +92,18 @@ ob_start();
     window.addEventListener('DOMContentLoaded', function() {
         loadOCs();
         loadRaces();
+        checkRacesAvailability();
         setupEventListeners();
     });
+    
+    function checkRacesAvailability() {
+        const data = JSON.parse(localStorage.getItem('oc_data') || '{}');
+        const races = data.races || [];
+        
+        if (races.length === 0) {
+            document.getElementById('no-races-alert').classList.remove('hidden');
+        }
+    }
     
     function loadOCs() {
         const data = JSON.parse(localStorage.getItem('oc_data') || '{}');

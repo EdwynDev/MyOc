@@ -4,12 +4,39 @@ ob_start();
 ?>
 
 <div class="fade-in">
+    <!-- Message si aucune race n'existe -->
+    <div id="no-races-warning" class="hidden mb-8 bg-amber-50 border border-amber-200 rounded-lg p-6">
+        <div class="flex items-start">
+            <svg class="w-6 h-6 text-amber-600 mt-0.5 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+            </svg>
+            <div class="flex-1">
+                <h3 class="font-medium text-amber-800 mb-2">Aucune race disponible</h3>
+                <p class="text-sm text-amber-700 mb-4">
+                    Vous devez créer au moins une race avant de pouvoir créer un Original Character. 
+                    Les races définissent les caractéristiques de base de vos personnages.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="/races/create" class="inline-flex items-center px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        Créer ma première race
+                    </a>
+                    <a href="/ocs" class="inline-flex items-center px-4 py-2 border border-amber-300 text-amber-700 rounded-lg hover:bg-amber-100 transition-colors">
+                        Retour aux OCs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="mb-8">
         <h1 class="text-3xl font-bold text-gray-900 mb-2">Créer un Original Character</h1>
         <p class="text-gray-600">Donnez vie à votre nouveau personnage</p>
     </div>
     
-    <form id="oc-form" class="max-w-4xl">
+    <form id="oc-form" class="max-w-4xl" style="display: none;">
         <div class="bg-white p-8 rounded-lg shadow-lg border space-y-6">
             <!-- Informations de base -->
             <div class="border-b border-gray-200 pb-6">
@@ -131,14 +158,38 @@ ob_start();
 
 <script>
     window.addEventListener('DOMContentLoaded', function() {
-        loadRaces();
-        setupForm();
+        if (checkRacesExist()) {
+            loadRaces();
+            setupForm();
+            document.getElementById('oc-form').style.display = 'block';
+        } else {
+            showNoRacesWarning();
+        }
     });
+    
+    function checkRacesExist() {
+        const data = JSON.parse(localStorage.getItem('oc_data') || '{}');
+        const races = data.races || [];
+        return races.length > 0;
+    }
+    
+    function showNoRacesWarning() {
+        document.getElementById('no-races-warning').classList.remove('hidden');
+        
+        // Masquer le titre et la description si aucune race
+        const header = document.querySelector('.mb-8');
+        if (header && header.querySelector('h1')) {
+            header.style.display = 'none';
+        }
+    }
     
     function loadRaces() {
         const data = JSON.parse(localStorage.getItem('oc_data') || '{}');
         const races = data.races || [];
         const raceSelect = document.getElementById('race');
+        
+        // Vider les options existantes sauf la première
+        raceSelect.innerHTML = '<option value="">Sélectionner une race</option>';
         
         races.forEach(race => {
             const option = document.createElement('option');
@@ -165,6 +216,13 @@ ob_start();
             if (!ocData.name) {
                 alert('Le nom est obligatoire !');
                 return;
+            }
+            
+            // Vérifier qu'une race est sélectionnée (optionnel mais recommandé)
+            if (!ocData.race) {
+                if (!confirm('Aucune race sélectionnée. Voulez-vous continuer sans race ?')) {
+                    return;
+                }
             }
             
             // Créer l'OC

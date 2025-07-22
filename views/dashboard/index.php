@@ -70,11 +70,11 @@ ob_start();
     
     <!-- Actions rapides -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        <a href="/ocs/create" class="group bg-gradient-to-r from-indigo-500 to-purple-600 p-6 rounded-lg shadow-lg text-white hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105">
+        <a href="/ocs/create" id="create-oc-link" class="group bg-gradient-to-r from-indigo-500 to-purple-600 p-6 rounded-lg shadow-lg text-white hover:from-indigo-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105">
             <div class="flex items-center justify-between">
                 <div>
                     <h3 class="text-lg font-semibold mb-2">Créer un OC</h3>
-                    <p class="text-indigo-100">Ajoutez un nouveau personnage original</p>
+                    <p id="create-oc-description" class="text-indigo-100">Ajoutez un nouveau personnage original</p>
                 </div>
                 <svg class="w-8 h-8 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -150,7 +150,29 @@ ob_start();
     window.addEventListener('DOMContentLoaded', function() {
         updateStats();
         loadRecentOCs();
+        checkRacesForOCCreation();
     });
+    
+    function checkRacesForOCCreation() {
+        const data = JSON.parse(localStorage.getItem('oc_data') || '{}');
+        const races = data.races || [];
+        
+        if (races.length === 0) {
+            const createOCLink = document.getElementById('create-oc-link');
+            const createOCDescription = document.getElementById('create-oc-description');
+            
+            // Modifier le lien pour rediriger vers la création de race
+            createOCLink.href = '/races/create';
+            createOCLink.classList.remove('from-indigo-500', 'to-purple-600', 'hover:from-indigo-600', 'hover:to-purple-700');
+            createOCLink.classList.add('from-amber-500', 'to-orange-600', 'hover:from-amber-600', 'hover:to-orange-700');
+            
+            // Modifier le texte
+            createOCLink.querySelector('h3').textContent = 'Créer une race d\'abord';
+            createOCDescription.textContent = 'Créez une race avant vos OCs';
+            createOCDescription.classList.remove('text-indigo-100');
+            createOCDescription.classList.add('text-amber-100');
+        }
+    }
     
     function updateStats() {
         const data = JSON.parse(localStorage.getItem('oc_data') || '{}');
