@@ -1,0 +1,41 @@
+-- Migration: Création de la table community_races
+-- Date: 2025-01-27
+
+CREATE TABLE IF NOT EXISTS community_races (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    type VARCHAR(100) NULL,
+    origin VARCHAR(255) NULL,
+    lifespan VARCHAR(100) NULL,
+    description TEXT NULL,
+    appearance TEXT NULL,
+    height VARCHAR(100) NULL,
+    weight VARCHAR(100) NULL,
+    abilities TEXT NULL,
+    strengths TEXT NULL,
+    weaknesses TEXT NULL,
+    culture TEXT NULL,
+    society TEXT NULL,
+    language VARCHAR(255) NULL,
+    religion VARCHAR(255) NULL,
+    habitat TEXT NULL,
+    diet VARCHAR(100) NULL,
+    notes TEXT NULL,
+    images JSON NULL,
+    custom_fields JSON NULL,
+    is_public BOOLEAN DEFAULT FALSE,
+    status ENUM('draft', 'pending', 'approved', 'rejected') DEFAULT 'draft',
+    likes_count INT DEFAULT 0,
+    views_count INT DEFAULT 0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    INDEX idx_user_id (user_id),
+    INDEX idx_is_public (is_public),
+    INDEX idx_status (status),
+    INDEX idx_name (name),
+    INDEX idx_created_at (created_at),
+    INDEX idx_likes_count (likes_count)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

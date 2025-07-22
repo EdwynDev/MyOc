@@ -48,6 +48,14 @@
                 </svg>
                 Personnaliser formulaires
             </a>
+            
+            <a href="/settings/database" class="nav-link flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-indigo-50 hover:text-indigo-700 transition-all duration-200 ml-4">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 1.79 4 4 4h8c2.21 0 4-1.79 4-4V7c0-2.21-1.79-4-4-4H8c-2.21 0-4 1.79-4 4z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 11H7m4 0h2m-6 4h8"></path>
+                </svg>
+                Base de données
+            </a>
         </nav>
         
         <div class="p-4 border-t border-gray-200">

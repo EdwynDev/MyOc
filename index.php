@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+// Inclure la configuration de la base de données
+require_once __DIR__ . '/config/database.php';
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -21,6 +24,7 @@ use Controllers\DashboardController;
 use Controllers\OCController;
 use Controllers\RaceController;
 use Controllers\SettingsController;
+use Controllers\DatabaseController;
 
 $router = new Router();
 
@@ -54,9 +58,18 @@ $router->group(['middleware' => AuthMiddleware::class], function($router) {
     // Paramètres et import/export
     $router->get('/settings', [SettingsController::class, 'index']);
     $router->get('/settings/custom-fields', [SettingsController::class, 'customFieldsView']);
+    $router->get('/settings/database', function() {
+        include 'views/settings/database.php';
+    });
     $router->post('/settings/export', [SettingsController::class, 'export']);
     $router->post('/settings/import', [SettingsController::class, 'import']);
     $router->post('/settings/custom-fields', [SettingsController::class, 'customFields']);
+    
+    // API pour la base de données
+    $router->post('/api/database/test', [DatabaseController::class, 'testConnection']);
+    $router->post('/api/database/info', [DatabaseController::class, 'info']);
+    $router->post('/api/database/migrate', [DatabaseController::class, 'migrate']);
+    $router->post('/api/database/seed', [DatabaseController::class, 'seed']);
 });
 
 try {
