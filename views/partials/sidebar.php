@@ -1,7 +1,14 @@
-<aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
+<aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out border-r border-gray-200">
     <div class="flex flex-col h-full">
         <div class="flex items-center justify-center h-16 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
-            <h2 class="text-lg font-bold">YOC</h2>
+            <div class="flex items-center">
+                <h2 class="text-lg font-bold">YOC</h2>
+                <button id="sidebar-close" class="lg:hidden ml-auto p-1 text-white hover:bg-white hover:bg-opacity-20 rounded">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
         
         <nav class="flex-1 px-4 py-6 space-y-2">
@@ -51,5 +58,3 @@
         </div>
     </div>
 </aside>
-
-<div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden"></div>

@@ -28,6 +28,7 @@ class OCManager {
     initializeEventListeners() {
         // Sidebar toggle
         const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebarClose = document.getElementById('sidebar-close');
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('sidebar-overlay');
         
@@ -40,12 +41,31 @@ class OCManager {
             });
         }
         
+        if (sidebarClose && sidebar) {
+            sidebarClose.addEventListener('click', () => {
+                sidebar.classList.add('-translate-x-full');
+                if (overlay) {
+                    overlay.classList.add('hidden');
+                }
+            });
+        }
+        
         if (overlay) {
             overlay.addEventListener('click', () => {
                 sidebar.classList.add('-translate-x-full');
                 overlay.classList.add('hidden');
             });
         }
+        
+        // Fermer le sidebar avec Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sidebar && !sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.add('-translate-x-full');
+                if (overlay) {
+                    overlay.classList.add('hidden');
+                }
+            }
+        });
         
         // Navigation active state
         this.updateActiveNavigation();

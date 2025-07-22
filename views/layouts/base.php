@@ -32,6 +32,7 @@
         <?php if (isset($_SESSION['user_name'])): ?>
             <?php include __DIR__ . '/../partials/header.php'; ?>
             <?php include __DIR__ . '/../partials/sidebar.php'; ?>
+            <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden"></div>
             <main class="ml-0 lg:ml-64 transition-all duration-300">
                 <div class="p-4 lg:p-8">
                     <?php include __DIR__ . '/../partials/alerts.php'; ?>
