@@ -30,8 +30,8 @@
 <body class="h-full bg-gradient-to-br from-indigo-50 via-white to-cyan-50 font-electrolize">
     <div class="min-h-screen">
         <?php if (isset($_SESSION['user_name'])): ?>
-            <?php include 'partials/header.php'; ?>
-            <?php include 'partials/sidebar.php'; ?>
+            <?php include __DIR__ . '/../partials/header.php'; ?>
+            <?php include __DIR__ . '/../partials/sidebar.php'; ?>
             <main class="ml-0 lg:ml-64 transition-all duration-300">
                 <div class="p-4 lg:p-8">
                     <?php include __DIR__ . '/../partials/alerts.php'; ?>
