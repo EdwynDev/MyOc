@@ -78,5 +78,5 @@ ob_start();
 
 <?php 
 $content = ob_get_clean();
-include 'layouts/base.php';
+include __DIR__ . '/../layouts/base.php';
 ?>
