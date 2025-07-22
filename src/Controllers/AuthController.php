@@ -4,6 +4,7 @@ namespace Controllers;
 
 class AuthController extends BaseController {
     public function login() {
+        // error_log('AuthController::login called');
         if (isset($_SESSION['user_name'])) {
             $this->redirect('/dashboard');
         }

@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Autoloader simple
 spl_autoload_register(function ($class) {
     $file = __DIR__ . '/src/' . str_replace('\\', '/', $class) . '.php';

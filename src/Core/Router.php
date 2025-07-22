@@ -35,6 +35,8 @@ class Router {
     }
     
     public function dispatch() {
+        // Debug : vérifier que dispatch est appelé
+        // error_log('Router dispatch called');
         $method = $_SERVER['REQUEST_METHOD'];
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         
