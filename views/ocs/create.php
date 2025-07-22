@@ -136,6 +136,36 @@ ob_start();
                 </div>
             </div>
             
+            <!-- Images -->
+            <div class="border-b border-gray-200 pb-6">
+                <h2 class="text-xl font-bold text-gray-900 mb-4">Images</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm text-gray-600">Ajoutez des images pour illustrer votre OC</p>
+                        <button type="button" onclick="addImageField()" class="inline-flex items-center px-3 py-2 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700 transition-colors">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                            Ajouter une image
+                        </button>
+                    </div>
+                    
+                    <div id="images-container" class="space-y-4">
+                        <!-- Les champs d'images seront ajoutés ici -->
+                    </div>
+                    
+                    <div id="no-images" class="text-center py-8 text-gray-500 border-2 border-dashed border-gray-300 rounded-lg">
+                        <svg class="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        <p class="text-sm">Aucune image ajoutée</p>
+                        <button type="button" onclick="addImageField()" class="inline-block mt-2 text-sm text-indigo-600 hover:text-indigo-800">
+                            Ajouter votre première image
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Relations -->
             <div class="pb-6">
                 <h2 class="text-xl font-bold text-gray-900 mb-4">Relations</h2>
@@ -238,6 +268,13 @@ ob_start();
             // Créer l'OC
             const oc = window.ocManager.createOC(ocData);
             
+            // Ajouter les images
+            const images = collectImages();
+            if (images.length > 0) {
+                ocData.images = images;
+                const updatedOC = window.ocManager.updateOC(oc.id, { images: images });
+            }
+            
             if (oc) {
                 window.ocManager.showNotification('OC créé avec succès !', 'success');
                 window.location.href = '/ocs';
@@ -245,6 +282,27 @@ ob_start();
                 window.ocManager.showNotification('Erreur lors de la création de l\'OC', 'error');
             }
         });
+    }
+    
+    function collectImages() {
+        const images = [];
+        const container = document.getElementById('images-container');
+        
+        container.querySelectorAll('[id^="image-field-"]').forEach(field => {
+            const urlInput = field.querySelector('input[name*="[url]"]');
+            const titleInput = field.querySelector('input[name*="[title]"]');
+            const descInput = field.querySelector('textarea[name*="[description]"]');
+            
+            if (urlInput && urlInput.value.trim()) {
+                images.push({
+                    url: urlInput.value.trim(),
+                    title: titleInput ? titleInput.value.trim() : '',
+                    description: descInput ? descInput.value.trim() : ''
+                });
+            }
+        });
+        
+        return images;
     }
     
     function loadCustomFields() {
@@ -315,6 +373,104 @@ ob_start();
                         <input type="text" id="${key}" name="${key}" ${requiredAttr} class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="${field.placeholder || ''}">
                     </div>
                 `;
+        }
+    }
+    
+    let imageCounter = 0;
+    
+    function addImageField() {
+        const container = document.getElementById('images-container');
+        const noImages = document.getElementById('no-images');
+        
+        imageCounter++;
+        const imageId = `image_${imageCounter}`;
+        
+        const imageField = document.createElement('div');
+        imageField.className = 'bg-gray-50 border border-gray-200 rounded-lg p-4';
+        imageField.id = `image-field-${imageCounter}`;
+        
+        imageField.innerHTML = `
+            <div class="flex items-center justify-between mb-3">
+                <h4 class="font-medium text-gray-900">Image ${imageCounter}</h4>
+                <button type="button" onclick="removeImageField(${imageCounter})" class="text-red-600 hover:text-red-800 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="space-y-3">
+                <div>
+                    <label for="${imageId}_url" class="block text-sm font-medium text-gray-700 mb-1">URL de l'image</label>
+                    <input type="url" id="${imageId}_url" name="images[${imageCounter}][url]" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="https://exemple.com/image.jpg">
+                </div>
+                
+                <div>
+                    <label for="${imageId}_title" class="block text-sm font-medium text-gray-700 mb-1">Titre (optionnel)</label>
+                    <input type="text" id="${imageId}_title" name="images[${imageCounter}][title]" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Titre de l'image">
+                </div>
+                
+                <div>
+                    <label for="${imageId}_description" class="block text-sm font-medium text-gray-700 mb-1">Description (optionnel)</label>
+                    <textarea id="${imageId}_description" name="images[${imageCounter}][description]" rows="2" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Description de l'image"></textarea>
+                </div>
+                
+                <div class="bg-white border border-gray-200 rounded-lg p-3">
+                    <div id="${imageId}_preview" class="text-center text-gray-500 text-sm">
+                        Aperçu de l'image (entrez une URL ci-dessus)
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        container.appendChild(imageField);
+        noImages.style.display = 'none';
+        
+        // Ajouter l'événement pour l'aperçu
+        const urlInput = document.getElementById(`${imageId}_url`);
+        urlInput.addEventListener('input', function() {
+            updateImagePreview(imageId, this.value);
+        });
+    }
+    
+    function removeImageField(id) {
+        const field = document.getElementById(`image-field-${id}`);
+        if (field) {
+            field.remove();
+            
+            // Vérifier s'il reste des images
+            const container = document.getElementById('images-container');
+            const noImages = document.getElementById('no-images');
+            
+            if (container.children.length === 0) {
+                noImages.style.display = 'block';
+            }
+        }
+    }
+    
+    function updateImagePreview(imageId, url) {
+        const preview = document.getElementById(`${imageId}_preview`);
+        
+        if (url && isValidImageUrl(url)) {
+            preview.innerHTML = `
+                <img src="${url}" alt="Aperçu" class="max-w-full max-h-32 mx-auto rounded-lg shadow-sm" 
+                     onerror="this.parentElement.innerHTML='<span class=\\"text-red-500 text-sm\\">Impossible de charger l\\'image</span>'"
+                     onload="this.parentElement.querySelector('.loading')?.remove()">
+                <div class="loading text-gray-500 text-sm mt-2">Chargement...</div>
+            `;
+        } else if (url) {
+            preview.innerHTML = '<span class="text-amber-600 text-sm">URL invalide ou format non supporté</span>';
+        } else {
+            preview.innerHTML = '<span class="text-gray-500 text-sm">Aperçu de l\'image (entrez une URL ci-dessus)</span>';
+        }
+    }
+    
+    function isValidImageUrl(url) {
+        try {
+            const urlObj = new URL(url);
+            return /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(urlObj.pathname) || url.includes('imgur') || url.includes('discord') || url.includes('pinterest');
+        } catch {
+            return false;
         }
     }
 </script>
