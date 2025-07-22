@@ -34,12 +34,12 @@
             <?php include 'partials/sidebar.php'; ?>
             <main class="ml-0 lg:ml-64 transition-all duration-300">
                 <div class="p-4 lg:p-8">
-                    <?php include 'partials/alerts.php'; ?>
+                    <?php include __DIR__ . '/../partials/alerts.php'; ?>
                     <?= $content ?>
                 </div>
             </main>
         <?php else: ?>
-            <?php include 'partials/alerts.php'; ?>
+            <?php include __DIR__ . '/../partials/alerts.php'; ?>
             <?= $content ?>
         <?php endif; ?>
     </div>
