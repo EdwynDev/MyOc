@@ -12,10 +12,40 @@ ob_start();
                 </svg>
             </div>
             <h2 class="text-3xl font-bold text-gray-900 mb-2">Bienvenue dans votre gestionnaire d'OC</h2>
-            <p class="text-gray-600 mb-8">Gérez vos Original Characters et leurs races en toute simplicité</p>
+            <p class="text-gray-600 mb-8">Créez et gérez vos Original Characters avec des formulaires personnalisables</p>
         </div>
         
         <div class="bg-white p-6 rounded-lg shadow-lg border">
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">Fonctionnalités principales :</h3>
+                <ul class="text-sm text-gray-600 space-y-2">
+                    <li class="flex items-center">
+                        <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Gestion complète d'Original Characters et de races
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Formulaires personnalisables avec champs sur mesure
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Export/Import JSON pour sauvegarder vos créations
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Interface moderne et responsive
+                    </li>
+                </ul>
+            </div>
+            
             <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
                 <div class="flex items-start">
                     <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -24,7 +54,7 @@ ob_start();
                     <div>
                         <h3 class="text-sm font-medium text-blue-800">Stockage local</h3>
                         <p class="text-xs text-blue-700 mt-1">
-                            Vos données sont stockées uniquement sur votre appareil. Aucune information n'est partagée ou envoyée sur internet.
+                            Vos données sont stockées uniquement sur votre appareil. Aucune information n'est partagée ou envoyée sur internet. Pensez à exporter régulièrement vos données !
                         </p>
                     </div>
                 </div>

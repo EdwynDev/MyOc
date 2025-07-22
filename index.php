@@ -53,6 +53,7 @@ $router->group(['middleware' => AuthMiddleware::class], function($router) {
     
     // Paramètres et import/export
     $router->get('/settings', [SettingsController::class, 'index']);
+    $router->get('/settings/custom-fields', [SettingsController::class, 'customFieldsView']);
     $router->post('/settings/export', [SettingsController::class, 'export']);
     $router->post('/settings/import', [SettingsController::class, 'import']);
     $router->post('/settings/custom-fields', [SettingsController::class, 'customFields']);

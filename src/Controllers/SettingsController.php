@@ -7,6 +7,10 @@ class SettingsController extends BaseController {
         $this->view('settings/index');
     }
     
+    public function customFieldsView() {
+        $this->view('settings/custom-fields');
+    }
+    
     public function export() {
         // L'export est géré côté JavaScript, mais on peut ajouter une validation
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

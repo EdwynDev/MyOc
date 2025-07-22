@@ -9,6 +9,42 @@ ob_start();
         <p class="text-gray-600">Gérez vos données et personnalisez votre expérience</p>
     </div>
     
+    <!-- Navigation rapide -->
+    <div class="bg-white p-6 rounded-lg shadow-lg border mb-8">
+        <h2 class="text-lg font-bold text-gray-900 mb-4">Actions rapides</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <a href="/settings/custom-fields" class="flex items-center p-4 border border-gray-200 rounded-lg hover:border-indigo-300 hover:bg-indigo-50 transition-all duration-200">
+                <svg class="w-8 h-8 text-indigo-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+                </svg>
+                <div>
+                    <h3 class="font-medium text-gray-900">Champs personnalisés</h3>
+                    <p class="text-sm text-gray-600">Personnaliser les formulaires</p>
+                </div>
+            </a>
+            
+            <button onclick="exportData()" class="flex items-center p-4 border border-gray-200 rounded-lg hover:border-green-300 hover:bg-green-50 transition-all duration-200">
+                <svg class="w-8 h-8 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                <div>
+                    <h3 class="font-medium text-gray-900">Export rapide</h3>
+                    <p class="text-sm text-gray-600">Sauvegarder vos données</p>
+                </div>
+            </button>
+            
+            <button onclick="document.getElementById('import-file').click()" class="flex items-center p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-all duration-200">
+                <svg class="w-8 h-8 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
+                </svg>
+                <div>
+                    <h3 class="font-medium text-gray-900">Import rapide</h3>
+                    <p class="text-sm text-gray-600">Charger des données</p>
+                </div>
+            </button>
+        </div>
+    </div>
+    
     <!-- Import/Export -->
     <div class="bg-white p-8 rounded-lg shadow-lg border mb-8">
         <h2 class="text-xl font-bold text-gray-900 mb-6">Sauvegarde et restauration</h2>

@@ -128,6 +128,14 @@ ob_start();
                 </div>
             </div>
             
+            <!-- Champs personnalisés -->
+            <div id="custom-fields-section" class="border-b border-gray-200 pb-6">
+                <h2 class="text-xl font-bold text-gray-900 mb-4">Informations supplémentaires</h2>
+                <div id="custom-fields-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Sera rempli par JavaScript -->
+                </div>
+            </div>
+            
             <!-- Relations -->
             <div class="pb-6">
                 <h2 class="text-xl font-bold text-gray-900 mb-4">Relations</h2>
@@ -200,6 +208,8 @@ ob_start();
     }
     
     function setupForm() {
+        loadCustomFields();
+        
         const form = document.getElementById('oc-form');
         form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -235,6 +245,77 @@ ob_start();
                 window.ocManager.showNotification('Erreur lors de la création de l\'OC', 'error');
             }
         });
+    }
+    
+    function loadCustomFields() {
+        const data = JSON.parse(localStorage.getItem('oc_data') || '{}');
+        const customFields = data.custom_fields?.oc || {};
+        const container = document.getElementById('custom-fields-container');
+        const section = document.getElementById('custom-fields-section');
+        
+        const fieldEntries = Object.entries(customFields);
+        
+        if (fieldEntries.length === 0) {
+            section.style.display = 'none';
+            return;
+        }
+        
+        section.style.display = 'block';
+        container.innerHTML = fieldEntries.map(([key, field]) => createCustomFieldInput(key, field)).join('');
+    }
+    
+    function createCustomFieldInput(key, field) {
+        const requiredAttr = field.required ? 'required' : '';
+        const requiredLabel = field.required ? ' *' : '';
+        
+        switch (field.inputType) {
+            case 'textarea':
+                return `
+                    <div>
+                        <label for="${key}" class="block text-sm font-medium text-gray-700 mb-2">${field.name}${requiredLabel}</label>
+                        <textarea id="${key}" name="${key}" rows="3" ${requiredAttr} class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="${field.placeholder || ''}"></textarea>
+                    </div>
+                `;
+            case 'select':
+                const options = field.options?.map(opt => `<option value="${opt}">${opt}</option>`).join('') || '';
+                return `
+                    <div>
+                        <label for="${key}" class="block text-sm font-medium text-gray-700 mb-2">${field.name}${requiredLabel}</label>
+                        <select id="${key}" name="${key}" ${requiredAttr} class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="">Sélectionner...</option>
+                            ${options}
+                        </select>
+                    </div>
+                `;
+            case 'checkbox':
+                return `
+                    <div class="flex items-center">
+                        <input type="checkbox" id="${key}" name="${key}" value="1" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                        <label for="${key}" class="ml-2 block text-sm text-gray-700">${field.name}</label>
+                    </div>
+                `;
+            case 'number':
+                return `
+                    <div>
+                        <label for="${key}" class="block text-sm font-medium text-gray-700 mb-2">${field.name}${requiredLabel}</label>
+                        <input type="number" id="${key}" name="${key}" ${requiredAttr} class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="${field.placeholder || ''}">
+                    </div>
+                `;
+            case 'date':
+                return `
+                    <div>
+                        <label for="${key}" class="block text-sm font-medium text-gray-700 mb-2">${field.name}${requiredLabel}</label>
+                        <input type="date" id="${key}" name="${key}" ${requiredAttr} class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                `;
+            default: // text
+                return `
+                    <div>
+                        <label for="${key}" class="block text-sm font-medium text-gray-700 mb-2">${field.name}${requiredLabel}</label>
+                        <input type="text" id="${key}" name="${key}" ${requiredAttr} class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="${field.placeholder || ''}">
+                    </div>
+                `;
+        }
     }
 </script>
 
