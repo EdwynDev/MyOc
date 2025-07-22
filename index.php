@@ -25,6 +25,8 @@ use Controllers\OCController;
 use Controllers\RaceController;
 use Controllers\SettingsController;
 use Controllers\DatabaseController;
+use Controllers\CommunityController;
+use Controllers\CommunityAuthController;
 
 $router = new Router();
 
@@ -33,6 +35,32 @@ $router->get('/', [HomeController::class, 'index']);
 $router->get('/login', [AuthController::class, 'login']);
 $router->post('/login', [AuthController::class, 'authenticate']);
 $router->get('/legal', [HomeController::class, 'legal']);
+
+// Routes communautaires publiques
+$router->get('/community', [CommunityController::class, 'index']);
+$router->get('/community/ocs', [CommunityController::class, 'ocs']);
+$router->get('/community/races', [CommunityController::class, 'races']);
+$router->get('/community/oc/{id}', [CommunityController::class, 'viewOC']);
+$router->get('/community/race/{id}', [CommunityController::class, 'viewRace']);
+$router->get('/community/profile/{username}', [CommunityController::class, 'profile']);
+
+// Authentification communautaire
+$router->get('/community/login', [CommunityAuthController::class, 'login']);
+$router->post('/community/login', [CommunityAuthController::class, 'handleLogin']);
+$router->get('/community/register', [CommunityAuthController::class, 'register']);
+$router->post('/community/register', [CommunityAuthController::class, 'handleRegister']);
+$router->get('/community/logout', [CommunityAuthController::class, 'logout']);
+$router->get('/community/profile', [CommunityAuthController::class, 'profile']);
+$router->post('/community/profile', [CommunityAuthController::class, 'profile']);
+
+// API communautaire
+$router->post('/community/like-oc', [CommunityController::class, 'likeOC']);
+$router->post('/community/like-race', [CommunityController::class, 'likeRace']);
+$router->post('/community/add-comment', [CommunityController::class, 'addComment']);
+$router->get('/community/publish-oc', [CommunityController::class, 'publishOC']);
+$router->post('/community/publish-oc', [CommunityController::class, 'publishOC']);
+$router->get('/community/publish-race', [CommunityController::class, 'publishRace']);
+$router->post('/community/publish-race', [CommunityController::class, 'publishRace']);
 
 // Routes protégées
 $router->group(['middleware' => AuthMiddleware::class], function($router) {
