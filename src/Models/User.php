@@ -54,4 +54,35 @@ class User extends BaseModel {
     public function findActiveUsers() {
         return $this->findWhere('status', 'active');
     }
+    
+    /**
+     * Trouve les top créateurs avec le nombre de créations
+     */
+    public function getTopCreators($limit = 5) {
+        $stmt = $this->db->prepare("
+            SELECT u.*, 
+                   (SELECT COUNT(*) FROM community_ocs WHERE user_id = u.id AND is_public = 1) +
+                   (SELECT COUNT(*) FROM community_races WHERE user_id = u.id AND is_public = 1) as total_creations
+            FROM {$this->table} u 
+            WHERE u.status = 'active'
+            HAVING total_creations > 0
+            ORDER BY total_creations DESC 
+            LIMIT ?
+        ");
+        $stmt->execute([$limit]);
+        return $stmt->fetchAll();
+    }
+    
+    /**
+     * Trouve les collections publiques d'un utilisateur
+     */
+    public function getPublicCollections($userId) {
+        $stmt = $this->db->prepare("
+            SELECT * FROM collections 
+            WHERE user_id = ? AND is_public = 1 
+            ORDER BY created_at DESC
+        ");
+        $stmt->execute([$userId]);
+        return $stmt->fetchAll();
+    }
 }
