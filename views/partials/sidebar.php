@@ -1,7 +1,7 @@
 <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
     <div class="flex flex-col h-full">
         <div class="flex items-center justify-center h-16 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
-            <h2 class="text-lg font-bold">YourOriginalCharacter</h2>
+            <h2 class="text-lg font-bold">YOC</h2>
         </div>
         
         <nav class="flex-1 px-4 py-6 space-y-2">

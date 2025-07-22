@@ -1,5 +1,5 @@
 <?php 
-$title = 'Créer un OC - YourOriginalCharacter';
+$title = 'Créer un OC - YOC';
 ob_start(); 
 ?>
 

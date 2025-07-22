@@ -1,5 +1,5 @@
 <?php 
-$title = 'Mes OC - YourOriginalCharacter';
+$title = 'Mes OC - YOC';
 ob_start(); 
 ?>
 

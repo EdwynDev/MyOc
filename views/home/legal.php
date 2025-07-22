@@ -1,5 +1,5 @@
 <?php 
-$title = 'Mentions légales - YourOriginalCharacter';
+$title = 'Mentions légales - YOC';
 ob_start(); 
 ?>
 
@@ -7,7 +7,7 @@ ob_start();
     <div class="max-w-4xl mx-auto">
         <div class="text-center mb-12 fade-in">
             <h1 class="text-3xl font-bold text-gray-900 mb-4">Mentions légales et Confidentialité</h1>
-            <p class="text-gray-600">Informations importantes sur l'utilisation de YourOriginalCharacter</p>
+            <p class="text-gray-600">Informations importantes sur l'utilisation de YOC</p>
         </div>
         
         <div class="space-y-8">

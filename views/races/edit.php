@@ -1,5 +1,5 @@
 <?php 
-$title = 'Modifier une race - YourOriginalCharacter';
+$title = 'Modifier une race - YOC';
 ob_start(); 
 ?>
 

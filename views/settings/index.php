@@ -1,5 +1,5 @@
 <?php 
-$title = 'Paramètres - YourOriginalCharacter';
+$title = 'Paramètres - YOC';
 ob_start(); 
 ?>
 

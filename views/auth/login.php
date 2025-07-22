@@ -1,5 +1,5 @@
 <?php 
-$title = 'Connexion - YourOriginalCharacter';
+$title = 'Connexion - YOC';
 ob_start(); 
 ?>
 

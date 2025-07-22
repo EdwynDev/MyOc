@@ -1,4 +1,4 @@
-// Application JavaScript principal pour YourOriginalCharacter
+// Application JavaScript principal pour YOC
 
 class OCManager {
     constructor() {

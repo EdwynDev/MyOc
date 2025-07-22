@@ -1,5 +1,5 @@
 <?php 
-$title = 'Tableau de bord - YourOriginalCharacter';
+$title = 'Tableau de bord - YOC';
 ob_start(); 
 ?>
 
