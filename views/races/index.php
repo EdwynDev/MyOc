@@ -112,10 +112,10 @@ ob_start();
                     ${race.images && race.images.length > 0 ? `
                         <div class="mb-4">
                             <div class="flex space-x-2 overflow-x-auto">
-                                ${race.images.slice(0, 3).map(img => `
-                                    <img src="${img.url}" alt="${img.title || 'Image race'}" 
+                                ${race.images.slice(0, 3).map((img, index) => `
+                                    <img src="${img.data}" alt="${img.title || 'Image race'}" 
                                          class="w-16 h-16 object-cover rounded-lg flex-shrink-0 border border-gray-200"
-                                         onerror="this.style.display='none'">
+                                         onerror="this.style.display='none'" loading="lazy">
                                 `).join('')}
                                 ${race.images.length > 3 ? `<div class="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center text-xs text-gray-500 flex-shrink-0">+${race.images.length - 3}</div>` : ''}
                             </div>

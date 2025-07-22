@@ -373,8 +373,9 @@ ob_start();
             
             <div class="space-y-3">
                 <div>
-                    <label for="${imageId}_url" class="block text-sm font-medium text-gray-700 mb-1">URL de l'image</label>
-                    <input type="url" id="${imageId}_url" name="images[${imageCounter}][url]" value="${existingImage ? existingImage.url : ''}" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="https://exemple.com/image.jpg">
+                    <label for="${imageId}_file" class="block text-sm font-medium text-gray-700 mb-1">Choisir une image</label>
+                    <input type="file" id="${imageId}_file" accept="image/*" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" onchange="handleImageUpload(${imageCounter}, this)">
+                    <p class="text-xs text-gray-500 mt-1">Formats supportés: JPG, PNG, GIF, WebP (max 5MB)</p>
                 </div>
                 
                 <div>
@@ -392,21 +393,21 @@ ob_start();
                         Aperçu de l'image
                     </div>
                 </div>
+                
+                <input type="hidden" id="${imageId}_data" name="images[${imageCounter}][data]" value="${existingImage ? existingImage.data || '' : ''}">
             </div>
         `;
         
         container.appendChild(imageField);
         noImages.style.display = 'none';
         
-        // Ajouter l'événement pour l'aperçu
-        const urlInput = document.getElementById(`${imageId}_url`);
-        urlInput.addEventListener('input', function() {
-            updateImagePreview(imageId, this.value);
-        });
-        
         // Charger l'aperçu si une image existe
-        if (existingImage && existingImage.url) {
-            updateImagePreview(imageId, existingImage.url);
+        if (existingImage && existingImage.data) {
+            const preview = document.getElementById(`${imageId}_preview`);
+            preview.innerHTML = `
+                <img src="${existingImage.data}" alt="Aperçu" class="max-w-full max-h-32 mx-auto rounded-lg shadow-sm">
+                <p class="text-xs text-gray-500 mt-2">Image existante</p>
+            `;
         }
     }
     
@@ -429,29 +430,57 @@ ob_start();
         }
     }
     
-    function updateImagePreview(imageId, url) {
+    function handleImageUpload(imageCounter, input) {
+        const file = input.files[0];
+        const imageId = `image_${imageCounter}`;
         const preview = document.getElementById(`${imageId}_preview`);
+        const dataInput = document.getElementById(`${imageId}_data`);
         
-        if (url && isValidImageUrl(url)) {
-            preview.innerHTML = `
-                <img src="${url}" alt="Aperçu" class="max-w-full max-h-32 mx-auto rounded-lg shadow-sm" 
-                     onerror="this.parentElement.innerHTML='<span class=\\"text-red-500 text-sm\\">Impossible de charger l\\'image</span>'"
-                     onload="this.parentElement.querySelector('.loading')?.remove()">
-                <div class="loading text-gray-500 text-sm mt-2">Chargement...</div>
-            `;
-        } else if (url) {
-            preview.innerHTML = '<span class="text-amber-600 text-sm">URL invalide ou format non supporté</span>';
-        } else {
-            preview.innerHTML = '<span class="text-gray-500 text-sm">Aperçu de l\'image (entrez une URL ci-dessus)</span>';
+        if (!file) {
+            return;
         }
+        
+        // Vérifier la taille du fichier (max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+            preview.innerHTML = '<span class="text-red-500 text-sm">Fichier trop volumineux (max 5MB)</span>';
+            input.value = '';
+            return;
+        }
+        
+        // Vérifier le type de fichier
+        if (!file.type.startsWith('image/')) {
+            preview.innerHTML = '<span class="text-red-500 text-sm">Format de fichier non supporté</span>';
+            input.value = '';
+            return;
+        }
+        
+        preview.innerHTML = '<div class="text-blue-500 text-sm">Chargement de l\'image...</div>';
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const base64Data = e.target.result;
+            dataInput.value = base64Data;
+            
+            preview.innerHTML = `
+                <img src="${base64Data}" alt="Aperçu" class="max-w-full max-h-32 mx-auto rounded-lg shadow-sm">
+                <p class="text-xs text-gray-500 mt-2">${file.name} (${(file.size / 1024).toFixed(1)} KB)</p>
+            `;
+        };
+        
+        reader.onerror = function() {
+            preview.innerHTML = '<span class="text-red-500 text-sm">Erreur lors du chargement du fichier</span>';
+            input.value = '';
+            dataInput.value = '';
+        };
+        
+        reader.readAsDataURL(file);
     }
     
-    function isValidImageUrl(url) {
-        try {
-            const urlObj = new URL(url);
-            return /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(urlObj.pathname) || url.includes('imgur') || url.includes('discord') || url.includes('pinterest');
-        } catch {
-            return false;
+    function removeImageField(id) {
+        const field = document.getElementById(`image-field-${id}`);
+        if (field) {
+            field.remove();
+            updateImagesDisplay();
         }
     }
     
@@ -460,13 +489,13 @@ ob_start();
         const container = document.getElementById('images-container');
         
         container.querySelectorAll('[id^="image-field-"]').forEach(field => {
-            const urlInput = field.querySelector('input[name*="[url]"]');
+            const dataInput = field.querySelector('input[name*="[data]"]');
             const titleInput = field.querySelector('input[name*="[title]"]');
             const descInput = field.querySelector('textarea[name*="[description]"]');
             
-            if (urlInput && urlInput.value.trim()) {
+            if (dataInput && dataInput.value.trim()) {
                 images.push({
-                    url: urlInput.value.trim(),
+                    data: dataInput.value.trim(),
                     title: titleInput ? titleInput.value.trim() : '',
                     description: descInput ? descInput.value.trim() : ''
                 });
