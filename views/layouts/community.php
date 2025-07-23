@@ -16,7 +16,7 @@
     <meta property="og:url" content="<?= $canonical ?? 'https://yoc.studio' . $_SERVER['REQUEST_URI'] ?>">
     <meta property="og:title" content="<?= $og_title ?? $title ?? 'Communauté YOC - Partagez vos Original Characters' ?>">
     <meta property="og:description" content="<?= $og_description ?? $description ?? 'Découvrez et partagez des Original Characters incroyables dans la communauté YOC.' ?>">
-    <meta property="og:image" content="<?= $og_image ?? 'https://yoc.studio/assets/images/community-og.jpg' ?>">
+    <meta property="og:image" content="<?= $og_image ?? 'https://myocverse.neopolyworks.fr/assets/images/community-og.jpg' ?>">
     <meta property="og:site_name" content="YOC Studio">
     <meta property="og:locale" content="fr_FR">
     
@@ -25,7 +25,7 @@
     <meta property="twitter:url" content="<?= $canonical ?? 'https://yoc.studio' . $_SERVER['REQUEST_URI'] ?>">
     <meta property="twitter:title" content="<?= $twitter_title ?? $og_title ?? $title ?>">
     <meta property="twitter:description" content="<?= $twitter_description ?? $og_description ?? $description ?>">
-    <meta property="twitter:image" content="<?= $twitter_image ?? $og_image ?? 'https://yoc.studio/assets/images/community-og.jpg' ?>">
+    <meta property="twitter:image" content="<?= $twitter_image ?? $og_image ?? 'https://myocverse.neopolyworks.fr/assets/images/community-og.jpg' ?>">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="<?= $canonical ?? 'https://yoc.studio' . $_SERVER['REQUEST_URI'] ?>">

@@ -9,12 +9,12 @@
     <meta name="description" content="Mentions légales et politique de confidentialité de YOC Studio. Découvrez comment vos données sont protégées et stockées localement en toute sécurité.">
     <meta name="keywords" content="mentions légales, confidentialité, protection données, RGPD, privacy policy, legal">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://yoc.studio/legal">
+    <link rel="canonical" href="https://myocverse.neopolyworks.fr/legal">
     
     <!-- Open Graph -->
     <meta property="og:title" content="Mentions Légales - YOC Studio">
     <meta property="og:description" content="Politique de confidentialité et mentions légales de YOC Studio. Vos données restent privées et sécurisées.">
-    <meta property="og:url" content="https://yoc.studio/legal">
+    <meta property="og:url" content="https://myocverse.neopolyworks.fr/legal">
     <meta property="og:type" content="website">
     
     <script src="https://cdn.tailwindcss.com"></script>

@@ -2,7 +2,7 @@
 $title = htmlspecialchars($oc['name']) . ' - Original Character par ' . htmlspecialchars($oc['username']) . ' | YOC';
 $description = 'Découvrez ' . htmlspecialchars($oc['name']) . ', un Original Character ' . ($oc['race'] ? 'de race ' . htmlspecialchars($oc['race']) : '') . ' créé par ' . htmlspecialchars($oc['username']) . '. ' . (isset($oc['description']) ? substr(strip_tags($oc['description']), 0, 150) . '...' : 'Explorez ce personnage unique sur YOC.');
 $keywords = 'OC ' . htmlspecialchars($oc['name']) . ', original character, ' . ($oc['race'] ? htmlspecialchars($oc['race']) . ', ' : '') . htmlspecialchars($oc['username']) . ', personnage fantasy';
-$canonical = 'https://yoc.studio/community/oc/' . $oc['id'];
+$canonical = 'https://myocverse.neopolyworks.fr/community/oc/' . $oc['id'];
 $og_title = htmlspecialchars($oc['name']) . ' - Original Character par ' . htmlspecialchars($oc['username']);
 $og_description = $description;
 $robots = 'index, follow';
