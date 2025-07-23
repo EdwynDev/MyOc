@@ -237,7 +237,8 @@ class CommunityController extends BaseController {
     // Publier un OC local vers la communauté
     public function publishOC() {
         if (!isset($_SESSION['community_user_id'])) {
-            $this->json(['success' => false, 'message' => 'Connexion requise pour publier.'], 401);
+            $_SESSION['error'] = 'Vous devez être connecté pour publier.';
+            $this->redirect('/community/login');
             return;
         }
         
@@ -252,13 +253,42 @@ class CommunityController extends BaseController {
                     return;
                 }
                 
-                // Pour l'instant, on simule la publication (pas de BDD)
-                // En production, on utiliserait la base de données
-                $this->json(['success' => true, 'message' => 'OC publié avec succès ! (Mode simulation - BDD non connectée)']);
+                // Préparer les données pour la base de données
+                $communityOCData = [
+                    'user_id' => $_SESSION['community_user_id'],
+                    'name' => $ocData['name'],
+                    'race' => $ocData['race'] ?? null,
+                    'age' => $ocData['age'] ?? null,
+                    'gender' => $ocData['gender'] ?? null,
+                    'description' => $ocData['description'] ?? null,
+                    'appearance' => $ocData['appearance'] ?? null,
+                    'personality' => $ocData['personality'] ?? null,
+                    'backstory' => $ocData['backstory'] ?? null,
+                    'occupation' => $ocData['occupation'] ?? null,
+                    'location' => $ocData['location'] ?? null,
+                    'abilities' => $ocData['abilities'] ?? null,
+                    'skills' => $ocData['skills'] ?? null,
+                    'strengths' => $ocData['strengths'] ?? null,
+                    'weaknesses' => $ocData['weaknesses'] ?? null,
+                    'relationships' => $ocData['relationships'] ?? null,
+                    'notes' => $ocData['notes'] ?? null,
+                    'images' => !empty($ocData['images']) ? json_encode($ocData['images']) : null,
+                    'is_public' => true,
+                    'status' => 'approved'
+                ];
+                
+                // Créer l'OC dans la base de données
+                $createdOC = $this->ocModel->create($communityOCData);
+                
+                if ($createdOC) {
+                    $this->json(['success' => true, 'message' => 'OC publié avec succès dans la communauté !', 'oc_id' => $createdOC['id']]);
+                } else {
+                    $this->json(['success' => false, 'message' => 'Erreur lors de la publication de l\'OC'], 500);
+                }
                 
             } catch (Exception $e) {
                 error_log('Erreur publication OC: ' . $e->getMessage());
-                $this->json(['success' => false, 'message' => 'Erreur serveur lors de la publication'], 500);
+                $this->json(['success' => false, 'message' => 'Erreur serveur: ' . $e->getMessage()], 500);
             }
             return;
         }
@@ -269,7 +299,8 @@ class CommunityController extends BaseController {
     // Publier une race locale vers la communauté
     public function publishRace() {
         if (!isset($_SESSION['community_user_id'])) {
-            $this->json(['success' => false, 'message' => 'Connexion requise pour publier.'], 401);
+            $_SESSION['error'] = 'Vous devez être connecté pour publier.';
+            $this->redirect('/community/login');
             return;
         }
         
@@ -284,13 +315,44 @@ class CommunityController extends BaseController {
                     return;
                 }
                 
-                // Pour l'instant, on simule la publication (pas de BDD)
-                // En production, on utiliserait la base de données
-                $this->json(['success' => true, 'message' => 'Race publiée avec succès ! (Mode simulation - BDD non connectée)']);
+                // Préparer les données pour la base de données
+                $communityRaceData = [
+                    'user_id' => $_SESSION['community_user_id'],
+                    'name' => $raceData['name'],
+                    'type' => $raceData['type'] ?? null,
+                    'origin' => $raceData['origin'] ?? null,
+                    'lifespan' => $raceData['lifespan'] ?? null,
+                    'description' => $raceData['description'] ?? null,
+                    'appearance' => $raceData['appearance'] ?? null,
+                    'height' => $raceData['height'] ?? null,
+                    'weight' => $raceData['weight'] ?? null,
+                    'abilities' => $raceData['abilities'] ?? null,
+                    'strengths' => $raceData['strengths'] ?? null,
+                    'weaknesses' => $raceData['weaknesses'] ?? null,
+                    'culture' => $raceData['culture'] ?? null,
+                    'society' => $raceData['society'] ?? null,
+                    'language' => $raceData['language'] ?? null,
+                    'religion' => $raceData['religion'] ?? null,
+                    'habitat' => $raceData['habitat'] ?? null,
+                    'diet' => $raceData['diet'] ?? null,
+                    'notes' => $raceData['notes'] ?? null,
+                    'images' => !empty($raceData['images']) ? json_encode($raceData['images']) : null,
+                    'is_public' => true,
+                    'status' => 'approved'
+                ];
+                
+                // Créer la race dans la base de données
+                $createdRace = $this->raceModel->create($communityRaceData);
+                
+                if ($createdRace) {
+                    $this->json(['success' => true, 'message' => 'Race publiée avec succès dans la communauté !', 'race_id' => $createdRace['id']]);
+                } else {
+                    $this->json(['success' => false, 'message' => 'Erreur lors de la publication de la race'], 500);
+                }
                 
             } catch (Exception $e) {
                 error_log('Erreur publication race: ' . $e->getMessage());
-                $this->json(['success' => false, 'message' => 'Erreur serveur lors de la publication'], 500);
+                $this->json(['success' => false, 'message' => 'Erreur serveur: ' . $e->getMessage()], 500);
             }
             return;
         }
