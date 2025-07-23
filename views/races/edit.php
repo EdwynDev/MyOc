@@ -196,6 +196,11 @@ ob_start();
         const raceId = document.getElementById('race-id').value;
         currentRace = window.ocManager.getRace(raceId);
         
+        // Fallback si ocManager n'est pas encore chargé
+        if (!currentRace && typeof getRace === 'function') {
+            currentRace = getRace(raceId);
+        }
+        
         if (!currentRace) {
             alert('Race non trouvée !');
             window.location.href = '/races';

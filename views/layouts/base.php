@@ -45,7 +45,7 @@
         <?php endif; ?>
     </div>
     
-    <script src="assets/js/app.js"></script>
+    <script src="/assets/js/app.js"></script>
     <?php if (isset($scripts)): ?>
         <?php foreach ($scripts as $script): ?>
             <script src="<?= $script ?>"></script>

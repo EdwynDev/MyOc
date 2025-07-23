@@ -203,6 +203,11 @@ ob_start();
         const ocId = document.getElementById('oc-id').value;
         currentOC = window.ocManager.getOC(ocId);
         
+        // Fallback si ocManager n'est pas encore chargé
+        if (!currentOC && typeof getOC === 'function') {
+            currentOC = getOC(ocId);
+        }
+        
         if (!currentOC) {
             alert('OC non trouvé !');
             window.location.href = '/ocs';

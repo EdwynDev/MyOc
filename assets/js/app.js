@@ -340,3 +340,40 @@ window.exportData = function() {
 window.confirmDelete = function(message = 'Êtes-vous sûr de vouloir supprimer cet élément ?') {
     return confirm(message);
 };
+
+// Fonctions globales pour les formulaires
+window.createOC = function(ocData) {
+    return window.ocManager.createOC(ocData);
+};
+
+window.createRace = function(raceData) {
+    return window.ocManager.createRace(raceData);
+};
+
+window.updateOC = function(id, updates) {
+    return window.ocManager.updateOC(id, updates);
+};
+
+window.updateRace = function(id, updates) {
+    return window.ocManager.updateRace(id, updates);
+};
+
+window.deleteOC = function(id) {
+    return window.ocManager.deleteOC(id);
+};
+
+window.deleteRace = function(id) {
+    return window.ocManager.deleteRace(id);
+};
+
+window.getOC = function(id) {
+    return window.ocManager.getOC(id);
+};
+
+window.getRace = function(id) {
+    return window.ocManager.getRace(id);
+};
+
+window.showNotification = function(message, type = 'info') {
+    return window.ocManager.showNotification(message, type);
+};

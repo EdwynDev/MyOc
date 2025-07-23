@@ -284,21 +284,21 @@ ob_start();
             }
             
             // Créer l'OC
-            const oc = window.ocManager.createOC(ocData);
+            const oc = createOC(ocData);
             
             // Ajouter les images
             const images = collectImages();
             if (images.length > 0) {
-                window.ocManager.updateOC(oc.id, { images: images });
+                updateOC(oc.id, { images: images });
             }
             
             if (oc) {
-                window.ocManager.showNotification('OC créé avec succès !', 'success');
+                showNotification('OC créé avec succès !', 'success');
                 setTimeout(() => {
                     window.location.href = '/ocs';
                 }, 1000);
             } else {
-                window.ocManager.showNotification('Erreur lors de la création de l\'OC', 'error');
+                showNotification('Erreur lors de la création de l\'OC', 'error');
             }
         });
     }
