@@ -232,9 +232,15 @@ ob_start();
             <div class="glass rounded-xl p-6 hover-lift card-hover">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg">
-                            ${oc.name.charAt(0).toUpperCase()}
-                        </div>
+                        ${oc.images && oc.images.length > 0 && oc.images[0].data ? 
+                            `<img src="${oc.images[0].data}" alt="${oc.name}" class="w-12 h-12 rounded-xl object-cover shadow-lg border border-gray-700" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                             <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg" style="display: none;">
+                                 ${oc.name.charAt(0).toUpperCase()}
+                             </div>` :
+                            `<div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg">
+                                 ${oc.name.charAt(0).toUpperCase()}
+                             </div>`
+                        }
                         <div>
                             <h4 class="font-bold text-white">${oc.name}</h4>
                             <p class="text-gray-400 text-sm">${oc.race || 'Race non définie'}</p>
