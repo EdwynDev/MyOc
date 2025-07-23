@@ -251,18 +251,23 @@ ob_start();
                 },
                 body: JSON.stringify(publicationData)
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.success) {
-                    alert('OC publié avec succès dans la communauté !');
-                    window.location.href = '/community/ocs';
+                    alert(data.message || 'OC publié avec succès dans la communauté !');
+                    window.location.href = '/community';
                 } else {
                     alert('Erreur: ' + (data.message || 'Erreur lors de la publication'));
                 }
             })
             .catch(error => {
                 console.error('Erreur:', error);
-                alert('Erreur lors de la publication de l\'OC');
+                alert('Erreur de connexion lors de la publication de l\'OC');
             });
         });
     }
