@@ -21,7 +21,7 @@ ob_start();
                 <?php if (!isset($_SESSION['community_user_id'])): ?>
                     <div class="flex flex-col sm:flex-row gap-6 justify-center max-w-md mx-auto">
                         <a href="/community/register" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-xl btn-primary font-bold text-lg">
-                            Rejoindre la communauté
+                            Rejoindre
                         </a>
                         <a href="/community/login" class="px-8 py-4 glass border border-gray-600 text-white rounded-2xl hover:border-blue-500 transition-all duration-300 font-bold text-lg">
                             Se connecter
