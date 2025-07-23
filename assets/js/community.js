@@ -259,6 +259,60 @@ function deleteCommunityOC(ocId) {
         .then(data => {
             if (data.success) {
                 window.communityManager.showNotification('OC supprimé de la communauté avec succès !', 'success');
+                setTimeout(() => {
+                    window.location.href = '/community';
+                }, 1500);
+            } else {
+                window.communityManager.showNotification('Erreur: ' + (data.message || 'Erreur lors de la suppression'), 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            window.communityManager.showNotification('Erreur de connexion', 'error');
+        });
+    }
+}
+
+function deleteCommunityRace(raceId) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cette race de la communauté ?')) {
+        fetch('/community/delete-race', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `race_id=${raceId}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.communityManager.showNotification('Race supprimée de la communauté avec succès !', 'success');
+                setTimeout(() => {
+                    window.location.href = '/community';
+                }, 1500);
+            } else {
+                window.communityManager.showNotification('Erreur: ' + (data.message || 'Erreur lors de la suppression'), 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            window.communityManager.showNotification('Erreur de connexion', 'error');
+        });
+    }
+}
+
+function deleteCommunityOC(ocId) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cet OC de la communauté ?')) {
+        fetch('/community/delete-oc', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `oc_id=${ocId}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.communityManager.showNotification('OC supprimé de la communauté avec succès !', 'success');
                 window.location.href = '/community';
             } else {
                 window.communityManager.showNotification('Erreur: ' + (data.message || 'Erreur lors de la suppression'), 'error');
