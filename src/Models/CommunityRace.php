@@ -63,6 +63,20 @@ class CommunityRace extends BaseModel {
     }
     
     /**
+     * Récupère les races distinctes pour les filtres
+     */
+    public function getDistinctRaces() {
+        $stmt = $this->db->prepare("
+            SELECT DISTINCT name 
+            FROM {$this->table} 
+            WHERE name IS NOT NULL AND name != '' AND is_public = 1 AND status = 'approved'
+            ORDER BY name ASC
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_COLUMN);
+    }
+    
+    /**
      * Incrémente le nombre de vues
      */
     public function incrementViews($id) {

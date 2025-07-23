@@ -20,7 +20,7 @@ class CommunityController extends BaseController {
     // Page d'accueil communautaire
     public function index() {
         $recentOCs = $this->ocModel->findPublicOCs(6);
-        $recentRaces = $this->raceModel->findPublicRaces(6);
+        $recentRaces = $this->raceModel->findPublicRaces(6, 0);
         $topCreators = $this->userModel->getTopCreators(5);
         
         $this->view('community/index', [
@@ -48,7 +48,7 @@ class CommunityController extends BaseController {
             $ocs = $this->ocModel->findPublicOCs($limit, $offset, $sort);
         }
         
-        $races = $this->raceModel->getDistinctRaces();
+        $races = $this->ocModel->getDistinctRaces();
         
         $this->view('community/ocs', [
             'ocs' => $ocs,
