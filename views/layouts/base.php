@@ -47,85 +47,90 @@
     
     <script>
         // Fonctions globales définies immédiatement
-        window.exportData = function() {
-            if (window.ocManager) {
-                window.ocManager.exportData();
-            }
-        };
-        
-        window.confirmDelete = function(message = 'Êtes-vous sûr de vouloir supprimer cet élément ?') {
-            return confirm(message);
-        };
-        
-        window.createOC = function(ocData) {
-            if (window.ocManager) {
-                return window.ocManager.createOC(ocData);
-            }
-            return null;
-        };
-        
-        window.createRace = function(raceData) {
-            if (window.ocManager) {
-                return window.ocManager.createRace(raceData);
-            }
-            // Fallback si ocManager n'est pas disponible
-            console.error('ocManager not available');
-            return null;
-        };
-        
-        window.updateOC = function(id, updates) {
-            if (window.ocManager) {
-                return window.ocManager.updateOC(id, updates);
-            }
-            console.error('ocManager not available');
-            return null;
-        };
-        
-        window.updateRace = function(id, updates) {
-            if (window.ocManager) {
-                return window.ocManager.updateRace(id, updates);
-            }
-            return null;
-        };
-        
-        window.deleteOC = function(id) {
-            if (window.ocManager) {
-                return window.ocManager.deleteOC(id);
-            }
-            return null;
-        };
-        
-        window.deleteRace = function(id) {
-            if (window.ocManager) {
-                return window.ocManager.deleteRace(id);
-            }
-            return null;
-        };
-        
-        window.getOC = function(id) {
-            if (window.ocManager) {
-                return window.ocManager.getOC(id);
-            }
-            return null;
-        };
-        
-        window.getRace = function(id) {
-            if (window.ocManager) {
-                return window.ocManager.getRace(id);
-            }
-            return null;
-        };
-        
-        window.showNotification = function(message, type = 'info') {
-            if (window.ocManager) {
-                return window.ocManager.showNotification(message, type);
-            } else {
-                // Fallback simple
-                alert(message);
-            }
-        };
+        // Attendre que app.js soit chargé avant de définir les fonctions globales
+        document.addEventListener('DOMContentLoaded', function() {
+            // Attendre un peu pour que app.js soit complètement chargé
+            setTimeout(function() {
+                window.exportData = function() {
+                    if (window.ocManager) {
+                        window.ocManager.exportData();
+                    }
+                };
+                
+                window.confirmDelete = function(message = 'Êtes-vous sûr de vouloir supprimer cet élément ?') {
+                    return confirm(message);
+                };
+                
+                window.createOC = function(ocData) {
+                    if (window.ocManager) {
+                        return window.ocManager.createOC(ocData);
+                    }
+                    console.error('ocManager not available');
+                    return null;
+                };
+                
+                window.createRace = function(raceData) {
+                    if (window.ocManager) {
+                        return window.ocManager.createRace(raceData);
+                    }
+                    console.error('ocManager not available');
+                    return null;
+                };
+                
+                window.updateOC = function(id, updates) {
+                    if (window.ocManager) {
+                        return window.ocManager.updateOC(id, updates);
+                    }
+                    console.error('ocManager not available');
+                    return null;
+                };
+                
+                window.updateRace = function(id, updates) {
+                    if (window.ocManager) {
+                        return window.ocManager.updateRace(id, updates);
+                    }
+                    return null;
+                };
+                
+                window.deleteOC = function(id) {
+                    if (window.ocManager) {
+                        return window.ocManager.deleteOC(id);
+                    }
+                    return null;
+                };
+                
+                window.deleteRace = function(id) {
+                    if (window.ocManager) {
+                        return window.ocManager.deleteRace(id);
+                    }
+                    return null;
+                };
+                
+                window.getOC = function(id) {
+                    if (window.ocManager) {
+                        return window.ocManager.getOC(id);
+                    }
+                    return null;
+                };
+                
+                window.getRace = function(id) {
+                    if (window.ocManager) {
+                        return window.ocManager.getRace(id);
+                    }
+                    return null;
+                };
+                
+                window.showNotification = function(message, type = 'info') {
+                    if (window.ocManager) {
+                        return window.ocManager.showNotification(message, type);
+                    } else {
+                        alert(message);
+                    }
+                };
+            }, 100);
+        });
     </script>
-    <script src="/assets/js/app.js"></script>
+    <script src="assets/js/app.js"></script>
     <?php if (isset($scripts)): ?>
         <?php foreach ($scripts as $script): ?>
             <script src="<?= $script ?>"></script>

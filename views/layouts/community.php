@@ -107,7 +107,7 @@
         </footer>
     </div>
     
-    <script src="/assets/js/app.js"></script>
-    <script src="/assets/js/community.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/community.js"></script>
 </body>
 </html>
