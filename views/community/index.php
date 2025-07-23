@@ -375,9 +375,7 @@ ob_start();
     function createCreatorCard(creator) {
         return `
             <div class="text-center glass rounded-2xl p-6 hover-lift border border-gray-800">
-                <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center text-white font-bold text-lg mx-auto mb-4 shadow-xl">
-                    ${creator.username.charAt(0).toUpperCase()}
-                </div>
+                <img src="${creator.avatar || '/assets/default-avatar.png'}" alt="${creator.username}" class="w-16 h-16 rounded-full mx-auto mb-4 object-cover shadow-lg">
                 <h3 class="font-bold text-white mb-1">${creator.username}</h3>
                 <p class="text-sm text-gray-400 mb-3">${creator.total_creations || 0} créations</p>
                 <a href="/community/profile/${creator.username}" class="text-xs text-blue-400 hover:text-blue-300 transition-colors">

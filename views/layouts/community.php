@@ -244,8 +244,8 @@
                     <div class="flex items-center space-x-4">
                         <?php if (isset($_SESSION['community_user_id'])): ?>
                             <div class="hidden sm:flex items-center space-x-4 glass px-4 py-2 rounded-xl">
-                                <?php if (!empty($user['avatar'])): ?>
-                                    <img src="<?= htmlspecialchars($user['avatar']) ?>" 
+                                <?php if (!empty($_SESSION['community_user_avatar'])): ?>
+                                    <img src="<?= htmlspecialchars($_SESSION['community_user_avatar']) ?>" 
                                          alt="Avatar" 
                                          class="w-8 h-8 rounded-lg object-cover shadow-lg border border-white/10"
                                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
