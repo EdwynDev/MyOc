@@ -244,11 +244,26 @@ ob_start();
                 delete publicationData.weaknesses;
             }
             
-            // Simuler la publication (en production, cela serait un appel API)
-            console.log('Publication Race:', publicationData);
-            
-            // Rediriger vers la communauté
-            window.location.href = '/community/races';
+            // Publier la race dans la communauté
+            try {
+                const response = await fetch('/community/publish-race', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(publicationData)
+                });
+                
+                if (response.ok) {
+                    alert('Race publiée avec succès dans la communauté !');
+                    window.location.href = '/community/races';
+                } else {
+                    throw new Error('Erreur lors de la publication');
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors de la publication de la race');
+            }
         });
     }
 </script>

@@ -125,6 +125,51 @@ ob_start();
             </div>
         </div>
         
+        <!-- Images -->
+        <div class="border-b border-gray-200 pb-6">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">Images</h2>
+            <div class="space-y-4">
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <div class="flex items-start">
+                        <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <div>
+                            <h3 class="text-sm font-medium text-blue-800">Hébergement d'images gratuit</h3>
+                            <p class="text-xs text-blue-700 mt-1">
+                                Utilisez <a href="https://www.zupimages.net/" target="_blank" class="underline font-medium">ZupImages</a> pour héberger vos images gratuitement. 
+                                Après upload, sélectionnez "Lien direct de votre image" et copiez l'URL ici.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="images-container">
+                    <div class="image-input-group space-y-3 p-4 border border-gray-200 rounded-lg">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Titre de l'image (optionnel)</label>
+                            <input type="text" class="image-title w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="ex: Illustration de la race, Habitat...">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">URL de l'image</label>
+                            <input type="url" class="image-url w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="https://exemple.com/image.jpg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Description (optionnel)</label>
+                            <textarea class="image-description w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" rows="2" placeholder="Description de l'image..."></textarea>
+                        </div>
+                        <button type="button" onclick="removeImageInput(this)" class="text-red-600 hover:text-red-800 text-sm">
+                            Supprimer cette image
+                        </button>
+                    </div>
+                </div>
+                
+                <button type="button" onclick="addImageInput()" class="w-full py-2 px-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-green-300 hover:text-green-600 transition-colors">
+                    + Ajouter une image
+                </button>
+            </div>
+        </div>
+        
         <!-- Boutons d'action -->
         <div class="flex justify-between mt-8">
             <a href="/races" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
@@ -172,7 +217,8 @@ ob_start();
                 religion: document.getElementById('religion').value.trim(),
                 habitat: document.getElementById('habitat').value.trim(),
                 diet: document.getElementById('diet').value.trim(),
-                notes: document.getElementById('notes').value.trim()
+                notes: document.getElementById('notes').value.trim(),
+                images: collectImages()
             };
             
             // Créer la race directement
@@ -199,6 +245,60 @@ ob_start();
             alert('Race créée avec succès !');
             window.location.href = '/races';
         });
+    }
+    
+    function addImageInput() {
+        const container = document.getElementById('images-container');
+        const newImageInput = document.createElement('div');
+        newImageInput.className = 'image-input-group space-y-3 p-4 border border-gray-200 rounded-lg';
+        newImageInput.innerHTML = `
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Titre de l'image (optionnel)</label>
+                <input type="text" class="image-title w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="ex: Illustration de la race, Habitat...">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">URL de l'image</label>
+                <input type="url" class="image-url w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="https://exemple.com/image.jpg">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Description (optionnel)</label>
+                <textarea class="image-description w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" rows="2" placeholder="Description de l'image..."></textarea>
+            </div>
+            <button type="button" onclick="removeImageInput(this)" class="text-red-600 hover:text-red-800 text-sm">
+                Supprimer cette image
+            </button>
+        `;
+        container.appendChild(newImageInput);
+    }
+    
+    function removeImageInput(button) {
+        const container = document.getElementById('images-container');
+        if (container.children.length > 1) {
+            button.parentElement.remove();
+        } else {
+            alert('Vous devez garder au moins un champ d\'image (vous pouvez le laisser vide).');
+        }
+    }
+    
+    function collectImages() {
+        const imageGroups = document.querySelectorAll('.image-input-group');
+        const images = [];
+        
+        imageGroups.forEach(group => {
+            const title = group.querySelector('.image-title').value.trim();
+            const url = group.querySelector('.image-url').value.trim();
+            const description = group.querySelector('.image-description').value.trim();
+            
+            if (url) {
+                images.push({
+                    title: title || '',
+                    data: url,
+                    description: description || ''
+                });
+            }
+        });
+        
+        return images;
     }
 </script>
 

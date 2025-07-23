@@ -226,19 +226,32 @@ class CommunityController extends BaseController {
         }
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $ocData = $_POST;
+            // Récupérer les données JSON
+            $input = file_get_contents('php://input');
+            $ocData = json_decode($input, true);
+            
+            if (!$ocData) {
+                $this->json(['success' => false, 'message' => 'Données invalides'], 400);
+                return;
+            }
+            
             $ocData['user_id'] = $_SESSION['community_user_id'];
             $ocData['is_public'] = true;
             $ocData['status'] = 'approved'; // Auto-approuvé pour l'instant
             
+            // Convertir les images en JSON si nécessaire
+            if (isset($ocData['images']) && is_array($ocData['images'])) {
+                $ocData['images'] = json_encode($ocData['images']);
+            }
+            
             $oc = $this->ocModel->create($ocData);
             
             if ($oc) {
-                $_SESSION['success'] = 'OC publié avec succès !';
-                $this->redirect('/community/ocs');
+                $this->json(['success' => true, 'message' => 'OC publié avec succès !']);
             } else {
-                $_SESSION['error'] = 'Erreur lors de la publication.';
+                $this->json(['success' => false, 'message' => 'Erreur lors de la publication'], 500);
             }
+            return;
         }
         
         $this->view('community/publish-oc');
@@ -253,19 +266,32 @@ class CommunityController extends BaseController {
         }
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $raceData = $_POST;
+            // Récupérer les données JSON
+            $input = file_get_contents('php://input');
+            $raceData = json_decode($input, true);
+            
+            if (!$raceData) {
+                $this->json(['success' => false, 'message' => 'Données invalides'], 400);
+                return;
+            }
+            
             $raceData['user_id'] = $_SESSION['community_user_id'];
             $raceData['is_public'] = true;
             $raceData['status'] = 'approved'; // Auto-approuvé pour l'instant
             
+            // Convertir les images en JSON si nécessaire
+            if (isset($raceData['images']) && is_array($raceData['images'])) {
+                $raceData['images'] = json_encode($raceData['images']);
+            }
+            
             $race = $this->raceModel->create($raceData);
             
             if ($race) {
-                $_SESSION['success'] = 'Race publiée avec succès !';
-                $this->redirect('/community/races');
+                $this->json(['success' => true, 'message' => 'Race publiée avec succès !']);
             } else {
-                $_SESSION['error'] = 'Erreur lors de la publication.';
+                $this->json(['success' => false, 'message' => 'Erreur lors de la publication'], 500);
             }
+            return;
         }
         
         $this->view('community/publish-race');

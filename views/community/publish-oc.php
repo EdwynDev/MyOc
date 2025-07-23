@@ -243,11 +243,26 @@ ob_start();
                 delete publicationData.weaknesses;
             }
             
-            // Simuler la publication (en production, cela serait un appel API)
-            console.log('Publication OC:', publicationData);
-            
-            // Rediriger vers la communauté
-            window.location.href = '/community/ocs';
+            // Publier l'OC dans la communauté
+            try {
+                const response = await fetch('/community/publish-oc', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(publicationData)
+                });
+                
+                if (response.ok) {
+                    alert('OC publié avec succès dans la communauté !');
+                    window.location.href = '/community/ocs';
+                } else {
+                    throw new Error('Erreur lors de la publication');
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors de la publication de l\'OC');
+            }
         });
     }
 </script>
