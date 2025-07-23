@@ -179,26 +179,7 @@ ob_start();
                             <h3 class="text-xl font-bold text-white neon-text group-hover:text-blue-400 transition-colors">${oc.name}</h3>
                             <p class="text-gray-400">${oc.race || 'Race non définie'}</p>
                         </div>
-                    </div>
-                    
-                    <div class="space-y-3 mb-6">
-                        ${oc.age ? `<div class="flex items-center text-sm"><span class="text-gray-400 w-16">Âge:</span><span class="text-gray-300">${oc.age}</span></div>` : ''}
-                        ${oc.gender ? `<div class="flex items-center text-sm"><span class="text-gray-400 w-16">Genre:</span><span class="text-gray-300">${oc.gender}</span></div>` : ''}
-                        ${oc.description ? `<div class="mt-4"><p class="text-gray-300 text-sm leading-relaxed line-clamp-3">${oc.description}</p></div>` : ''}
-                    </div>
-                    
-                    ${oc.images && oc.images.length > 0 ? `
-                        <div class="mb-6">
-                            <div class="flex space-x-3 overflow-x-auto pb-2">
-                                ${oc.images.slice(0, 3).map((img, index) => `
-                                    <img src="${img.data}" alt="${img.title || 'Image OC'}" 
-                                         class="w-20 h-20 object-cover rounded-xl flex-shrink-0 border border-gray-700 hover:border-blue-500 transition-colors"
-                                         onerror="this.style.display='none'" loading="lazy">
-                                `).join('')}
-                                ${oc.images.length > 3 ? `<div class="w-20 h-20 bg-gray-800 rounded-xl flex items-center justify-center text-xs text-gray-400 flex-shrink-0 border border-gray-700">+${oc.images.length - 3}</div>` : ''}
-                            </div>
                         </div>
-                    ` : ''}
                     
                     <div class="flex items-center justify-between text-xs text-gray-500 mb-6 pt-4 border-t border-gray-800">
                         <span>Créé le ${createdDate}</span>
