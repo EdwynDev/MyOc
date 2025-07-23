@@ -101,7 +101,7 @@ ob_start();
     <div class="bg-white p-8 rounded-lg shadow-lg border mb-8">
         <h2 class="text-xl font-bold text-gray-900 mb-6">Statistiques</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="text-center p-6 bg-blue-50 rounded-lg">
                 <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
