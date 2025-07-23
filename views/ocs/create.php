@@ -244,25 +244,43 @@ ob_start();
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const formData = new FormData(form);
-            const ocData = {};
+            // Collecter les données du formulaire
+            const ocData = {
+                name: document.getElementById('name').value.trim(),
+                race: document.getElementById('race').value.trim(),
+                age: document.getElementById('age').value.trim(),
+                gender: document.getElementById('gender').value.trim(),
+                description: document.getElementById('description').value.trim(),
+                appearance: document.getElementById('appearance').value.trim(),
+                personality: document.getElementById('personality').value.trim(),
+                backstory: document.getElementById('backstory').value.trim(),
+                occupation: document.getElementById('occupation').value.trim(),
+                location: document.getElementById('location').value.trim(),
+                abilities: document.getElementById('abilities').value.trim(),
+                skills: document.getElementById('skills').value.trim(),
+                strengths: document.getElementById('strengths').value.trim(),
+                weaknesses: document.getElementById('weaknesses').value.trim(),
+                relationships: document.getElementById('relationships').value.trim(),
+                notes: document.getElementById('notes').value.trim()
+            };
             
-            for (let [key, value] of formData.entries()) {
-                if (value.trim()) {
-                    ocData[key] = value.trim();
+            // Ajouter les champs personnalisés
+            const data = JSON.parse(localStorage.getItem('oc_data') || '{}');
+            const customFields = data.custom_fields?.oc || {};
+            Object.keys(customFields).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    if (element.type === 'checkbox') {
+                        ocData[key] = element.checked ? '1' : '0';
+                    } else {
+                        ocData[key] = element.value.trim();
+                    }
                 }
-            }
+            });
             
             if (!ocData.name) {
                 alert('Le nom est obligatoire !');
                 return;
-            }
-            
-            // Vérifier qu'une race est sélectionnée (optionnel mais recommandé)
-            if (!ocData.race) {
-                if (!confirm('Aucune race sélectionnée. Voulez-vous continuer sans race ?')) {
-                    return;
-                }
             }
             
             // Créer l'OC
@@ -271,13 +289,14 @@ ob_start();
             // Ajouter les images
             const images = collectImages();
             if (images.length > 0) {
-                ocData.images = images;
-                const updatedOC = window.ocManager.updateOC(oc.id, { images: images });
+                window.ocManager.updateOC(oc.id, { images: images });
             }
             
             if (oc) {
                 window.ocManager.showNotification('OC créé avec succès !', 'success');
-                window.location.href = '/ocs';
+                setTimeout(() => {
+                    window.location.href = '/ocs';
+                }, 1000);
             } else {
                 window.ocManager.showNotification('Erreur lors de la création de l\'OC', 'error');
             }

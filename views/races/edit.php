@@ -310,19 +310,47 @@ ob_start();
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const formData = new FormData(form);
-            const updates = {};
+            // Collecter les données du formulaire
+            const updates = {
+                name: document.getElementById('name').value.trim(),
+                type: document.getElementById('type').value.trim(),
+                origin: document.getElementById('origin').value.trim(),
+                lifespan: document.getElementById('lifespan').value.trim(),
+                description: document.getElementById('description').value.trim(),
+                appearance: document.getElementById('appearance').value.trim(),
+                height: document.getElementById('height').value.trim(),
+                weight: document.getElementById('weight').value.trim(),
+                abilities: document.getElementById('abilities').value.trim(),
+                strengths: document.getElementById('strengths').value.trim(),
+                weaknesses: document.getElementById('weaknesses').value.trim(),
+                culture: document.getElementById('culture').value.trim(),
+                society: document.getElementById('society').value.trim(),
+                language: document.getElementById('language').value.trim(),
+                religion: document.getElementById('religion').value.trim(),
+                habitat: document.getElementById('habitat').value.trim(),
+                diet: document.getElementById('diet').value.trim(),
+                notes: document.getElementById('notes').value.trim()
+            };
             
-            for (let [key, value] of formData.entries()) {
-                updates[key] = value.trim();
-            }
+            // Ajouter les champs personnalisés
+            const data = JSON.parse(localStorage.getItem('oc_data') || '{}');
+            const customFields = data.custom_fields?.race || {};
+            Object.keys(customFields).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    if (element.type === 'checkbox') {
+                        updates[key] = element.checked ? '1' : '0';
+                    } else {
+                        updates[key] = element.value.trim();
+                    }
+                }
+            });
             
             if (!updates.name) {
                 alert('Le nom de la race est obligatoire !');
                 return;
             }
             
-            // Mettre à jour la race
             const raceId = document.getElementById('race-id').value;
             
             // Ajouter les images
@@ -333,7 +361,9 @@ ob_start();
             
             if (updatedRace) {
                 window.ocManager.showNotification('Race mise à jour avec succès !', 'success');
-                window.location.href = '/races';
+                setTimeout(() => {
+                    window.location.href = '/races';
+                }, 1000);
             } else {
                 window.ocManager.showNotification('Erreur lors de la mise à jour de la race', 'error');
             }

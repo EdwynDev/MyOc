@@ -179,6 +179,13 @@ class OCManager {
             ...ocData
         };
         
+        // Nettoyer les données vides
+        Object.keys(oc).forEach(key => {
+            if (oc[key] === '' || oc[key] === null || oc[key] === undefined) {
+                delete oc[key];
+            }
+        });
+        
         this.data.ocs.push(oc);
         this.saveData();
         return oc;
@@ -220,6 +227,13 @@ class OCManager {
             updated_at: new Date().toISOString(),
             ...raceData
         };
+        
+        // Nettoyer les données vides
+        Object.keys(race).forEach(key => {
+            if (race[key] === '' || race[key] === null || race[key] === undefined) {
+                delete race[key];
+            }
+        });
         
         this.data.races.push(race);
         this.saveData();

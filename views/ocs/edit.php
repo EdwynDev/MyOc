@@ -317,19 +317,45 @@ ob_start();
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const formData = new FormData(form);
-            const updates = {};
+            // Collecter les données du formulaire
+            const updates = {
+                name: document.getElementById('name').value.trim(),
+                race: document.getElementById('race').value.trim(),
+                age: document.getElementById('age').value.trim(),
+                gender: document.getElementById('gender').value.trim(),
+                description: document.getElementById('description').value.trim(),
+                appearance: document.getElementById('appearance').value.trim(),
+                personality: document.getElementById('personality').value.trim(),
+                backstory: document.getElementById('backstory').value.trim(),
+                occupation: document.getElementById('occupation').value.trim(),
+                location: document.getElementById('location').value.trim(),
+                abilities: document.getElementById('abilities').value.trim(),
+                skills: document.getElementById('skills').value.trim(),
+                strengths: document.getElementById('strengths').value.trim(),
+                weaknesses: document.getElementById('weaknesses').value.trim(),
+                relationships: document.getElementById('relationships').value.trim(),
+                notes: document.getElementById('notes').value.trim()
+            };
             
-            for (let [key, value] of formData.entries()) {
-                updates[key] = value.trim();
-            }
+            // Ajouter les champs personnalisés
+            const data = JSON.parse(localStorage.getItem('oc_data') || '{}');
+            const customFields = data.custom_fields?.oc || {};
+            Object.keys(customFields).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    if (element.type === 'checkbox') {
+                        updates[key] = element.checked ? '1' : '0';
+                    } else {
+                        updates[key] = element.value.trim();
+                    }
+                }
+            });
             
             if (!updates.name) {
                 alert('Le nom est obligatoire !');
                 return;
             }
             
-            // Mettre à jour l'OC
             const ocId = document.getElementById('oc-id').value;
             
             // Ajouter les images
@@ -340,7 +366,9 @@ ob_start();
             
             if (updatedOC) {
                 window.ocManager.showNotification('OC mis à jour avec succès !', 'success');
-                window.location.href = '/ocs';
+                setTimeout(() => {
+                    window.location.href = '/ocs';
+                }, 1000);
             } else {
                 window.ocManager.showNotification('Erreur lors de la mise à jour de l\'OC', 'error');
             }
