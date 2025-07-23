@@ -3,65 +3,86 @@ $title = 'Connexion - YOC';
 ob_start(); 
 ?>
 
-<div class="min-h-screen flex items-center justify-center px-4">
-    <div class="max-w-md w-full space-y-8 fade-in">
+<div class="min-h-screen flex items-center justify-center px-4 relative">
+    <!-- Background effects -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="max-w-md w-full space-y-8 fade-in relative z-10">
+        <!-- Header -->
         <div class="text-center">
-            <div class="mx-auto h-20 w-20 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full flex items-center justify-center mb-6">
+            <div class="mx-auto h-20 w-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-8 shadow-2xl hover-lift">
                 <svg class="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                 </svg>
             </div>
-            <h2 class="text-3xl font-bold text-gray-900 mb-2">Bienvenue dans votre gestionnaire d'OC</h2>
-            <p class="text-gray-600 mb-8">Merci de bien renseigner votre nom</p>
+            <h2 class="text-3xl font-bold text-white mb-4 neon-text">Accès au Studio</h2>
+            <p class="text-gray-400 mb-8">Entrez votre nom pour accéder à votre espace de création</p>
         </div>
         
-        <form method="POST" action="/login" class="mt-8 space-y-6">
-            <div class="bg-white p-6 rounded-lg shadow-lg border">
-                <div class="mb-6">
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                        Votre nom
+        <!-- Formulaire -->
+        <form method="POST" action="/login" class="space-y-6">
+            <div class="glass-dark rounded-2xl p-8 border border-gray-800">
+                <div class="mb-8">
+                    <label for="name" class="block text-sm font-medium text-gray-300 mb-3">
+                        Votre nom de créateur
                     </label>
                     <input 
                         type="text" 
                         id="name" 
                         name="name" 
                         required 
-                        class="w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200"
+                        class="w-full px-4 py-4 bg-gray-900/50 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm"
                         placeholder="Entrez votre nom..."
                         autocomplete="name"
                     >
                 </div>
                 
-                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                    <div class="flex items-start">
-                        <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+                <!-- Info sécurité -->
+                <div class="glass rounded-xl p-6 mb-8 border border-blue-500/30">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
                         <div>
-                            <h3 class="text-sm font-medium text-blue-800">Données sécurisées</h3>
-                            <p class="text-xs text-blue-700 mt-1">
-                                Votre nom est uniquement utilisé pour personnaliser l'interface. Toutes vos données restent sur votre appareil.
+                            <h4 class="text-blue-400 font-medium mb-1 text-sm">Données sécurisées</h4>
+                            <p class="text-gray-400 text-xs leading-relaxed">
+                                Votre nom est uniquement utilisé pour personnaliser l'interface. 
+                                Toutes vos données restent sur votre appareil.
                             </p>
                         </div>
                     </div>
                 </div>
                 
+                <!-- Bouton de connexion -->
                 <button 
                     type="submit" 
-                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200"
+                    class="w-full py-4 px-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-xl btn-primary text-lg"
                 >
-                    Accéder au gestionnaire
+                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                    </svg>
+                    Accéder au studio
                 </button>
             </div>
         </form>
         
+        <!-- Sauvegarde existante -->
         <div id="existing-save" class="hidden">
             <!-- Sera rempli par JavaScript si une sauvegarde existe -->
         </div>
         
+        <!-- Retour -->
         <div class="text-center">
-            <a href="/" class="text-sm text-gray-500 hover:text-gray-700 transition-colors">
-                ← Retour à l'accueil
+            <a href="/" class="text-gray-500 hover:text-gray-400 transition-colors text-sm flex items-center justify-center space-x-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                <span>Retour à l'accueil</span>
             </a>
         </div>
     </div>
@@ -75,28 +96,32 @@ ob_start();
         
         if (savedData || savedUserName) {
             const existingSaveDiv = document.getElementById('existing-save');
-            existingSaveDiv.className = 'mt-6 p-4 bg-amber-50 border border-amber-200 rounded-lg';
+            existingSaveDiv.className = 'glass-dark rounded-2xl p-6 border border-yellow-500/30';
             existingSaveDiv.innerHTML = `
-                <div class="flex items-center mb-2">
-                    <svg class="w-5 h-5 text-amber-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                    </svg>
-                    <span class="text-sm font-medium text-amber-800">Sauvegarde détectée</span>
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-lg flex items-center justify-center mr-3">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                    </div>
+                    <span class="text-yellow-400 font-medium">Sauvegarde détectée</span>
                 </div>
-                <p class="text-xs text-amber-700 mb-3">
+                <p class="text-gray-400 mb-4 text-sm">
                     Une sauvegarde a été trouvée sur cet appareil. ${savedUserName ? `Utilisateur: ${savedUserName}` : ''}
                 </p>
-                <div class="flex space-x-2">
-                    <button onclick="loadExistingSave()" class="flex-1 text-center py-2 px-3 bg-amber-600 text-white text-xs rounded hover:bg-amber-700 transition-colors">
+                <div class="grid grid-cols-1 gap-3">
+                    <button onclick="loadExistingSave()" class="w-full py-3 px-4 bg-gradient-to-r from-yellow-600 to-orange-600 text-white rounded-xl hover:from-yellow-700 hover:to-orange-700 transition-all duration-300 text-sm font-medium btn-primary">
                         Charger la sauvegarde
                     </button>
-                    <button onclick="clearSave()" class="flex-1 py-2 px-3 bg-gray-600 text-white text-xs rounded hover:bg-gray-700 transition-colors">
-                        Nouvelle session
-                    </button>
-                    <input type="file" id="import-file" accept=".json" class="hidden" onchange="importSave(event)">
-                    <button onclick="document.getElementById('import-file').click()" class="flex-1 py-2 px-3 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 transition-colors">
-                        Importer JSON
-                    </button>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="clearSave()" class="py-3 px-4 bg-gray-700 text-white rounded-xl hover:bg-gray-600 transition-all duration-300 text-sm font-medium">
+                            Nouvelle session
+                        </button>
+                        <input type="file" id="import-file" accept=".json" class="hidden" onchange="importSave(event)">
+                        <button onclick="document.getElementById('import-file').click()" class="py-3 px-4 bg-blue-700 text-white rounded-xl hover:bg-blue-600 transition-all duration-300 text-sm font-medium">
+                            Importer JSON
+                        </button>
+                    </div>
                 </div>
             `;
             

@@ -3,72 +3,102 @@ $title = 'Accueil - YOC';
 ob_start(); 
 ?>
 
-<div class="min-h-screen flex items-center justify-center px-4">
-    <div class="max-w-md w-full space-y-8 fade-in">
+<div class="min-h-screen flex items-center justify-center px-4 relative">
+    <!-- Background particles -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="max-w-lg w-full space-y-8 fade-in relative z-10">
+        <!-- Logo et titre -->
         <div class="text-center">
-            <div class="mx-auto h-20 w-20 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full flex items-center justify-center mb-6">
-                <svg class="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                </svg>
+            <div class="mx-auto h-24 w-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center mb-8 shadow-2xl hover-lift">
+                <span class="text-3xl font-bold text-white neon-text">YOC</span>
             </div>
-            <h2 class="text-3xl font-bold text-gray-900 mb-2">Bienvenue dans votre gestionnaire d'OC</h2>
-            <p class="text-gray-600 mb-8">Créez et gérez vos Original Characters avec des formulaires personnalisables</p>
+            <h2 class="text-4xl font-bold text-white mb-4 neon-text">Your Original Character</h2>
+            <p class="text-gray-400 mb-12 text-lg leading-relaxed">
+                Studio de création et gestion d'Original Characters avec formulaires personnalisables
+            </p>
         </div>
         
-        <div class="bg-white p-6 rounded-lg shadow-lg border">
-            <div class="mb-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-3">Fonctionnalités principales :</h3>
-                <ul class="text-sm text-gray-600 space-y-2">
-                    <li class="flex items-center">
-                        <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        Gestion complète d'Original Characters et de races
-                    </li>
-                    <li class="flex items-center">
-                        <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        Formulaires personnalisables avec champs sur mesure
-                    </li>
-                    <li class="flex items-center">
-                        <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        Export/Import JSON pour sauvegarder vos créations
-                    </li>
-                    <li class="flex items-center">
-                        <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        Interface moderne et responsive
-                    </li>
-                </ul>
+        <!-- Carte principale -->
+        <div class="glass-dark rounded-2xl p-8 border border-gray-800 hover-lift">
+            <div class="mb-8">
+                <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-3 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                    Fonctionnalités principales
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <span class="text-gray-300">Gestion complète d'Original Characters et de races</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <span class="text-gray-300">Interface moderne et responsive</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <span class="text-gray-300">Export/Import JSON pour sauvegarder vos créations</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-gradient-to-br from-pink-500 to-rose-600 rounded-lg flex items-center justify-center">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <span class="text-gray-300">Communauté pour partager vos créations</span>
+                    </div>
+                </div>
             </div>
             
-            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                <div class="flex items-start">
-                    <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+            <!-- Avertissement sécurité -->
+            <div class="glass rounded-xl p-6 mb-8 border border-blue-500/30">
+                <div class="flex items-start space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
                     <div>
-                        <h3 class="text-sm font-medium text-blue-800">Stockage local</h3>
-                        <p class="text-xs text-blue-700 mt-1">
-                            Vos données sont stockées uniquement sur votre appareil. Aucune information n'est partagée ou envoyée sur internet. Pensez à exporter régulièrement vos données !
+                        <h4 class="text-blue-400 font-medium mb-2">100% Sécurisé & Privé</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Toutes vos données sont stockées localement sur votre appareil. 
+                            Aucune information n'est transmise vers des serveurs externes.
                         </p>
                     </div>
                 </div>
             </div>
             
+            <!-- Bouton principal -->
             <div class="text-center">
-                <a href="/login" class="w-full inline-flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200">
-                    Commencer
+                <a href="/login" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-xl btn-primary text-lg">
+                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                    Commencer l'aventure
                 </a>
             </div>
         </div>
         
+        <!-- Lien mentions légales -->
         <div class="text-center">
-            <a href="/legal" class="text-xs text-gray-500 hover:text-gray-700 transition-colors">
+            <a href="/legal" class="text-gray-500 hover:text-gray-400 transition-colors text-sm">
                 Mentions légales et confidentialité
             </a>
         </div>
@@ -79,29 +109,31 @@ ob_start();
     // Vérifier si des données existent déjà
     window.addEventListener('DOMContentLoaded', function() {
         if (localStorage.getItem('oc_data') || localStorage.getItem('user_name')) {
-            const welcomeDiv = document.querySelector('.max-w-md');
+            const container = document.querySelector('.max-w-lg');
             const existingDataDiv = document.createElement('div');
-            existingDataDiv.className = 'mt-6 p-4 bg-amber-50 border border-amber-200 rounded-lg';
+            existingDataDiv.className = 'mt-8 glass-dark rounded-2xl p-6 border border-yellow-500/30';
             existingDataDiv.innerHTML = `
-                <div class="flex items-center mb-2">
-                    <svg class="w-5 h-5 text-amber-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                    </svg>
-                    <span class="text-sm font-medium text-amber-800">Données détectées</span>
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-lg flex items-center justify-center mr-3">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                    </div>
+                    <span class="text-yellow-400 font-medium">Données détectées</span>
                 </div>
-                <p class="text-xs text-amber-700 mb-3">
+                <p class="text-gray-400 mb-4 text-sm">
                     Une sauvegarde a été trouvée sur cet appareil.
                 </p>
-                <div class="flex space-x-2">
-                    <a href="/login" class="flex-1 text-center py-2 px-3 bg-amber-600 text-white text-xs rounded hover:bg-amber-700 transition-colors">
+                <div class="flex space-x-3">
+                    <a href="/login" class="flex-1 text-center py-3 px-4 bg-gradient-to-r from-yellow-600 to-orange-600 text-white rounded-xl hover:from-yellow-700 hover:to-orange-700 transition-all duration-300 text-sm font-medium btn-primary">
                         Charger la sauvegarde
                     </a>
-                    <button onclick="localStorage.clear(); location.reload();" class="flex-1 py-2 px-3 bg-gray-600 text-white text-xs rounded hover:bg-gray-700 transition-colors">
+                    <button onclick="localStorage.clear(); location.reload();" class="flex-1 py-3 px-4 bg-gray-700 text-white rounded-xl hover:bg-gray-600 transition-all duration-300 text-sm font-medium">
                         Nouvelle session
                     </button>
                 </div>
             `;
-            welcomeDiv.appendChild(existingDataDiv);
+            container.appendChild(existingDataDiv);
         }
     });
 </script>

@@ -33,7 +33,8 @@ class OCManager {
         
         if (sidebarToggle && sidebar) {
             sidebarToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('-translate-x-full');
+                sidebar.classList.remove('-translate-x-full');
+                sidebar.classList.add('translate-x-0');
                 if (overlay) {
                     overlay.classList.toggle('hidden');
                 }
@@ -42,6 +43,7 @@ class OCManager {
         
         if (sidebarClose && sidebar) {
             sidebarClose.addEventListener('click', () => {
+                sidebar.classList.remove('translate-x-0');
                 sidebar.classList.add('-translate-x-full');
                 if (overlay) {
                     overlay.classList.add('hidden');
@@ -51,6 +53,7 @@ class OCManager {
         
         if (overlay) {
             overlay.addEventListener('click', () => {
+                sidebar.classList.remove('translate-x-0');
                 sidebar.classList.add('-translate-x-full');
                 overlay.classList.add('hidden');
             });
@@ -59,6 +62,7 @@ class OCManager {
         // Fermer le sidebar avec Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && sidebar && !sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.remove('translate-x-0');
                 sidebar.classList.add('-translate-x-full');
                 if (overlay) {
                     overlay.classList.add('hidden');
@@ -71,6 +75,33 @@ class OCManager {
         
         // Auto-hide alerts
         this.autoHideAlerts();
+        
+        // Initialize modern interactions
+        this.initModernInteractions();
+    }
+    
+    initModernInteractions() {
+        // Add smooth scroll behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
+        
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all cards and sections
+        document.querySelectorAll('.card-hover, .glass, .glass-dark').forEach(el => {
+            observer.observe(el);
+        });
     }
     
     updateActiveNavigation() {
