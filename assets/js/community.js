@@ -320,28 +320,6 @@ function deleteComment(commentId, type) {
     }
 }
 
-// Fonctions DTIYS et création basée sur d'autres créations
-function createBasedOnOC(ocId) {
-    // Rediriger vers la création d'OC avec la race pré-remplie
-    const urlParams = new URLSearchParams();
-    urlParams.set('based_on_oc', ocId);
-    window.location.href = '/ocs/create?' + urlParams.toString();
-}
-
-function createDTIYS(ocId) {
-    // Rediriger vers la création d'OC en mode DTIYS
-    const urlParams = new URLSearchParams();
-    urlParams.set('dtiys_oc', ocId);
-    window.location.href = '/ocs/create?' + urlParams.toString();
-}
-
-function createOCWithRace(raceName) {
-    // Rediriger vers la création d'OC avec la race pré-remplie
-    const urlParams = new URLSearchParams();
-    urlParams.set('race', encodeURIComponent(raceName));
-    window.location.href = '/ocs/create?' + urlParams.toString();
-}
-
 // Modal d'affichage d'images
 function openImageModal(src, alt, caption = '') {
     const modal = document.getElementById('image-modal');

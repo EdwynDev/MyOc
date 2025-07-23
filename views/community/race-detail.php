@@ -360,30 +360,6 @@ ob_start();
             </div>
         <?php endif; ?>
         
-        <!-- Actions pour créer un OC de cette race -->
-        <?php if (isset($_SESSION['community_user_id'])): ?>
-            <div class="bg-gradient-to-br from-green-900/20 to-teal-800/20 backdrop-blur-xl rounded-3xl border border-green-700/30 p-12 mb-12">
-                <h2 class="text-3xl font-bold text-white mb-8 flex items-center">
-                    <svg class="w-8 h-8 mr-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg>
-                    Créer avec cette race
-                </h2>
-                <div class="text-center">
-                    <p class="text-gray-300 text-lg mb-8">Utilisez cette race pour créer votre propre Original Character</p>
-                    <button onclick="createOCWithRace('<?= htmlspecialchars($race['name']) ?>')" class="px-12 py-6 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-2xl hover:from-green-700 hover:to-teal-700 transition-all duration-300 shadow-xl font-bold text-xl relative overflow-hidden group">
-                        <span class="relative z-10 flex items-center justify-center">
-                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                            </svg>
-                            Créer un OC de race <?= htmlspecialchars($race['name']) ?>
-                        </span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-teal-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                    </button>
-                </div>
-            </div>
-        <?php endif; ?>
-        
         <!-- OCs de cette race -->
         <?php if (!empty($ocs_of_race)): ?>
             <div class="glass-dark rounded-3xl p-12 border border-gray-800 mb-12">

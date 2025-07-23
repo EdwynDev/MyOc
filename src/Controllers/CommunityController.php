@@ -456,7 +456,9 @@ class CommunityController extends BaseController {
             $table = $type === 'oc' ? 'oc_comments' : 'race_comments';
             
             // Vérifier que le commentaire appartient à l'utilisateur
-            $stmt = $this->ocModel->query("SELECT * FROM {$table} WHERE id = ? AND user_id = ?", [$commentId, $userId]);
+            $db = \Database::getInstance()->getConnection();
+            $stmt = $db->prepare("SELECT * FROM {$table} WHERE id = ? AND user_id = ?");
+            $stmt->execute([$commentId, $userId]);
             $comment = $stmt->fetch();
             
             if (!$comment) {
@@ -465,7 +467,8 @@ class CommunityController extends BaseController {
             }
             
             // Supprimer le commentaire
-            $stmt = $this->ocModel->query("DELETE FROM {$table} WHERE id = ?", [$commentId]);
+            $stmt = $db->prepare("DELETE FROM {$table} WHERE id = ?");
+            $stmt->execute([$commentId]);
             
             if ($stmt->rowCount() > 0) {
                 $this->json(['success' => true, 'message' => 'Commentaire supprimé avec succès']);

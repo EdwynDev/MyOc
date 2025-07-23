@@ -342,30 +342,6 @@ ob_start();
             </div>
         <?php endif; ?>
         
-        <!-- Actions DTIYS -->
-        <?php if (isset($_SESSION['community_user_id']) && $_SESSION['community_user_id'] != $oc['user_id']): ?>
-            <div class="bg-gradient-to-br from-purple-900/20 to-pink-800/20 backdrop-blur-xl rounded-3xl border border-purple-700/30 p-12 mb-12">
-                <h2 class="text-3xl font-bold text-white mb-8 flex items-center">
-                    <svg class="w-8 h-8 mr-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                    </svg>
-                    Inspiré par cet OC ?
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <button onclick="createBasedOnOC('<?= $oc['id'] ?>')" class="p-8 bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700/30 hover:border-purple-500/30 transition-all duration-300 text-left">
-                        <h3 class="text-xl font-bold text-white mb-4">Créer un OC de même race</h3>
-                        <p class="text-gray-400 mb-6">Utilisez la race "<?= htmlspecialchars($oc['race']) ?>" pour créer votre propre OC</p>
-                        <div class="text-purple-400 font-medium">→ Créer maintenant</div>
-                    </button>
-                    <button onclick="createDTIYS('<?= $oc['id'] ?>')" class="p-8 bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700/30 hover:border-pink-500/30 transition-all duration-300 text-left">
-                        <h3 class="text-xl font-bold text-white mb-4">DTIYS (Draw This In Your Style)</h3>
-                        <p class="text-gray-400 mb-6">Créez votre propre version de cet OC avec votre style</p>
-                        <div class="text-pink-400 font-medium">→ Commencer le DTIYS</div>
-                    </button>
-                </div>
-            </div>
-        <?php endif; ?>
-        
         <!-- OCs liés -->
         <?php if (!empty($related_ocs)): ?>
             <div class="mt-12">

@@ -101,11 +101,6 @@
                     </div>
                 </div>
                 
-                <!-- Info DTIYS/Based on -->
-                <div id="creation-info" class="hidden glass-dark rounded-2xl p-6 border border-blue-500/30 mb-8">
-                    <div class="flex items-center">
-                        <svg class="w-6 h-6 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                         <span id="creation-info-text" class="text-blue-400 font-medium"></span>
                     </div>
@@ -345,36 +340,7 @@
         window.addEventListener('DOMContentLoaded', function() {
             loadRaces();
             setupForm();
-            handleURLParams();
         });
-        
-        function handleURLParams() {
-            const urlParams = new URLSearchParams(window.location.search);
-            
-            // Si on vient d'un DTIYS ou d'un OC de base
-            if (urlParams.has('based_on_oc') || urlParams.has('dtiys_oc')) {
-                const ocId = urlParams.get('based_on_oc') || urlParams.get('dtiys_oc');
-                const isDTIYS = urlParams.has('dtiys_oc');
-                
-                const infoDiv = document.getElementById('creation-info');
-                const infoText = document.getElementById('creation-info-text');
-                
-                infoText.textContent = isDTIYS ? 
-                    '🎨 Mode DTIYS activé - Créez votre version de cet OC' : 
-                    '🔗 Création basée sur un OC existant';
-                
-                infoDiv.classList.remove('hidden');
-            }
-            
-            // Si on vient avec une race pré-remplie
-            if (urlParams.has('race')) {
-                const raceName = decodeURIComponent(urlParams.get('race'));
-                setTimeout(() => {
-                    const raceSelect = document.getElementById('race');
-                    raceSelect.value = raceName;
-                }, 100);
-            }
-        }
         
         function loadRaces() {
             const data = JSON.parse(localStorage.getItem('oc_data') || '{}');
