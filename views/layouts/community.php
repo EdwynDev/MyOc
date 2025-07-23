@@ -13,7 +13,7 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="<?= $canonical ?? 'https://yoc.studio' . $_SERVER['REQUEST_URI'] ?>">
+    <meta property="og:url" content="<?= $canonical ?? 'https://myocverse.neopolyworks.fr' . $_SERVER['REQUEST_URI'] ?>">
     <meta property="og:title" content="<?= $og_title ?? $title ?? 'Communauté YOC - Partagez vos Original Characters' ?>">
     <meta property="og:description" content="<?= $og_description ?? $description ?? 'Découvrez et partagez des Original Characters incroyables dans la communauté YOC.' ?>">
     <meta property="og:image" content="<?= $og_image ?? 'https://myocverse.neopolyworks.fr/assets/images/community-og.jpg' ?>">
@@ -22,13 +22,13 @@
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="<?= $canonical ?? 'https://yoc.studio' . $_SERVER['REQUEST_URI'] ?>">
+    <meta property="twitter:url" content="<?= $canonical ?? 'https://myocverse.neopolyworks.fr' . $_SERVER['REQUEST_URI'] ?>">
     <meta property="twitter:title" content="<?= $twitter_title ?? $og_title ?? $title ?>">
     <meta property="twitter:description" content="<?= $twitter_description ?? $og_description ?? $description ?>">
     <meta property="twitter:image" content="<?= $twitter_image ?? $og_image ?? 'https://myocverse.neopolyworks.fr/assets/images/community-og.jpg' ?>">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="<?= $canonical ?? 'https://yoc.studio' . $_SERVER['REQUEST_URI'] ?>">
+    <link rel="canonical" href="<?= $canonical ?? 'https://myocverse.neopolyworks.fr' . $_SERVER['REQUEST_URI'] ?>">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -244,8 +244,8 @@
                     <div class="flex items-center space-x-4">
                         <?php if (isset($_SESSION['community_user_id'])): ?>
                             <div class="hidden sm:flex items-center space-x-4 glass px-4 py-2 rounded-xl">
-                                <?php if (!empty($_SESSION['community_user_avatar'])): ?>
-                                    <img src="<?= htmlspecialchars($_SESSION['community_user_avatar']) ?>" 
+                                <?php if (!empty($user['avatar'])): ?>
+                                    <img src="<?= htmlspecialchars($user['avatar']) ?>" 
                                          alt="Avatar" 
                                          class="w-8 h-8 rounded-lg object-cover shadow-lg border border-white/10"
                                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
