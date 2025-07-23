@@ -3,61 +3,93 @@ $title = 'Communauté YOC - Partagez vos créations';
 ob_start(); 
 ?>
 
-<div class="fade-in">
+<div class="fade-in space-y-12">
     <!-- Hero Section -->
-    <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white py-16 px-4 rounded-lg mb-8">
-        <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Bienvenue dans la Communauté YOC</h1>
-            <p class="text-xl md:text-2xl mb-8 opacity-90">Partagez vos Original Characters et découvrez les créations d'autres passionnés</p>
-            
-            <?php if (!isset($_SESSION['community_user_id'])): ?>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="/community/register" class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                        Rejoindre la communauté
-                    </a>
-                    <a href="/community/login" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition-colors">
-                        Se connecter
-                    </a>
-                </div>
-            <?php else: ?>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="/community/publish-oc" class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                        Publier un OC
-                    </a>
-                    <a href="/community/publish-race" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition-colors">
-                        Publier une race
-                    </a>
-                </div>
-            <?php endif; ?>
+    <div class="relative overflow-hidden">
+        <div class="glass-dark rounded-3xl p-12 lg:p-16 border border-gray-800">
+            <div class="relative z-10 text-center">
+                <h1 class="text-5xl md:text-6xl font-bold text-white neon-text mb-6">Bienvenue dans la Communauté YOC</h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
+                    Partagez vos Original Characters et découvrez les créations d'autres passionnés
+                </p>
+                
+                <?php if (!isset($_SESSION['community_user_id'])): ?>
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center max-w-md mx-auto">
+                        <a href="/community/register" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-xl btn-primary font-bold text-lg">
+                            Rejoindre la communauté
+                        </a>
+                        <a href="/community/login" class="px-8 py-4 glass border border-gray-600 text-white rounded-2xl hover:border-blue-500 transition-all duration-300 font-bold text-lg">
+                            Se connecter
+                        </a>
+                    </div>
+                <?php else: ?>
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center max-w-md mx-auto">
+                        <a href="/community/publish-oc" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-xl btn-primary font-bold text-lg">
+                            Publier un OC
+                        </a>
+                        <a href="/community/publish-race" class="px-8 py-4 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-2xl hover:from-green-700 hover:to-teal-700 transition-all duration-300 shadow-xl btn-primary font-bold text-lg">
+                            Publier une race
+                        </a>
+                    </div>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
     
     <!-- Statistiques -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-            <div class="text-3xl font-bold text-indigo-600 mb-2" id="total-ocs">0</div>
-            <div class="text-gray-600">OCs partagés</div>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="glass-dark rounded-2xl p-8 text-center hover-lift border border-gray-800">
+            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+            </div>
+            <div id="total-ocs" class="text-3xl font-bold text-blue-400 neon-text mb-2">0</div>
+            <div class="text-gray-400">OCs partagés</div>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-            <div class="text-3xl font-bold text-green-600 mb-2" id="total-races">0</div>
-            <div class="text-gray-600">Races créées</div>
+        <div class="glass-dark rounded-2xl p-8 text-center hover-lift border border-gray-800">
+            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                </svg>
+            </div>
+            <div id="total-races" class="text-3xl font-bold text-green-400 neon-text mb-2">0</div>
+            <div class="text-gray-400">Races créées</div>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-            <div class="text-3xl font-bold text-purple-600 mb-2" id="total-users">0</div>
-            <div class="text-gray-600">Créateurs</div>
+        <div class="glass-dark rounded-2xl p-8 text-center hover-lift border border-gray-800">
+            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                </svg>
+            </div>
+            <div id="total-users" class="text-3xl font-bold text-purple-400 neon-text mb-2">0</div>
+            <div class="text-gray-400">Créateurs</div>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-            <div class="text-3xl font-bold text-pink-600 mb-2" id="total-likes">0</div>
-            <div class="text-gray-600">Likes donnés</div>
+        <div class="glass-dark rounded-2xl p-8 text-center hover-lift border border-gray-800">
+            <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+            </div>
+            <div id="total-likes" class="text-3xl font-bold text-pink-400 neon-text mb-2">0</div>
+            <div class="text-gray-400">Likes donnés</div>
         </div>
     </div>
     
     <!-- OCs récents -->
-    <div class="mb-12">
-        <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-bold text-gray-900">OCs récents</h2>
-            <a href="/community/ocs" class="text-indigo-600 hover:text-indigo-800 font-medium">
-                Voir tous les OCs →
+    <div class="glass-dark rounded-2xl p-8 border border-gray-800">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-3xl font-bold text-white neon-text flex items-center">
+                <svg class="w-8 h-8 mr-3 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                OCs récents
+            </h2>
+            <a href="/community/ocs" class="text-blue-400 hover:text-blue-300 font-medium transition-colors flex items-center space-x-2">
+                <span>Voir tous les OCs</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
             </a>
         </div>
         
@@ -67,11 +99,19 @@ ob_start();
     </div>
     
     <!-- Races récentes -->
-    <div class="mb-12">
-        <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-bold text-gray-900">Races récentes</h2>
-            <a href="/community/races" class="text-green-600 hover:text-green-800 font-medium">
-                Voir toutes les races →
+    <div class="glass-dark rounded-2xl p-8 border border-gray-800">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-3xl font-bold text-white neon-text flex items-center">
+                <svg class="w-8 h-8 mr-3 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                </svg>
+                Races récentes
+            </h2>
+            <a href="/community/races" class="text-green-400 hover:text-green-300 font-medium transition-colors flex items-center space-x-2">
+                <span>Voir toutes les races</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
             </a>
         </div>
         
@@ -81,9 +121,14 @@ ob_start();
     </div>
     
     <!-- Top créateurs -->
-    <div class="bg-white p-8 rounded-lg shadow-lg">
-        <h2 class="text-2xl font-bold text-gray-900 mb-6">Top créateurs</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4" id="top-creators">
+    <div class="glass-dark rounded-2xl p-8 border border-gray-800">
+        <h2 class="text-3xl font-bold text-white neon-text mb-8 flex items-center">
+            <svg class="w-8 h-8 mr-3 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+            </svg>
+            Top créateurs
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6" id="top-creators">
             <!-- Sera rempli par les données -->
         </div>
     </div>
@@ -111,12 +156,18 @@ ob_start();
         
         if (recentOCs.length === 0) {
             ocsContainer.innerHTML = `
-                <div class="col-span-full text-center py-12 text-gray-500">
-                    <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                    </svg>
-                    <p>Aucun OC partagé pour le moment</p>
-                    <p class="text-sm mt-2">Soyez le premier à partager votre création !</p>
+                <div class="col-span-full text-center py-16">
+                    <div class="w-20 h-20 bg-gradient-to-br from-gray-700 to-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Aucun OC partagé pour le moment</h3>
+                    <p class="text-gray-400 mb-6">Soyez le premier à partager votre création !</p>
+                    ${<?= isset($_SESSION['community_user_id']) ? 'true' : 'false' ?> ? 
+                        '<a href="/community/publish-oc" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 btn-primary"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>Publier un OC</a>' : 
+                        '<a href="/community/register" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 btn-primary">Rejoindre la communauté</a>'
+                    }
                 </div>
             `;
         } else {
@@ -129,12 +180,18 @@ ob_start();
         
         if (recentRaces.length === 0) {
             racesContainer.innerHTML = `
-                <div class="col-span-full text-center py-12 text-gray-500">
-                    <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                    </svg>
-                    <p>Aucune race partagée pour le moment</p>
-                    <p class="text-sm mt-2">Partagez vos créations de races !</p>
+                <div class="col-span-full text-center py-16">
+                    <div class="w-20 h-20 bg-gradient-to-br from-gray-700 to-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Aucune race partagée pour le moment</h3>
+                    <p class="text-gray-400 mb-6">Partagez vos créations de races !</p>
+                    ${<?= isset($_SESSION['community_user_id']) ? 'true' : 'false' ?> ? 
+                        '<a href="/community/publish-race" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-xl hover:from-green-700 hover:to-teal-700 transition-all duration-300 btn-primary"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>Publier une race</a>' : 
+                        '<a href="/community/register" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-xl hover:from-green-700 hover:to-teal-700 transition-all duration-300 btn-primary">Rejoindre la communauté</a>'
+                    }
                 </div>
             `;
         } else {
@@ -147,8 +204,13 @@ ob_start();
         
         if (topCreators.length === 0) {
             creatorsContainer.innerHTML = `
-                <div class="col-span-full text-center py-8 text-gray-500">
-                    <p>Aucun créateur pour le moment</p>
+                <div class="col-span-full text-center py-12">
+                    <div class="w-16 h-16 bg-gradient-to-br from-gray-700 to-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-gray-400">Aucun créateur pour le moment</p>
                 </div>
             `;
         } else {
@@ -160,20 +222,20 @@ ob_start();
         const createdDate = new Date(oc.created_at).toLocaleDateString('fr-FR');
         
         return `
-            <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 overflow-hidden">
+            <div class="glass rounded-2xl border border-gray-800 hover-lift card-hover overflow-hidden group">
                 <div class="p-6">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg">
                             ${oc.name.charAt(0).toUpperCase()}
                         </div>
                         <div class="ml-4">
-                            <h3 class="font-bold text-gray-900">${oc.name}</h3>
-                            <p class="text-sm text-gray-500">par ${oc.username}</p>
+                            <h3 class="font-bold text-white group-hover:text-blue-400 transition-colors">${oc.name}</h3>
+                            <p class="text-sm text-gray-400">par ${oc.username}</p>
                         </div>
                     </div>
                     
-                    ${oc.race ? `<p class="text-sm text-gray-600 mb-2"><span class="font-medium">Race:</span> ${oc.race}</p>` : ''}
-                    ${oc.description ? `<p class="text-sm text-gray-600 mb-4 line-clamp-3">${oc.description}</p>` : ''}
+                    ${oc.race ? `<p class="text-sm text-gray-300 mb-2"><span class="text-gray-400">Race:</span> ${oc.race}</p>` : ''}
+                    ${oc.description ? `<p class="text-sm text-gray-300 mb-4 line-clamp-3">${oc.description}</p>` : ''}
                     
                     <div class="flex items-center justify-between text-xs text-gray-500 mb-4">
                         <span>${createdDate}</span>
@@ -183,7 +245,7 @@ ob_start();
                         </div>
                     </div>
                     
-                    <a href="/community/oc/${oc.id}" class="block w-full text-center py-2 px-4 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors">
+                    <a href="/community/oc/${oc.id}" class="block w-full text-center py-3 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 btn-primary font-medium">
                         Voir l'OC
                     </a>
                 </div>
@@ -195,20 +257,20 @@ ob_start();
         const createdDate = new Date(race.created_at).toLocaleDateString('fr-FR');
         
         return `
-            <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 overflow-hidden">
+            <div class="glass rounded-2xl border border-gray-800 hover-lift card-hover overflow-hidden group">
                 <div class="p-6">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg">
                             ${race.name.charAt(0).toUpperCase()}
                         </div>
                         <div class="ml-4">
-                            <h3 class="font-bold text-gray-900">${race.name}</h3>
-                            <p class="text-sm text-gray-500">par ${race.username}</p>
+                            <h3 class="font-bold text-white group-hover:text-green-400 transition-colors">${race.name}</h3>
+                            <p class="text-sm text-gray-400">par ${race.username}</p>
                         </div>
                     </div>
                     
-                    ${race.type ? `<p class="text-sm text-gray-600 mb-2"><span class="font-medium">Type:</span> ${race.type}</p>` : ''}
-                    ${race.description ? `<p class="text-sm text-gray-600 mb-4 line-clamp-3">${race.description}</p>` : ''}
+                    ${race.type ? `<p class="text-sm text-gray-300 mb-2"><span class="text-gray-400">Type:</span> ${race.type}</p>` : ''}
+                    ${race.description ? `<p class="text-sm text-gray-300 mb-4 line-clamp-3">${race.description}</p>` : ''}
                     
                     <div class="flex items-center justify-between text-xs text-gray-500 mb-4">
                         <span>${createdDate}</span>
@@ -218,7 +280,7 @@ ob_start();
                         </div>
                     </div>
                     
-                    <a href="/community/race/${race.id}" class="block w-full text-center py-2 px-4 bg-green-600 text-white rounded hover:bg-green-700 transition-colors">
+                    <a href="/community/race/${race.id}" class="block w-full text-center py-3 px-4 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-xl hover:from-green-700 hover:to-teal-700 transition-all duration-300 btn-primary font-medium">
                         Voir la race
                     </a>
                 </div>
@@ -228,13 +290,13 @@ ob_start();
     
     function createCreatorCard(creator) {
         return `
-            <div class="text-center">
-                <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg mx-auto mb-3">
+            <div class="text-center glass rounded-2xl p-6 hover-lift border border-gray-800">
+                <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center text-white font-bold text-lg mx-auto mb-4 shadow-xl">
                     ${creator.username.charAt(0).toUpperCase()}
                 </div>
-                <h3 class="font-medium text-gray-900">${creator.username}</h3>
-                <p class="text-sm text-gray-500">${creator.total_creations || 0} créations</p>
-                <a href="/community/profile/${creator.username}" class="text-xs text-indigo-600 hover:text-indigo-800">
+                <h3 class="font-bold text-white mb-1">${creator.username}</h3>
+                <p class="text-sm text-gray-400 mb-3">${creator.total_creations || 0} créations</p>
+                <a href="/community/profile/${creator.username}" class="text-xs text-blue-400 hover:text-blue-300 transition-colors">
                     Voir le profil
                 </a>
             </div>

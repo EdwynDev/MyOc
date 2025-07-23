@@ -3,14 +3,15 @@ $title = 'Mes OC - YOC';
 ob_start(); 
 ?>
 
-<div class="fade-in">
-    <div class="flex items-center justify-between mb-8">
+<div class="fade-in space-y-8">
+    <!-- Header avec actions -->
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-6 lg:space-y-0">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">Mes Original Characters</h1>
-            <p class="text-gray-600">Gérez tous vos personnages originaux</p>
+            <h1 class="text-4xl font-bold text-white neon-text mb-3">Mes Original Characters</h1>
+            <p class="text-gray-400 text-lg">Gérez tous vos personnages originaux</p>
         </div>
-        <a href="/ocs/create" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg">
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <a href="/ocs/create" class="inline-flex items-center px-6 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-xl btn-primary text-lg font-medium">
+            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
             </svg>
             Créer un OC
@@ -18,44 +19,48 @@ ob_start();
     </div>
     
     <!-- Avertissement si aucune race -->
-    <div id="no-races-alert" class="hidden mb-8 bg-amber-50 border border-amber-200 rounded-lg p-6">
-        <div class="flex items-start">
-            <svg class="w-6 h-6 text-amber-600 mt-0.5 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
-            </svg>
-            <div class="flex-1">
-                <h3 class="font-medium text-amber-800 mb-2">Aucune race disponible</h3>
-                <p class="text-sm text-amber-700 mb-4">
-                    Pour créer des OCs plus détaillés, nous recommandons de créer d'abord quelques races. 
-                    Cela vous permettra de mieux organiser vos personnages.
-                </p>
-                <a href="/races/create" class="inline-flex items-center px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+    <div id="no-races-alert" class="hidden">
+        <div class="glass-dark rounded-2xl p-8 border border-yellow-500/30">
+            <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
                     </svg>
-                    Créer une race
-                </a>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-bold text-yellow-400 mb-3 text-lg">Aucune race disponible</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Pour créer des OCs plus détaillés, nous recommandons de créer d'abord quelques races. 
+                        Cela vous permettra de mieux organiser vos personnages.
+                    </p>
+                    <a href="/races/create" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-yellow-600 to-orange-600 text-white rounded-xl hover:from-yellow-700 hover:to-orange-700 transition-all duration-300 btn-primary">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        Créer une race
+                    </a>
+                </div>
             </div>
         </div>
     </div>
     
     <!-- Filtres et recherche -->
-    <div class="bg-white p-6 rounded-lg shadow-lg border mb-8">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+    <div class="glass-dark rounded-2xl p-8 border border-gray-800">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-6 lg:space-y-0">
             <div class="flex-1 max-w-md">
                 <label for="search" class="sr-only">Rechercher</label>
                 <div class="relative">
-                    <input type="text" id="search" placeholder="Rechercher un OC..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                    <svg class="absolute left-3 top-2.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <input type="text" id="search" placeholder="Rechercher un OC..." class="w-full pl-12 pr-4 py-4 bg-gray-900/50 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm">
+                    <svg class="absolute left-4 top-4 w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                 </div>
             </div>
-            <div class="flex items-center space-x-4">
-                <select id="race-filter" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <select id="race-filter" class="px-4 py-4 bg-gray-900/50 border border-gray-700 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm">
                     <option value="">Toutes les races</option>
                 </select>
-                <select id="sort-by" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                <select id="sort-by" class="px-4 py-4 bg-gray-900/50 border border-gray-700 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm">
                     <option value="name">Nom</option>
                     <option value="created_at">Date de création</option>
                     <option value="updated_at">Dernière modification</option>
@@ -65,23 +70,27 @@ ob_start();
     </div>
     
     <!-- Liste des OCs -->
-    <div id="ocs-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div id="ocs-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
         <!-- Sera rempli par JavaScript -->
     </div>
     
     <!-- Message si aucun OC -->
-    <div id="no-ocs" class="hidden text-center py-12">
-        <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-        </svg>
-        <h3 class="text-lg font-medium text-gray-900 mb-2">Aucun OC trouvé</h3>
-        <p class="text-gray-500 mb-6">Commencez par créer votre premier Original Character</p>
-        <a href="/ocs/create" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-            </svg>
-            Créer mon premier OC
-        </a>
+    <div id="no-ocs" class="hidden">
+        <div class="text-center py-20">
+            <div class="w-24 h-24 bg-gradient-to-br from-gray-700 to-gray-800 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl">
+                <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-4 neon-text">Aucun OC trouvé</h3>
+            <p class="text-gray-400 mb-8 text-lg">Commencez par créer votre premier Original Character</p>
+            <a href="/ocs/create" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-xl btn-primary text-lg font-medium">
+                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Créer mon premier OC
+            </a>
+        </div>
     </div>
 </div>
 
@@ -146,45 +155,47 @@ ob_start();
         const updatedDate = new Date(oc.updated_at).toLocaleDateString('fr-FR');
         
         return `
-            <div class="bg-white rounded-lg shadow-lg border hover:shadow-xl transition-all duration-200 overflow-hidden">
-                <div class="p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+            <div class="glass-dark rounded-2xl border border-gray-800 hover-lift card-hover overflow-hidden group">
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-xl">
                             ${oc.name.charAt(0).toUpperCase()}
                         </div>
-                        <div class="ml-4">
-                            <h3 class="text-lg font-bold text-gray-900">${oc.name}</h3>
-                            <p class="text-sm text-gray-500">${oc.race || 'Race non définie'}</p>
+                        <div class="ml-6">
+                            <h3 class="text-xl font-bold text-white neon-text group-hover:text-blue-400 transition-colors">${oc.name}</h3>
+                            <p class="text-gray-400">${oc.race || 'Race non définie'}</p>
                         </div>
                     </div>
                     
-                    ${oc.age ? `<p class="text-sm text-gray-600 mb-2"><span class="font-medium">Âge:</span> ${oc.age}</p>` : ''}
-                    ${oc.gender ? `<p class="text-sm text-gray-600 mb-2"><span class="font-medium">Genre:</span> ${oc.gender}</p>` : ''}
-                    ${oc.description ? `<p class="text-sm text-gray-600 mb-4 line-clamp-3">${oc.description}</p>` : ''}
+                    <div class="space-y-3 mb-6">
+                        ${oc.age ? `<div class="flex items-center text-sm"><span class="text-gray-400 w-16">Âge:</span><span class="text-gray-300">${oc.age}</span></div>` : ''}
+                        ${oc.gender ? `<div class="flex items-center text-sm"><span class="text-gray-400 w-16">Genre:</span><span class="text-gray-300">${oc.gender}</span></div>` : ''}
+                        ${oc.description ? `<div class="mt-4"><p class="text-gray-300 text-sm leading-relaxed line-clamp-3">${oc.description}</p></div>` : ''}
+                    </div>
                     
                     ${oc.images && oc.images.length > 0 ? `
-                        <div class="mb-4">
-                            <div class="flex space-x-2 overflow-x-auto">
+                        <div class="mb-6">
+                            <div class="flex space-x-3 overflow-x-auto pb-2">
                                 ${oc.images.slice(0, 3).map((img, index) => `
                                     <img src="${img.data}" alt="${img.title || 'Image OC'}" 
-                                         class="w-16 h-16 object-cover rounded-lg flex-shrink-0 border border-gray-200"
+                                         class="w-20 h-20 object-cover rounded-xl flex-shrink-0 border border-gray-700 hover:border-blue-500 transition-colors"
                                          onerror="this.style.display='none'" loading="lazy">
                                 `).join('')}
-                                ${oc.images.length > 3 ? `<div class="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center text-xs text-gray-500 flex-shrink-0">+${oc.images.length - 3}</div>` : ''}
+                                ${oc.images.length > 3 ? `<div class="w-20 h-20 bg-gray-800 rounded-xl flex items-center justify-center text-xs text-gray-400 flex-shrink-0 border border-gray-700">+${oc.images.length - 3}</div>` : ''}
                             </div>
                         </div>
                     ` : ''}
                     
-                    <div class="flex items-center justify-between text-xs text-gray-500 mb-4">
+                    <div class="flex items-center justify-between text-xs text-gray-500 mb-6 pt-4 border-t border-gray-800">
                         <span>Créé le ${createdDate}</span>
                         ${oc.updated_at !== oc.created_at ? `<span>Modifié le ${updatedDate}</span>` : ''}
                     </div>
                     
-                    <div class="flex space-x-2">
-                        <a href="/ocs/edit/${oc.id}" class="flex-1 text-center py-2 px-3 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700 transition-colors">
+                    <div class="flex space-x-3">
+                        <a href="/ocs/edit/${oc.id}" class="flex-1 text-center py-3 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-medium btn-primary">
                             Modifier
                         </a>
-                        <button onclick="deleteOCFromList('${oc.id}')" class="flex-1 py-2 px-3 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition-colors">
+                        <button onclick="deleteOCFromList('${oc.id}')" class="flex-1 py-3 px-4 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-xl hover:from-red-700 hover:to-red-800 transition-all duration-300 font-medium">
                             Supprimer
                         </button>
                     </div>
@@ -239,10 +250,19 @@ ob_start();
             data.ocs = (data.ocs || []).filter(oc => oc.id !== id);
             localStorage.setItem('oc_data', JSON.stringify(data));
             loadOCs();
-            alert('OC supprimé avec succès !');
+            window.ocManager.showNotification('OC supprimé avec succès !', 'success');
         }
     }
 </script>
+
+<style>
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+</style>
 
 <?php 
 $content = ob_get_clean();
