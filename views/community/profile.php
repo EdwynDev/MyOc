@@ -15,9 +15,19 @@ ob_start();
         <div class="glass-dark rounded-3xl p-12 border border-gray-800 mb-12">
             <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between space-y-8 lg:space-y-0">
                 <div class="flex items-center space-x-8">
-                    <div class="w-32 h-32 bg-gradient-to-br from-purple-500 to-pink-600 rounded-3xl flex items-center justify-center text-white font-bold text-4xl shadow-2xl neon-glow">
-                        <?= strtoupper(substr($user['username'], 0, 1)) ?>
-                    </div>
+                    <?php if (!empty($user['avatar'])): ?>
+                        <img src="<?= htmlspecialchars($user['avatar']) ?>" 
+                             alt="Avatar de <?= htmlspecialchars($user['username']) ?>" 
+                             class="w-32 h-32 rounded-3xl object-cover shadow-2xl neon-glow border border-white/10"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-32 h-32 bg-gradient-to-br from-purple-500 to-pink-600 rounded-3xl flex items-center justify-center text-white font-bold text-4xl shadow-2xl neon-glow" style="display: none;">
+                            <?= strtoupper(substr($user['username'], 0, 1)) ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="w-32 h-32 bg-gradient-to-br from-purple-500 to-pink-600 rounded-3xl flex items-center justify-center text-white font-bold text-4xl shadow-2xl neon-glow">
+                            <?= strtoupper(substr($user['username'], 0, 1)) ?>
+                        </div>
+                    <?php endif; ?>
                     <div>
                         <h1 class="text-5xl font-bold text-white neon-text mb-4"><?= htmlspecialchars($user['username']) ?></h1>
                         <div class="flex items-center space-x-6 text-lg text-gray-400 mb-6">

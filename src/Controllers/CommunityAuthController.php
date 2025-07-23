@@ -139,6 +139,7 @@ class CommunityAuthController extends BaseController {
         // Connexion réussie
         $_SESSION['community_user_id'] = $user['id'];
         $_SESSION['community_username'] = $user['username'];
+        $_SESSION['community_user_avatar'] = $user['avatar'];
         
         // Mettre à jour le dernier login
         $this->userModel->updateLastLogin($user['id']);

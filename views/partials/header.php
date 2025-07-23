@@ -20,9 +20,23 @@
         <div class="flex items-center space-x-4">
             <div class="hidden sm:flex items-center space-x-4">
                 <div class="flex items-center space-x-3 glass px-4 py-2 rounded-xl">
-                    <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg">
-                        <?= strtoupper(substr($_SESSION['user_name'], 0, 1)) ?>
-                    </div>
+                    <?php 
+                    // Récupérer l'avatar depuis la session communautaire si disponible
+                    $userAvatar = $_SESSION['community_user_avatar'] ?? null;
+                    ?>
+                    <?php if (!empty($userAvatar)): ?>
+                        <img src="<?= htmlspecialchars($userAvatar) ?>" 
+                             alt="Avatar" 
+                             class="w-8 h-8 rounded-lg object-cover shadow-lg border border-white/10"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg" style="display: none;">
+                            <?= strtoupper(substr($_SESSION['user_name'], 0, 1)) ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                            <?= strtoupper(substr($_SESSION['user_name'], 0, 1)) ?>
+                        </div>
+                    <?php endif; ?>
                     <div>
                         <span class="text-sm font-medium text-white"><?= $_SESSION['user_name'] ?></span>
                         <p class="text-xs text-gray-400">Créateur</p>

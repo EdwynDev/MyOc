@@ -18,9 +18,19 @@ ob_start();
         <div class="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl rounded-3xl border border-gray-700/50 p-12 mb-12 hover:border-gray-600/50 transition-all duration-500">
             <div class="text-center mb-12">
                 <div class="relative inline-block mb-8">
-                    <div class="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-4xl shadow-2xl border-4 border-white/10">
-                        <?= strtoupper(substr($user['username'], 0, 1)) ?>
-                    </div>
+                    <?php if (!empty($user['avatar'])): ?>
+                        <img src="<?= htmlspecialchars($user['avatar']) ?>" 
+                             alt="Avatar de <?= htmlspecialchars($user['username']) ?>" 
+                             class="w-32 h-32 rounded-full object-cover shadow-2xl border-4 border-white/10"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-4xl shadow-2xl border-4 border-white/10" style="display: none;">
+                            <?= strtoupper(substr($user['username'], 0, 1)) ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-4xl shadow-2xl border-4 border-white/10">
+                            <?= strtoupper(substr($user['username'], 0, 1)) ?>
+                        </div>
+                    <?php endif; ?>
                     <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur opacity-30 animate-pulse"></div>
                 </div>
                 <h1 class="text-4xl font-bold text-white mb-4 tracking-wide"><?= htmlspecialchars($user['username']) ?></h1>

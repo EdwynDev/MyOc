@@ -244,9 +244,19 @@
                     <div class="flex items-center space-x-4">
                         <?php if (isset($_SESSION['community_user_id'])): ?>
                             <div class="hidden sm:flex items-center space-x-4 glass px-4 py-2 rounded-xl">
-                                <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
-                                    <?= strtoupper(substr($_SESSION['community_username'], 0, 1)) ?>
-                                </div>
+                                <?php if (!empty($_SESSION['community_user_avatar'])): ?>
+                                    <img src="<?= htmlspecialchars($_SESSION['community_user_avatar']) ?>" 
+                                         alt="Avatar" 
+                                         class="w-8 h-8 rounded-lg object-cover shadow-lg border border-white/10"
+                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="display: none;">
+                                        <?= strtoupper(substr($_SESSION['community_username'], 0, 1)) ?>
+                                    </div>
+                                <?php else: ?>
+                                    <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
+                                        <?= strtoupper(substr($_SESSION['community_username'], 0, 1)) ?>
+                                    </div>
+                                <?php endif; ?>
                                 <span class="text-sm font-medium text-white"><?= $_SESSION['community_username'] ?></span>
                             </div>
                             <div class="flex items-center space-x-3">
