@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer une race - YOC</title>
+    <title>Créer une Race Fantasy - Worldbuilding avancé | YOC Studio</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Créez des races et espèces pour vos univers fantasy avec YOC Studio. Outils de worldbuilding avancés pour définir cultures, capacités et caractéristiques.">
+    <meta name="keywords" content="créer race fantasy, worldbuilding, création espèce, fantasy race creator, univers fantasy">
+    <meta name="robots" content="noindex, nofollow">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

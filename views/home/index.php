@@ -1,5 +1,10 @@
 <?php 
-$title = 'Accueil - YOC';
+$title = 'YOC Studio - Créateur d\'Original Characters | Gestionnaire de personnages';
+$description = 'YOC Studio : créez, organisez et gérez vos Original Characters avec notre interface moderne. Outils avancés pour character design, communauté créative, export/import sécurisé.';
+$keywords = 'original character, OC, character design, personnage original, création personnage, fantasy, roleplay, gestionnaire OC, studio création';
+$canonical = 'https://yoc.studio/';
+$og_title = 'YOC Studio - Le meilleur outil pour créer vos Original Characters';
+$og_description = 'Découvrez YOC Studio, la plateforme moderne pour créer, organiser et partager vos Original Characters. Interface intuitive, outils avancés, communauté active.';
 ob_start(); 
 ?>
 

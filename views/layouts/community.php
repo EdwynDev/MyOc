@@ -3,10 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?? 'Communauté YOC' ?></title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title><?= $title ?? 'Communauté YOC - Partagez vos Original Characters' ?></title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="<?= $description ?? 'Rejoignez la communauté YOC ! Partagez vos Original Characters, découvrez les créations d\'autres artistes, échangez et inspirez-vous mutuellement.' ?>">
+    <meta name="keywords" content="<?= $keywords ?? 'communauté OC, partage personnages, galerie OC, original characters community, character sharing, fantasy community' ?>">
+    <meta name="author" content="YOC Studio">
+    <meta name="robots" content="<?= $robots ?? 'index, follow' ?>">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?= $canonical ?? 'https://yoc.studio' . $_SERVER['REQUEST_URI'] ?>">
+    <meta property="og:title" content="<?= $og_title ?? $title ?? 'Communauté YOC - Partagez vos Original Characters' ?>">
+    <meta property="og:description" content="<?= $og_description ?? $description ?? 'Découvrez et partagez des Original Characters incroyables dans la communauté YOC.' ?>">
+    <meta property="og:image" content="<?= $og_image ?? 'https://yoc.studio/assets/images/community-og.jpg' ?>">
+    <meta property="og:site_name" content="YOC Studio">
+    <meta property="og:locale" content="fr_FR">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="<?= $canonical ?? 'https://yoc.studio' . $_SERVER['REQUEST_URI'] ?>">
+    <meta property="twitter:title" content="<?= $twitter_title ?? $og_title ?? $title ?>">
+    <meta property="twitter:description" content="<?= $twitter_description ?? $og_description ?? $description ?>">
+    <meta property="twitter:image" content="<?= $twitter_image ?? $og_image ?? 'https://yoc.studio/assets/images/community-og.jpg' ?>">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="<?= $canonical ?? 'https://yoc.studio' . $_SERVER['REQUEST_URI'] ?>">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Electrolize:wght@400&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>

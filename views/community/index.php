@@ -1,5 +1,10 @@
 <?php 
-$title = 'Communauté YOC - Partagez vos créations';
+$title = 'Communauté YOC - Partagez et découvrez des Original Characters';
+$description = 'Rejoignez la communauté YOC ! Partagez vos Original Characters, découvrez les créations d\'autres artistes, échangez conseils et inspirations dans un environnement bienveillant.';
+$keywords = 'communauté OC, partage original characters, galerie personnages, community fantasy, character sharing, inspiration OC';
+$canonical = 'https://yoc.studio/community';
+$og_title = 'Communauté YOC - La plus grande galerie d\'Original Characters';
+$og_description = 'Découvrez des milliers d\'Original Characters créés par une communauté passionnée. Partagez vos créations et inspirez-vous !';
 ob_start(); 
 ?>
 

@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer un OC - YOC</title>
+    <title>Créer un Original Character - Studio de création | YOC Studio</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Créez votre Original Character avec YOC Studio. Interface moderne et intuitive pour donner vie à vos personnages. Outils avancés de character design.">
+    <meta name="keywords" content="créer OC, character design, création personnage, original character creator, studio création">
+    <meta name="robots" content="noindex, nofollow">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

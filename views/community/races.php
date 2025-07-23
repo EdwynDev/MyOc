@@ -1,5 +1,10 @@
 <?php 
-$title = 'Galerie de Races - Communauté YOC';
+$title = 'Galerie de Races Fantasy - Univers et Espèces originales | YOC';
+$description = 'Explorez des races et espèces fantasy originales créées par la communauté. Découvrez des univers uniques, cultures fascinantes et créatures extraordinaires.';
+$keywords = 'races fantasy, espèces originales, worldbuilding, univers fantasy, créatures, races communauté, fantasy races';
+$canonical = 'https://yoc.studio/community/races';
+$og_title = 'Galerie de Races Fantasy - Communauté YOC';
+$og_description = 'Découvrez des races et espèces fantasy uniques créées par des worldbuilders passionnés.';
 ob_start(); 
 ?>
 

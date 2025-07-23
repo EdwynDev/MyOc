@@ -1,5 +1,8 @@
 <?php 
-$title = 'Tableau de bord - YOC';
+$title = 'Tableau de bord - ' . htmlspecialchars($user_name) . ' | YOC Studio';
+$description = 'Tableau de bord personnel de ' . htmlspecialchars($user_name) . ' sur YOC Studio. Gérez vos Original Characters, consultez vos statistiques et accédez à vos outils de création.';
+$keywords = 'tableau de bord, dashboard, OC, original character, statistiques, gestion personnage, ' . htmlspecialchars($user_name);
+$robots = 'noindex, nofollow';
 ob_start(); 
 ?>
 

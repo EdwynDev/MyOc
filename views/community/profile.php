@@ -1,5 +1,11 @@
 <?php 
-$title = 'Profil de ' . htmlspecialchars($user['username']) . ' - Communauté YOC';
+$title = 'Profil de ' . htmlspecialchars($user['username']) . ' - Créateur d\'Original Characters | YOC';
+$description = 'Découvrez le profil de ' . htmlspecialchars($user['username']) . ' sur YOC. Explorez ses Original Characters, races créées et collections. ' . (isset($user['bio']) && $user['bio'] ? substr(strip_tags($user['bio']), 0, 100) . '...' : '');
+$keywords = 'profil ' . htmlspecialchars($user['username']) . ', créateur OC, original characters, portfolio, artiste fantasy';
+$canonical = 'https://yoc.studio/community/profile/' . htmlspecialchars($user['username']);
+$og_title = 'Profil de ' . htmlspecialchars($user['username']) . ' - Créateur sur YOC';
+$og_description = $description;
+$robots = 'index, follow';
 ob_start(); 
 ?>
 

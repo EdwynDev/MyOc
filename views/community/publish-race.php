@@ -1,5 +1,8 @@
 <?php 
-$title = 'Publier une race - Communauté YOC';
+$title = 'Publier une Race Fantasy - Partagez votre univers | YOC';
+$description = 'Partagez votre race fantasy avec la communauté YOC. Publiez vos créations d\'espèces et d\'univers pour inspirer d\'autres worldbuilders.';
+$keywords = 'publier race, partager espèce fantasy, worldbuilding, publication race, share fantasy race';
+$robots = 'noindex, nofollow';
 ob_start(); 
 ?>
 

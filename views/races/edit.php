@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier une race - YOC</title>
+    <title>Modifier une Race Fantasy - Édition d'univers | YOC Studio</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Modifiez et perfectionnez vos races fantasy avec YOC Studio. Outils d'édition avancés pour peaufiner cultures, capacités et caractéristiques de vos espèces.">
+    <meta name="keywords" content="modifier race fantasy, édition espèce, worldbuilding editing, mise à jour race, perfectionnement univers">
+    <meta name="robots" content="noindex, nofollow">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

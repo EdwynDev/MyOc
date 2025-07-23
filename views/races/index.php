@@ -1,5 +1,8 @@
 <?php 
-$title = 'Races - YOC';
+$title = 'Mes Races et Espèces - Création d\'univers | YOC Studio';
+$description = 'Créez et gérez les races de vos univers fantastiques. Définissez les caractéristiques, cultures et capacités de vos espèces originales.';
+$keywords = 'races fantasy, espèces, création univers, worldbuilding, races originales, fantasy races, character races';
+$robots = 'noindex, nofollow';
 ob_start(); 
 ?>
 

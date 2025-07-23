@@ -1,5 +1,11 @@
 <?php 
-$title = htmlspecialchars($race['name']) . ' - Communauté YOC';
+$title = htmlspecialchars($race['name']) . ' - Race Fantasy par ' . htmlspecialchars($race['username']) . ' | YOC';
+$description = 'Découvrez la race ' . htmlspecialchars($race['name']) . ($race['type'] ? ' (' . htmlspecialchars($race['type']) . ')' : '') . ' créée par ' . htmlspecialchars($race['username']) . '. ' . (isset($race['description']) ? substr(strip_tags($race['description']), 0, 150) . '...' : 'Explorez cette espèce unique sur YOC.');
+$keywords = 'race ' . htmlspecialchars($race['name']) . ', fantasy race, ' . ($race['type'] ? htmlspecialchars($race['type']) . ', ' : '') . 'worldbuilding, ' . htmlspecialchars($race['username']);
+$canonical = 'https://yoc.studio/community/race/' . $race['id'];
+$og_title = htmlspecialchars($race['name']) . ' - Race Fantasy par ' . htmlspecialchars($race['username']);
+$og_description = $description;
+$robots = 'index, follow';
 ob_start(); 
 ?>
 

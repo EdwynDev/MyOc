@@ -3,7 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription Communauté - YOC</title>
+    <title>Inscription Communauté - Rejoignez les créateurs d'OCs | YOC Studio</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Créez votre compte communauté YOC gratuitement ! Partagez vos Original Characters, découvrez des créations inspirantes et rejoignez une communauté bienveillante de créateurs.">
+    <meta name="keywords" content="inscription YOC, créer compte, rejoindre communauté, partage OC, community signup, original characters">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yoc.studio/community/register">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Inscription Communauté YOC - Rejoignez les créateurs">
+    <meta property="og:description" content="Créez votre compte gratuitement et rejoignez la plus grande communauté d'Original Characters.">
+    <meta property="og:url" content="https://yoc.studio/community/register">
+    <meta property="og:type" content="website">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

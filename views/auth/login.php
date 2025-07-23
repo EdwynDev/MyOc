@@ -1,5 +1,8 @@
 <?php 
-$title = 'Connexion - YOC';
+$title = 'Connexion à votre Studio - Accès sécurisé | YOC Studio';
+$description = 'Connectez-vous à votre espace personnel YOC Studio. Accédez à vos Original Characters, races et outils de création en toute sécurité.';
+$keywords = 'connexion, login, accès, studio personnel, sécurisé, authentification';
+$canonical = 'https://yoc.studio/login';
 ob_start(); 
 ?>
 

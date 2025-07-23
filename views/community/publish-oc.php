@@ -1,5 +1,8 @@
 <?php 
-$title = 'Publier un OC - Communauté YOC';
+$title = 'Publier un Original Character - Partagez votre création | YOC';
+$description = 'Partagez votre Original Character avec la communauté YOC. Sélectionnez depuis votre espace personnel et publiez pour inspirer d\'autres créateurs.';
+$keywords = 'publier OC, partager original character, publication communauté, share OC, community publishing';
+$robots = 'noindex, nofollow';
 ob_start(); 
 ?>
 

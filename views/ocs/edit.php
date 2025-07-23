@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier un OC - YOC</title>
+    <title>Modifier un Original Character - Édition avancée | YOC Studio</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Modifiez et perfectionnez votre Original Character avec les outils d'édition avancés de YOC Studio. Interface intuitive pour peaufiner vos créations.">
+    <meta name="keywords" content="modifier OC, édition personnage, character editing, mise à jour OC, perfectionnement personnage">
+    <meta name="robots" content="noindex, nofollow">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

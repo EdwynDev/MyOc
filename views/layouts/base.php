@@ -3,12 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?? 'YOC - Gestionnaire d\'OC' ?></title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title><?= $title ?? 'YOC - Gestionnaire d\'Original Characters' ?></title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="<?= $description ?? 'YOC - Studio de création et gestion d\'Original Characters. Créez, organisez et partagez vos personnages originaux avec une interface moderne et intuitive.' ?>">
+    <meta name="keywords" content="<?= $keywords ?? 'original character, OC, personnage, création, fantasy, roleplay, character design, gestionnaire, studio' ?>">
+    <meta name="author" content="YOC Studio">
+    <meta name="robots" content="<?= $robots ?? 'index, follow' ?>">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?= $canonical ?? 'https://yoc.studio' . $_SERVER['REQUEST_URI'] ?>">
+    <meta property="og:title" content="<?= $og_title ?? $title ?? 'YOC - Studio de création d\'Original Characters' ?>">
+    <meta property="og:description" content="<?= $og_description ?? $description ?? 'Créez et gérez vos Original Characters avec YOC Studio. Interface moderne, outils avancés, communauté créative.' ?>">
+    <meta property="og:image" content="<?= $og_image ?? 'https://yoc.studio/assets/images/og-image.jpg' ?>">
+    <meta property="og:site_name" content="YOC Studio">
+    <meta property="og:locale" content="fr_FR">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="<?= $canonical ?? 'https://yoc.studio' . $_SERVER['REQUEST_URI'] ?>">
+    <meta property="twitter:title" content="<?= $twitter_title ?? $og_title ?? $title ?? 'YOC - Studio de création d\'Original Characters' ?>">
+    <meta property="twitter:description" content="<?= $twitter_description ?? $og_description ?? $description ?? 'Créez et gérez vos Original Characters avec YOC Studio.' ?>">
+    <meta property="twitter:image" content="<?= $twitter_image ?? $og_image ?? 'https://yoc.studio/assets/images/og-image.jpg' ?>">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="<?= $canonical ?? 'https://yoc.studio' . $_SERVER['REQUEST_URI'] ?>">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Electrolize:wght@400&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "YOC Studio",
+        "description": "Studio de création et gestion d'Original Characters",
+        "url": "https://yoc.studio",
+        "applicationCategory": "CreativeWork",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "YOC Studio"
+        }
+    }
+    </script>
     <style>
         body { 
             font-family: 'Electrolize', monospace; 

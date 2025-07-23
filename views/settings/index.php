@@ -1,5 +1,8 @@
 <?php 
-$title = 'Paramètres - YOC';
+$title = 'Paramètres et Configuration - Export/Import | YOC Studio';
+$description = 'Configurez votre espace YOC Studio. Exportez vos données, importez des sauvegardes, gérez vos paramètres et consultez les statistiques d\'utilisation.';
+$keywords = 'paramètres, configuration, export, import, sauvegarde, données, statistiques, settings';
+$robots = 'noindex, nofollow';
 ob_start(); 
 ?>
 

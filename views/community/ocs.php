@@ -1,5 +1,10 @@
 <?php 
-$title = 'Galerie d\'OCs - Communauté YOC';
+$title = 'Galerie d\'Original Characters - Découvrez des créations uniques | YOC';
+$description = 'Explorez la plus grande galerie d\'Original Characters. Découvrez des personnages uniques créés par la communauté YOC, filtrez par race et trouvez l\'inspiration.';
+$keywords = 'galerie OC, original characters, personnages fantasy, character gallery, inspiration personnage, découverte OC';
+$canonical = 'https://yoc.studio/community/ocs';
+$og_title = 'Galerie d\'Original Characters - Communauté YOC';
+$og_description = 'Découvrez des centaines d\'Original Characters créés par des artistes talentueux. Filtrez, explorez et inspirez-vous !';
 ob_start(); 
 ?>
 

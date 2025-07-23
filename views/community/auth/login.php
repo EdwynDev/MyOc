@@ -3,7 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion Communauté - YOC</title>
+    <title>Connexion Communauté - Rejoignez la galerie d'OCs | YOC Studio</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Connectez-vous à la communauté YOC pour partager vos Original Characters, découvrir des créations uniques et échanger avec d'autres créateurs passionnés.">
+    <meta name="keywords" content="connexion communauté, login YOC, partage OC, community login, galerie original characters">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yoc.studio/community/login">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Connexion Communauté YOC - Partagez vos Original Characters">
+    <meta property="og:description" content="Rejoignez la communauté YOC pour partager et découvrir des Original Characters extraordinaires.">
+    <meta property="og:url" content="https://yoc.studio/community/login">
+    <meta property="og:type" content="website">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

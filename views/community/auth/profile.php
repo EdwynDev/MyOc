@@ -1,5 +1,8 @@
 <?php 
-$title = 'Mon profil - Communauté YOC';
+$title = 'Mon Profil Communautaire - Gestion compte | YOC Studio';
+$description = 'Gérez votre profil communautaire YOC. Modifiez vos informations, consultez vos statistiques et configurez vos préférences de partage.';
+$keywords = 'mon profil, gestion compte, paramètres communauté, profil utilisateur, YOC account';
+$robots = 'noindex, nofollow';
 ob_start(); 
 ?>
 

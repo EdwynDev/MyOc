@@ -1,5 +1,8 @@
 <?php 
-$title = 'Mes OC - YOC';
+$title = 'Mes Original Characters - Gestion et organisation | YOC Studio';
+$description = 'Gérez tous vos Original Characters en un seul endroit. Organisez, modifiez et consultez vos personnages avec des outils avancés de filtrage et de recherche.';
+$keywords = 'mes OC, original characters, gestion personnage, organisation OC, liste personnages, character management';
+$robots = 'noindex, nofollow';
 ob_start(); 
 ?>
 
