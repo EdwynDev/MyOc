@@ -304,13 +304,13 @@ ob_start();
             // Créer la race
             const race = createRace(raceData);
             
-            // Ajouter les images
-            const images = collectImages();
-            if (images.length > 0) {
-                updateRace(race.id, { images: images });
-            }
-            
-            if (race) {
+            if (race && race.id) {
+                // Ajouter les images
+                const images = collectImages();
+                if (images.length > 0) {
+                    updateRace(race.id, { images: images });
+                }
+                
                 if (typeof showNotification === 'function') {
                     showNotification('Race créée avec succès !', 'success');
                 } else {
@@ -320,6 +320,7 @@ ob_start();
                     window.location.href = '/races';
                 }, 1000);
             } else {
+                console.error('Erreur lors de la création de la race:', race);
                 if (typeof showNotification === 'function') {
                     showNotification('Erreur lors de la création de la race', 'error');
                 } else {

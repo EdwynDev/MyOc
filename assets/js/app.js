@@ -22,7 +22,6 @@ class OCManager {
     saveData() {
         localStorage.setItem('oc_data', JSON.stringify(this.data));
         localStorage.setItem('last_save', Date.now().toString());
-        this.showNotification('Données sauvegardées !', 'success');
     }
     
     initializeEventListeners() {
@@ -188,6 +187,7 @@ class OCManager {
         
         this.data.ocs.push(oc);
         this.saveData();
+        console.log('OC créé:', oc);
         return oc;
     }
     
@@ -237,6 +237,7 @@ class OCManager {
         
         this.data.races.push(race);
         this.saveData();
+        console.log('Race créée:', race);
         return race;
     }
     

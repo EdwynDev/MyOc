@@ -68,6 +68,8 @@
             if (window.ocManager) {
                 return window.ocManager.createRace(raceData);
             }
+            // Fallback si ocManager n'est pas disponible
+            console.error('ocManager not available');
             return null;
         };
         
@@ -75,6 +77,7 @@
             if (window.ocManager) {
                 return window.ocManager.updateOC(id, updates);
             }
+            console.error('ocManager not available');
             return null;
         };
         

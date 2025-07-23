@@ -286,13 +286,13 @@ ob_start();
             // Créer l'OC
             const oc = createOC(ocData);
             
-            // Ajouter les images
-            const images = collectImages();
-            if (images.length > 0) {
-                updateOC(oc.id, { images: images });
-            }
-            
-            if (oc) {
+            if (oc && oc.id) {
+                // Ajouter les images
+                const images = collectImages();
+                if (images.length > 0) {
+                    updateOC(oc.id, { images: images });
+                }
+                
                 if (typeof showNotification === 'function') {
                     showNotification('OC créé avec succès !', 'success');
                 } else {
@@ -302,6 +302,7 @@ ob_start();
                     window.location.href = '/ocs';
                 }, 1000);
             } else {
+                console.error('Erreur lors de la création de l\'OC:', oc);
                 if (typeof showNotification === 'function') {
                     showNotification('Erreur lors de la création de l\'OC', 'error');
                 } else {
