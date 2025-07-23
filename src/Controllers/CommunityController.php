@@ -468,9 +468,9 @@ class CommunityController extends BaseController {
             
             // Supprimer le commentaire
             $stmt = $db->prepare("DELETE FROM {$table} WHERE id = ?");
-            $stmt->execute([$commentId]);
+            $result = $stmt->execute([$commentId]);
             
-            if ($stmt->rowCount() > 0) {
+            if ($result && $stmt->rowCount() > 0) {
                 $this->json(['success' => true, 'message' => 'Commentaire supprimé avec succès']);
             } else {
                 $this->json(['success' => false, 'message' => 'Erreur lors de la suppression'], 500);
