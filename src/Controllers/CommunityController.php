@@ -19,9 +19,16 @@ class CommunityController extends BaseController {
     
     // Page d'accueil communautaire
     public function index() {
-        $recentOCs = $this->ocModel->findPublicOCs(6);
-        $recentRaces = $this->raceModel->findPublicRaces(6, 0);
-        $topCreators = $this->userModel->getTopCreators(5);
+        try {
+            $recentOCs = $this->ocModel->findPublicOCs(6);
+            $recentRaces = $this->raceModel->findPublicRaces(6, 0);
+            $topCreators = $this->userModel->getTopCreators(5);
+        } catch (Exception $e) {
+            // Si la base de données n'est pas disponible, utiliser des données vides
+            $recentOCs = [];
+            $recentRaces = [];
+            $topCreators = [];
+        }
         
         $this->view('community/index', [
             'recent_ocs' => $recentOCs,
@@ -40,15 +47,20 @@ class CommunityController extends BaseController {
         $limit = 12;
         $offset = ($page - 1) * $limit;
         
-        if ($search) {
-            $ocs = $this->ocModel->search($search, $limit, $offset);
-        } elseif ($race) {
-            $ocs = $this->ocModel->findByRace($race, $limit, $offset);
-        } else {
-            $ocs = $this->ocModel->findPublicOCs($limit, $offset, $sort);
+        try {
+            if ($search) {
+                $ocs = $this->ocModel->search($search, $limit);
+            } elseif ($race) {
+                $ocs = $this->ocModel->findByRace($race, $limit);
+            } else {
+                $ocs = $this->ocModel->findPublicOCs($limit, $offset, $sort);
+            }
+            $races = $this->ocModel->getDistinctRaces();
+        } catch (Exception $e) {
+            // Si la base de données n'est pas disponible, utiliser des données vides
+            $ocs = [];
+            $races = [];
         }
-        
-        $races = $this->ocModel->getDistinctRaces();
         
         $this->view('community/ocs', [
             'ocs' => $ocs,
@@ -69,10 +81,15 @@ class CommunityController extends BaseController {
         $limit = 12;
         $offset = ($page - 1) * $limit;
         
-        if ($search) {
-            $races = $this->raceModel->search($search, $limit, $offset);
-        } else {
-            $races = $this->raceModel->findPublicRaces($limit, $offset, $sort);
+        try {
+            if ($search) {
+                $races = $this->raceModel->search($search, $limit, $offset);
+            } else {
+                $races = $this->raceModel->findPublicRaces($limit, $offset, $sort);
+            }
+        } catch (Exception $e) {
+            // Si la base de données n'est pas disponible, utiliser des données vides
+            $races = [];
         }
         
         $this->view('community/races', [

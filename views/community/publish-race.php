@@ -245,25 +245,26 @@ ob_start();
             }
             
             // Publier la race dans la communauté
-            try {
-                const response = await fetch('/community/publish-race', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(publicationData)
-                });
-                
-                if (response.ok) {
+            fetch('/community/publish-race', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(publicationData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
                     alert('Race publiée avec succès dans la communauté !');
                     window.location.href = '/community/races';
                 } else {
-                    throw new Error('Erreur lors de la publication');
+                    alert('Erreur: ' + (data.message || 'Erreur lors de la publication'));
                 }
-            } catch (error) {
+            })
+            .catch(error => {
                 console.error('Erreur:', error);
                 alert('Erreur lors de la publication de la race');
-            }
+            });
         });
     }
 </script>

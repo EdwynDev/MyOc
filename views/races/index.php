@@ -131,7 +131,7 @@ ob_start();
                         <a href="/races/edit/${race.id}" class="flex-1 text-center py-2 px-3 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition-colors">
                             Modifier
                         </a>
-                        <button onclick="deleteRace('${race.id}')" class="flex-1 py-2 px-3 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition-colors">
+                        <button onclick="deleteRaceFromList('${race.id}')" class="flex-1 py-2 px-3 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition-colors">
                             Supprimer
                         </button>
                     </div>
@@ -175,13 +175,13 @@ ob_start();
         displayRaces(filteredRaces);
     }
     
-    function deleteRace(id) {
+    function deleteRaceFromList(id) {
         if (confirm('Êtes-vous sûr de vouloir supprimer cette race ?')) {
             const data = JSON.parse(localStorage.getItem('oc_data') || '{}');
             data.races = (data.races || []).filter(race => race.id !== id);
             localStorage.setItem('oc_data', JSON.stringify(data));
             loadRaces();
-            window.ocManager.showNotification('Race supprimée avec succès !', 'success');
+            alert('Race supprimée avec succès !');
         }
     }
 </script>

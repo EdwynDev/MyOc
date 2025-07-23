@@ -184,7 +184,7 @@ ob_start();
                         <a href="/ocs/edit/${oc.id}" class="flex-1 text-center py-2 px-3 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700 transition-colors">
                             Modifier
                         </a>
-                        <button onclick="deleteOC('${oc.id}')" class="flex-1 py-2 px-3 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition-colors">
+                        <button onclick="deleteOCFromList('${oc.id}')" class="flex-1 py-2 px-3 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition-colors">
                             Supprimer
                         </button>
                     </div>
@@ -233,13 +233,13 @@ ob_start();
         displayOCs(filteredOCs);
     }
     
-    function deleteOC(id) {
+    function deleteOCFromList(id) {
         if (confirm('Êtes-vous sûr de vouloir supprimer cet OC ?')) {
             const data = JSON.parse(localStorage.getItem('oc_data') || '{}');
             data.ocs = (data.ocs || []).filter(oc => oc.id !== id);
             localStorage.setItem('oc_data', JSON.stringify(data));
             loadOCs();
-            window.ocManager.showNotification('OC supprimé avec succès !', 'success');
+            alert('OC supprimé avec succès !');
         }
     }
 </script>
