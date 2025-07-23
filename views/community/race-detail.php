@@ -317,13 +317,6 @@ ob_start();
                                             </a>
                                             <span class="text-gray-400 text-sm"><?= date('d/m/Y à H:i', strtotime($comment['created_at'])) ?></span>
                                         </div>
-                                        <?php if (isset($_SESSION['community_user_id']) && $_SESSION['community_user_id'] == $comment['user_id']): ?>
-                                            <button onclick="deleteComment('<?= $comment['id'] ?>', 'race')" class="text-red-400 hover:text-red-300 transition-colors p-2 rounded-lg hover:bg-red-900/20">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                </svg>
-                                            </button>
-                                        <?php endif; ?>
                                     </div>
                                     <p class="text-gray-300 leading-relaxed text-lg"><?= nl2br(htmlspecialchars($comment['content'])) ?></p>
                                 </div>
@@ -334,40 +327,23 @@ ob_start();
             </div>
         </div>
         
-        <!-- Actions pour le propriétaire -->
-        <?php if (isset($_SESSION['community_user_id']) && $_SESSION['community_user_id'] == $race['user_id']): ?>
-            <div class="bg-gradient-to-br from-red-900/20 to-red-800/20 backdrop-blur-xl rounded-3xl border border-red-700/30 p-12 mb-12">
-                <h2 class="text-3xl font-bold text-white mb-8 flex items-center">
-                    <svg class="w-8 h-8 mr-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+        <!-- Information sur la permanence -->
+        <div class="glass-dark rounded-3xl p-12 border border-green-500/30 mb-12">
+            <div class="flex items-start space-x-6">
+                <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                    Gestion de votre race
-                </h2>
-                <div class="glass rounded-2xl p-8 border border-yellow-500/30 mb-8">
-                    <div class="flex items-start space-x-4">
-                        <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-yellow-400 mb-2">Modification</h3>
-                            <p class="text-gray-300 text-sm leading-relaxed">
-                                Pour modifier cette race, supprimez-la de la communauté, modifiez-la dans votre espace personnel, puis republiez-la.
-                            </p>
-                        </div>
-                    </div>
                 </div>
-                <div class="flex flex-col sm:flex-row gap-6">
-                    <button onclick="deleteCommunityRace('<?= $race['id'] ?>')" class="px-8 py-4 bg-red-600 text-white rounded-2xl hover:bg-red-700 transition-all duration-300 font-bold">
-                        <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                        </svg>
-                        Supprimer de la communauté
-                    </button>
+                <div>
+                    <h3 class="text-xl font-bold text-green-400 mb-3">Publications permanentes</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Les races partagées dans la communauté sont permanentes et ne peuvent plus être modifiées ou supprimées. 
+                        Assurez-vous que votre création est finalisée avant de la publier.
+                    </p>
                 </div>
             </div>
-        <?php endif; ?>
+        </div>
         
         <!-- OCs de cette race -->
         <?php if (!empty($ocs_of_race)): ?>

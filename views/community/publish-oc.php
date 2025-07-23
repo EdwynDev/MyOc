@@ -103,17 +103,18 @@ ob_start();
                 </div>
                 
                 <!-- Avertissement -->
-                <div class="glass rounded-2xl p-8 border border-blue-500/30">
+                <div class="glass rounded-2xl p-8 border border-red-500/30">
                     <div class="flex items-start space-x-6">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center flex-shrink-0">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-blue-400 mb-3">Publication publique</h3>
+                            <h3 class="text-xl font-bold text-red-400 mb-3">⚠️ Publication permanente</h3>
                             <p class="text-gray-300 leading-relaxed">
-                                Votre OC sera visible par tous les membres de la communauté. Assurez-vous que le contenu est approprié et respectueux.
+                                <strong>ATTENTION :</strong> Une fois publié, votre OC sera permanent et ne pourra plus être modifié ou supprimé. 
+                                Assurez-vous que votre création est finalisée et que le contenu est approprié avant de publier.
                             </p>
                         </div>
                     </div>
