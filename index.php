@@ -57,13 +57,13 @@ $router->post('/community/profile', [CommunityAuthController::class, 'profile'])
 $router->post('/community/like-oc', [CommunityController::class, 'likeOC']);
 $router->post('/community/like-race', [CommunityController::class, 'likeRace']);
 $router->post('/community/add-comment', [CommunityController::class, 'addComment']);
+$router->post('/community/delete-oc', [CommunityController::class, 'deleteCommunityOC']);
+$router->post('/community/delete-race', [CommunityController::class, 'deleteCommunityRace']);
+$router->post('/community/delete-comment', [CommunityController::class, 'deleteComment']);
 $router->get('/community/publish-oc', [CommunityController::class, 'publishOC']);
 $router->post('/community/publish-oc', [CommunityController::class, 'publishOC']);
 $router->get('/community/publish-race', [CommunityController::class, 'publishRace']);
 $router->post('/community/publish-race', [CommunityController::class, 'publishRace']);
-$router->post('/community/delete-oc', [CommunityController::class, 'deleteCommunityOC']);
-$router->post('/community/delete-race', [CommunityController::class, 'deleteCommunityRace']);
-$router->post('/community/delete-comment', [CommunityController::class, 'deleteComment']);
 
 // Routes protégées
 $router->group(['middleware' => AuthMiddleware::class], function($router) {

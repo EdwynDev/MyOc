@@ -376,15 +376,34 @@ class CommunityController extends BaseController {
         }
         
         try {
+            $db = \Database::getInstance()->getConnection();
+            
             // Vérifier que l'OC appartient à l'utilisateur
-            $oc = $this->ocModel->find($ocId);
+            $stmt = $db->prepare("SELECT user_id FROM community_ocs WHERE id = ?");
+            $stmt->execute([$ocId]);
+            $oc = $stmt->fetch();
+            
             if (!$oc || $oc['user_id'] != $userId) {
                 $this->json(['success' => false, 'message' => 'OC non trouvé ou non autorisé'], 403);
                 return;
             }
             
+            // Supprimer l'OC et ses dépendances
+            $db->beginTransaction();
+            
+            // Supprimer les commentaires
+            $stmt = $db->prepare("DELETE FROM oc_comments WHERE oc_id = ?");
+            $stmt->execute([$ocId]);
+            
+            // Supprimer les likes
+            $stmt = $db->prepare("DELETE FROM oc_likes WHERE oc_id = ?");
+            $stmt->execute([$ocId]);
+            
             // Supprimer l'OC
-            $deleted = $this->ocModel->delete($ocId);
+            $stmt = $db->prepare("DELETE FROM community_ocs WHERE id = ?");
+            $deleted = $stmt->execute([$ocId]);
+            
+            $db->commit();
             
             if ($deleted) {
                 $this->json(['success' => true, 'message' => 'OC supprimé de la communauté avec succès']);
@@ -393,6 +412,9 @@ class CommunityController extends BaseController {
             }
             
         } catch (Exception $e) {
+            if (isset($db)) {
+                $db->rollBack();
+            }
             error_log('Erreur suppression OC communauté: ' . $e->getMessage());
             $this->json(['success' => false, 'message' => 'Erreur serveur: ' . $e->getMessage()], 500);
         }
@@ -414,15 +436,34 @@ class CommunityController extends BaseController {
         }
         
         try {
+            $db = \Database::getInstance()->getConnection();
+            
             // Vérifier que la race appartient à l'utilisateur
-            $race = $this->raceModel->find($raceId);
+            $stmt = $db->prepare("SELECT user_id FROM community_races WHERE id = ?");
+            $stmt->execute([$raceId]);
+            $race = $stmt->fetch();
+            
             if (!$race || $race['user_id'] != $userId) {
                 $this->json(['success' => false, 'message' => 'Race non trouvée ou non autorisée'], 403);
                 return;
             }
             
+            // Supprimer la race et ses dépendances
+            $db->beginTransaction();
+            
+            // Supprimer les commentaires
+            $stmt = $db->prepare("DELETE FROM race_comments WHERE race_id = ?");
+            $stmt->execute([$raceId]);
+            
+            // Supprimer les likes
+            $stmt = $db->prepare("DELETE FROM race_likes WHERE race_id = ?");
+            $stmt->execute([$raceId]);
+            
             // Supprimer la race
-            $deleted = $this->raceModel->delete($raceId);
+            $stmt = $db->prepare("DELETE FROM community_races WHERE id = ?");
+            $deleted = $stmt->execute([$raceId]);
+            
+            $db->commit();
             
             if ($deleted) {
                 $this->json(['success' => true, 'message' => 'Race supprimée de la communauté avec succès']);
@@ -431,6 +472,9 @@ class CommunityController extends BaseController {
             }
             
         } catch (Exception $e) {
+            if (isset($db)) {
+                $db->rollBack();
+            }
             error_log('Erreur suppression race communauté: ' . $e->getMessage());
             $this->json(['success' => false, 'message' => 'Erreur serveur: ' . $e->getMessage()], 500);
         }
@@ -453,10 +497,10 @@ class CommunityController extends BaseController {
         }
         
         try {
+            $db = \Database::getInstance()->getConnection();
             $table = $type === 'oc' ? 'oc_comments' : 'race_comments';
             
             // Vérifier que le commentaire appartient à l'utilisateur
-            $db = \Database::getInstance()->getConnection();
             $stmt = $db->prepare("SELECT * FROM {$table} WHERE id = ? AND user_id = ?");
             $stmt->execute([$commentId, $userId]);
             $comment = $stmt->fetch();
@@ -470,7 +514,7 @@ class CommunityController extends BaseController {
             $stmt = $db->prepare("DELETE FROM {$table} WHERE id = ?");
             $result = $stmt->execute([$commentId]);
             
-            if ($result && $stmt->rowCount() > 0) {
+            if ($result) {
                 $this->json(['success' => true, 'message' => 'Commentaire supprimé avec succès']);
             } else {
                 $this->json(['success' => false, 'message' => 'Erreur lors de la suppression'], 500);

@@ -245,7 +245,7 @@ class CommunityManager {
     }
 }
 
-// Fonctions pour la gestion des publications
+// Fonctions globales pour la suppression
 function deleteCommunityOC(ocId) {
     if (confirm('Êtes-vous sûr de vouloir supprimer cet OC de la communauté ?')) {
         fetch('/community/delete-oc', {
@@ -258,17 +258,29 @@ function deleteCommunityOC(ocId) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                window.communityManager.showNotification('OC supprimé de la communauté avec succès !', 'success');
+                if (window.communityManager) {
+                    window.communityManager.showNotification('OC supprimé de la communauté avec succès !', 'success');
+                } else {
+                    alert('OC supprimé avec succès !');
+                }
                 setTimeout(() => {
                     window.location.href = '/community';
                 }, 1500);
             } else {
-                window.communityManager.showNotification('Erreur: ' + (data.message || 'Erreur lors de la suppression'), 'error');
+                if (window.communityManager) {
+                    window.communityManager.showNotification('Erreur: ' + (data.message || 'Erreur lors de la suppression'), 'error');
+                } else {
+                    alert('Erreur: ' + (data.message || 'Erreur lors de la suppression'));
+                }
             }
         })
         .catch(error => {
             console.error('Erreur:', error);
-            window.communityManager.showNotification('Erreur de connexion', 'error');
+            if (window.communityManager) {
+                window.communityManager.showNotification('Erreur de connexion', 'error');
+            } else {
+                alert('Erreur de connexion');
+            }
         });
     }
 }
@@ -285,67 +297,29 @@ function deleteCommunityRace(raceId) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                window.communityManager.showNotification('Race supprimée de la communauté avec succès !', 'success');
+                if (window.communityManager) {
+                    window.communityManager.showNotification('Race supprimée de la communauté avec succès !', 'success');
+                } else {
+                    alert('Race supprimée avec succès !');
+                }
                 setTimeout(() => {
                     window.location.href = '/community';
                 }, 1500);
             } else {
-                window.communityManager.showNotification('Erreur: ' + (data.message || 'Erreur lors de la suppression'), 'error');
+                if (window.communityManager) {
+                    window.communityManager.showNotification('Erreur: ' + (data.message || 'Erreur lors de la suppression'), 'error');
+                } else {
+                    alert('Erreur: ' + (data.message || 'Erreur lors de la suppression'));
+                }
             }
         })
         .catch(error => {
             console.error('Erreur:', error);
-            window.communityManager.showNotification('Erreur de connexion', 'error');
-        });
-    }
-}
-
-function deleteCommunityOC(ocId) {
-    if (confirm('Êtes-vous sûr de vouloir supprimer cet OC de la communauté ?')) {
-        fetch('/community/delete-oc', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `oc_id=${ocId}`
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                window.communityManager.showNotification('OC supprimé de la communauté avec succès !', 'success');
-                window.location.href = '/community';
+            if (window.communityManager) {
+                window.communityManager.showNotification('Erreur de connexion', 'error');
             } else {
-                window.communityManager.showNotification('Erreur: ' + (data.message || 'Erreur lors de la suppression'), 'error');
+                alert('Erreur de connexion');
             }
-        })
-        .catch(error => {
-            console.error('Erreur:', error);
-            window.communityManager.showNotification('Erreur de connexion', 'error');
-        });
-    }
-}
-
-function deleteCommunityRace(raceId) {
-    if (confirm('Êtes-vous sûr de vouloir supprimer cette race de la communauté ?')) {
-        fetch('/community/delete-race', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `race_id=${raceId}`
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                window.communityManager.showNotification('Race supprimée de la communauté avec succès !', 'success');
-                window.location.href = '/community';
-            } else {
-                window.communityManager.showNotification('Erreur: ' + (data.message || 'Erreur lors de la suppression'), 'error');
-            }
-        })
-        .catch(error => {
-            console.error('Erreur:', error);
-            window.communityManager.showNotification('Erreur de connexion', 'error');
         });
     }
 }
@@ -362,15 +336,29 @@ function deleteComment(commentId, type) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                window.communityManager.showNotification('Commentaire supprimé avec succès !', 'success');
-                location.reload();
+                if (window.communityManager) {
+                    window.communityManager.showNotification('Commentaire supprimé avec succès !', 'success');
+                } else {
+                    alert('Commentaire supprimé avec succès !');
+                }
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
             } else {
-                window.communityManager.showNotification('Erreur: ' + (data.message || 'Erreur lors de la suppression'), 'error');
+                if (window.communityManager) {
+                    window.communityManager.showNotification('Erreur: ' + (data.message || 'Erreur lors de la suppression'), 'error');
+                } else {
+                    alert('Erreur: ' + (data.message || 'Erreur lors de la suppression'));
+                }
             }
         })
         .catch(error => {
             console.error('Erreur:', error);
-            window.communityManager.showNotification('Erreur de connexion', 'error');
+            if (window.communityManager) {
+                window.communityManager.showNotification('Erreur de connexion', 'error');
+            } else {
+                alert('Erreur de connexion');
+            }
         });
     }
 }
