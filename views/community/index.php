@@ -141,12 +141,43 @@ ob_start();
     });
     
     function loadCommunityStats() {
-        // Simuler le chargement des statistiques
-        // En production, cela viendrait d'une API
-        document.getElementById('total-ocs').textContent = '<?= count($recent_ocs ?? []) * 10 ?>';
-        document.getElementById('total-races').textContent = '<?= count($recent_races ?? []) * 5 ?>';
-        document.getElementById('total-users').textContent = '<?= count($top_creators ?? []) * 20 ?>';
-        document.getElementById('total-likes').textContent = '<?= count($recent_ocs ?? []) * 50 ?>';
+        // Afficher les vraies statistiques depuis les données PHP
+        const recentOCs = <?= json_encode($recent_ocs ?? []) ?>;
+        const recentRaces = <?= json_encode($recent_races ?? []) ?>;
+        const topCreators = <?= json_encode($top_creators ?? []) ?>;
+        
+        // Calculer les vraies statistiques
+        const totalOCs = recentOCs.length;
+        const totalRaces = recentRaces.length;
+        const totalUsers = topCreators.length;
+        const totalLikes = recentOCs.reduce((sum, oc) => sum + (oc.likes_count || 0), 0) + 
+                          recentRaces.reduce((sum, race) => sum + (race.likes_count || 0), 0);
+        
+        // Animer les compteurs
+        animateCounter('total-ocs', totalOCs);
+        animateCounter('total-races', totalRaces);
+        animateCounter('total-users', totalUsers);
+        animateCounter('total-likes', totalLikes);
+    }
+    
+    function animateCounter(elementId, targetValue) {
+        const element = document.getElementById(elementId);
+        const duration = 2000; // 2 secondes
+        const startTime = performance.now();
+        
+        function updateCounter(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const currentValue = Math.floor(progress * targetValue);
+            
+            element.textContent = currentValue;
+            
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            }
+        }
+        
+        requestAnimationFrame(updateCounter);
     }
     
     function loadRecentContent() {
