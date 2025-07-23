@@ -80,9 +80,21 @@ ob_start();
                 <div class="glass-dark rounded-2xl border border-gray-800 hover-lift card-hover overflow-hidden group">
                     <div class="p-8">
                         <div class="flex items-center mb-6">
-                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-xl">
-                                <?= strtoupper(substr($oc['name'], 0, 1)) ?>
-                            </div>
+                            <?php 
+                            $images = !empty($oc['images']) ? json_decode($oc['images'], true) : [];
+                            if (!empty($images) && !empty($images[0]['data'])): ?>
+                                <img src="<?= htmlspecialchars($images[0]['data']) ?>" 
+                                     alt="<?= htmlspecialchars($oc['name']) ?>" 
+                                     class="w-16 h-16 rounded-2xl object-cover shadow-xl border border-gray-700"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-xl" style="display: none;">
+                                    <?= strtoupper(substr($oc['name'], 0, 1)) ?>
+                                </div>
+                            <?php else: ?>
+                                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-xl">
+                                    <?= strtoupper(substr($oc['name'], 0, 1)) ?>
+                                </div>
+                            <?php endif; ?>
                             <div class="ml-6">
                                 <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors"><?= htmlspecialchars($oc['name']) ?></h3>
                                 <p class="text-gray-400">par <?= htmlspecialchars($oc['username']) ?></p>

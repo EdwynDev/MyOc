@@ -257,13 +257,37 @@ ob_start();
     function createOCCard(oc) {
         const createdDate = new Date(oc.created_at).toLocaleDateString('fr-FR');
         
+        // Récupérer la première image ou utiliser la lettre
+        let avatarHTML = '';
+        if (oc.images) {
+            try {
+                const images = typeof oc.images === 'string' ? JSON.parse(oc.images) : oc.images;
+                if (images && images.length > 0 && images[0].data) {
+                    avatarHTML = `<img src="${images[0].data}" alt="${oc.name}" class="w-12 h-12 rounded-xl object-cover shadow-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                  <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg" style="display: none;">
+                                      ${oc.name.charAt(0).toUpperCase()}
+                                  </div>`;
+                } else {
+                    avatarHTML = `<div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg">
+                                      ${oc.name.charAt(0).toUpperCase()}
+                                  </div>`;
+                }
+            } catch (e) {
+                avatarHTML = `<div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg">
+                                  ${oc.name.charAt(0).toUpperCase()}
+                              </div>`;
+            }
+        } else {
+            avatarHTML = `<div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg">
+                              ${oc.name.charAt(0).toUpperCase()}
+                          </div>`;
+        }
+        
         return `
             <div class="glass rounded-2xl border border-gray-800 hover-lift card-hover overflow-hidden group">
                 <div class="p-6">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg">
-                            ${oc.name.charAt(0).toUpperCase()}
-                        </div>
+                        ${avatarHTML}
                         <div class="ml-4">
                             <h3 class="font-bold text-white group-hover:text-blue-400 transition-colors">${oc.name}</h3>
                             <p class="text-sm text-gray-400">par ${oc.username}</p>
@@ -292,13 +316,37 @@ ob_start();
     function createRaceCard(race) {
         const createdDate = new Date(race.created_at).toLocaleDateString('fr-FR');
         
+        // Récupérer la première image ou utiliser la lettre
+        let avatarHTML = '';
+        if (race.images) {
+            try {
+                const images = typeof race.images === 'string' ? JSON.parse(race.images) : race.images;
+                if (images && images.length > 0 && images[0].data) {
+                    avatarHTML = `<img src="${images[0].data}" alt="${race.name}" class="w-12 h-12 rounded-xl object-cover shadow-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                  <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg" style="display: none;">
+                                      ${race.name.charAt(0).toUpperCase()}
+                                  </div>`;
+                } else {
+                    avatarHTML = `<div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg">
+                                      ${race.name.charAt(0).toUpperCase()}
+                                  </div>`;
+                }
+            } catch (e) {
+                avatarHTML = `<div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg">
+                                  ${race.name.charAt(0).toUpperCase()}
+                              </div>`;
+            }
+        } else {
+            avatarHTML = `<div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg">
+                              ${race.name.charAt(0).toUpperCase()}
+                          </div>`;
+        }
+        
         return `
             <div class="glass rounded-2xl border border-gray-800 hover-lift card-hover overflow-hidden group">
                 <div class="p-6">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg">
-                            ${race.name.charAt(0).toUpperCase()}
-                        </div>
+                        ${avatarHTML}
                         <div class="ml-4">
                             <h3 class="font-bold text-white group-hover:text-green-400 transition-colors">${race.name}</h3>
                             <p class="text-sm text-gray-400">par ${race.username}</p>
