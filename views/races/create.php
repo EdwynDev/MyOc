@@ -311,12 +311,20 @@ ob_start();
             }
             
             if (race) {
-                showNotification('Race créée avec succès !', 'success');
+                if (typeof showNotification === 'function') {
+                    showNotification('Race créée avec succès !', 'success');
+                } else {
+                    alert('Race créée avec succès !');
+                }
                 setTimeout(() => {
                     window.location.href = '/races';
                 }, 1000);
             } else {
-                showNotification('Erreur lors de la création de la race', 'error');
+                if (typeof showNotification === 'function') {
+                    showNotification('Erreur lors de la création de la race', 'error');
+                } else {
+                    alert('Erreur lors de la création de la race');
+                }
             }
         });
     }

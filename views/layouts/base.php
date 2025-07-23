@@ -45,6 +45,83 @@
         <?php endif; ?>
     </div>
     
+    <script>
+        // Fonctions globales définies immédiatement
+        window.exportData = function() {
+            if (window.ocManager) {
+                window.ocManager.exportData();
+            }
+        };
+        
+        window.confirmDelete = function(message = 'Êtes-vous sûr de vouloir supprimer cet élément ?') {
+            return confirm(message);
+        };
+        
+        window.createOC = function(ocData) {
+            if (window.ocManager) {
+                return window.ocManager.createOC(ocData);
+            }
+            return null;
+        };
+        
+        window.createRace = function(raceData) {
+            if (window.ocManager) {
+                return window.ocManager.createRace(raceData);
+            }
+            return null;
+        };
+        
+        window.updateOC = function(id, updates) {
+            if (window.ocManager) {
+                return window.ocManager.updateOC(id, updates);
+            }
+            return null;
+        };
+        
+        window.updateRace = function(id, updates) {
+            if (window.ocManager) {
+                return window.ocManager.updateRace(id, updates);
+            }
+            return null;
+        };
+        
+        window.deleteOC = function(id) {
+            if (window.ocManager) {
+                return window.ocManager.deleteOC(id);
+            }
+            return null;
+        };
+        
+        window.deleteRace = function(id) {
+            if (window.ocManager) {
+                return window.ocManager.deleteRace(id);
+            }
+            return null;
+        };
+        
+        window.getOC = function(id) {
+            if (window.ocManager) {
+                return window.ocManager.getOC(id);
+            }
+            return null;
+        };
+        
+        window.getRace = function(id) {
+            if (window.ocManager) {
+                return window.ocManager.getRace(id);
+            }
+            return null;
+        };
+        
+        window.showNotification = function(message, type = 'info') {
+            if (window.ocManager) {
+                return window.ocManager.showNotification(message, type);
+            } else {
+                // Fallback simple
+                alert(message);
+            }
+        };
+    </script>
     <script src="/assets/js/app.js"></script>
     <?php if (isset($scripts)): ?>
         <?php foreach ($scripts as $script): ?>

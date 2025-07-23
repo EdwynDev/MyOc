@@ -293,12 +293,20 @@ ob_start();
             }
             
             if (oc) {
-                showNotification('OC créé avec succès !', 'success');
+                if (typeof showNotification === 'function') {
+                    showNotification('OC créé avec succès !', 'success');
+                } else {
+                    alert('OC créé avec succès !');
+                }
                 setTimeout(() => {
                     window.location.href = '/ocs';
                 }, 1000);
             } else {
-                showNotification('Erreur lors de la création de l\'OC', 'error');
+                if (typeof showNotification === 'function') {
+                    showNotification('Erreur lors de la création de l\'OC', 'error');
+                } else {
+                    alert('Erreur lors de la création de l\'OC');
+                }
             }
         });
     }
