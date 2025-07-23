@@ -359,4 +359,123 @@ class CommunityController extends BaseController {
         
         $this->view('community/publish-race');
     }
+    
+    // API - Supprimer un OC de la communauté
+    public function deleteCommunityOC() {
+        if (!isset($_SESSION['community_user_id'])) {
+            $this->json(['success' => false, 'message' => 'Connexion requise'], 401);
+            return;
+        }
+        
+        $ocId = $_POST['oc_id'] ?? null;
+        $userId = $_SESSION['community_user_id'];
+        
+        if (!$ocId) {
+            $this->json(['success' => false, 'message' => 'ID OC manquant'], 400);
+            return;
+        }
+        
+        try {
+            // Vérifier que l'OC appartient à l'utilisateur
+            $oc = $this->ocModel->find($ocId);
+            if (!$oc || $oc['user_id'] != $userId) {
+                $this->json(['success' => false, 'message' => 'OC non trouvé ou non autorisé'], 403);
+                return;
+            }
+            
+            // Supprimer l'OC
+            $deleted = $this->ocModel->delete($ocId);
+            
+            if ($deleted) {
+                $this->json(['success' => true, 'message' => 'OC supprimé de la communauté avec succès']);
+            } else {
+                $this->json(['success' => false, 'message' => 'Erreur lors de la suppression'], 500);
+            }
+            
+        } catch (Exception $e) {
+            error_log('Erreur suppression OC communauté: ' . $e->getMessage());
+            $this->json(['success' => false, 'message' => 'Erreur serveur: ' . $e->getMessage()], 500);
+        }
+    }
+    
+    // API - Supprimer une race de la communauté
+    public function deleteCommunityRace() {
+        if (!isset($_SESSION['community_user_id'])) {
+            $this->json(['success' => false, 'message' => 'Connexion requise'], 401);
+            return;
+        }
+        
+        $raceId = $_POST['race_id'] ?? null;
+        $userId = $_SESSION['community_user_id'];
+        
+        if (!$raceId) {
+            $this->json(['success' => false, 'message' => 'ID race manquant'], 400);
+            return;
+        }
+        
+        try {
+            // Vérifier que la race appartient à l'utilisateur
+            $race = $this->raceModel->find($raceId);
+            if (!$race || $race['user_id'] != $userId) {
+                $this->json(['success' => false, 'message' => 'Race non trouvée ou non autorisée'], 403);
+                return;
+            }
+            
+            // Supprimer la race
+            $deleted = $this->raceModel->delete($raceId);
+            
+            if ($deleted) {
+                $this->json(['success' => true, 'message' => 'Race supprimée de la communauté avec succès']);
+            } else {
+                $this->json(['success' => false, 'message' => 'Erreur lors de la suppression'], 500);
+            }
+            
+        } catch (Exception $e) {
+            error_log('Erreur suppression race communauté: ' . $e->getMessage());
+            $this->json(['success' => false, 'message' => 'Erreur serveur: ' . $e->getMessage()], 500);
+        }
+    }
+    
+    // API - Supprimer un commentaire
+    public function deleteComment() {
+        if (!isset($_SESSION['community_user_id'])) {
+            $this->json(['success' => false, 'message' => 'Connexion requise'], 401);
+            return;
+        }
+        
+        $commentId = $_POST['comment_id'] ?? null;
+        $type = $_POST['type'] ?? null;
+        $userId = $_SESSION['community_user_id'];
+        
+        if (!$commentId || !$type) {
+            $this->json(['success' => false, 'message' => 'Données manquantes'], 400);
+            return;
+        }
+        
+        try {
+            $table = $type === 'oc' ? 'oc_comments' : 'race_comments';
+            
+            // Vérifier que le commentaire appartient à l'utilisateur
+            $stmt = $this->ocModel->query("SELECT * FROM {$table} WHERE id = ? AND user_id = ?", [$commentId, $userId]);
+            $comment = $stmt->fetch();
+            
+            if (!$comment) {
+                $this->json(['success' => false, 'message' => 'Commentaire non trouvé ou non autorisé'], 403);
+                return;
+            }
+            
+            // Supprimer le commentaire
+            $stmt = $this->ocModel->query("DELETE FROM {$table} WHERE id = ?", [$commentId]);
+            
+            if ($stmt->rowCount() > 0) {
+                $this->json(['success' => true, 'message' => 'Commentaire supprimé avec succès']);
+            } else {
+                $this->json(['success' => false, 'message' => 'Erreur lors de la suppression'], 500);
+            }
+            
+        } catch (Exception $e) {
+            error_log('Erreur suppression commentaire: ' . $e->getMessage());
+            $this->json(['success' => false, 'message' => 'Erreur serveur: ' . $e->getMessage()], 500);
+        }
+    }
 }

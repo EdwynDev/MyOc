@@ -245,9 +245,160 @@ class CommunityManager {
     }
 }
 
+// Fonctions pour la gestion des publications
+function deleteCommunityOC(ocId) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cet OC de la communauté ?')) {
+        fetch('/community/delete-oc', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `oc_id=${ocId}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('OC supprimé de la communauté avec succès !');
+                window.location.href = '/community';
+            } else {
+                alert('Erreur: ' + (data.message || 'Erreur lors de la suppression'));
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            alert('Erreur de connexion');
+        });
+    }
+}
+
+function deleteCommunityRace(raceId) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cette race de la communauté ?')) {
+        fetch('/community/delete-race', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `race_id=${raceId}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Race supprimée de la communauté avec succès !');
+                window.location.href = '/community';
+            } else {
+                alert('Erreur: ' + (data.message || 'Erreur lors de la suppression'));
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            alert('Erreur de connexion');
+        });
+    }
+}
+
+function deleteComment(commentId, type) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')) {
+        fetch('/community/delete-comment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `comment_id=${commentId}&type=${type}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('Erreur: ' + (data.message || 'Erreur lors de la suppression'));
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            alert('Erreur de connexion');
+        });
+    }
+}
+
+// Fonctions DTIYS et création basée sur d'autres créations
+function createBasedOnOC(ocId) {
+    // Rediriger vers la création d'OC avec la race pré-remplie
+    const urlParams = new URLSearchParams();
+    urlParams.set('based_on_oc', ocId);
+    window.location.href = '/ocs/create?' + urlParams.toString();
+}
+
+function createDTIYS(ocId) {
+    // Rediriger vers la création d'OC en mode DTIYS
+    const urlParams = new URLSearchParams();
+    urlParams.set('dtiys_oc', ocId);
+    window.location.href = '/ocs/create?' + urlParams.toString();
+}
+
+function createOCWithRace(raceName) {
+    // Rediriger vers la création d'OC avec la race pré-remplie
+    const urlParams = new URLSearchParams();
+    urlParams.set('race', encodeURIComponent(raceName));
+    window.location.href = '/ocs/create?' + urlParams.toString();
+}
+
+// Modal d'affichage d'images
+function openImageModal(src, alt, caption = '') {
+    const modal = document.getElementById('image-modal');
+    if (!modal) {
+        // Créer le modal s'il n'existe pas
+        const modalHTML = `
+            <div id="image-modal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-6">
+                <div class="relative max-w-6xl max-h-full">
+                    <button onclick="closeImageModal()" class="absolute -top-4 -right-4 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 z-10">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                    <img id="modal-image" src="" alt="" class="max-w-full max-h-full object-contain rounded-2xl shadow-2xl">
+                    <div id="modal-caption" class="absolute bottom-0 left-0 right-0 bg-black/70 backdrop-blur-sm text-white p-6 rounded-b-2xl"></div>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+    }
+    
+    const image = document.getElementById('modal-image');
+    const captionEl = document.getElementById('modal-caption');
+    
+    image.src = src;
+    image.alt = alt;
+    captionEl.textContent = caption;
+    
+    document.getElementById('image-modal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeImageModal() {
+    const modal = document.getElementById('image-modal');
+    if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+}
+
 // Initialiser le gestionnaire communautaire
 window.addEventListener('DOMContentLoaded', function() {
     window.communityManager = new CommunityManager();
+    
+    // Setup image modal
+    document.addEventListener('click', function(e) {
+        if (e.target.matches('.modal-image')) {
+            openImageModal(e.target.src, e.target.alt, e.target.dataset.caption || '');
+        }
+    });
+    
+    // Fermer le modal avec Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeImageModal();
+        }
+    });
 });
 
 // Fonctions utilitaires pour les vues

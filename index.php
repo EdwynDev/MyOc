@@ -61,6 +61,9 @@ $router->get('/community/publish-oc', [CommunityController::class, 'publishOC'])
 $router->post('/community/publish-oc', [CommunityController::class, 'publishOC']);
 $router->get('/community/publish-race', [CommunityController::class, 'publishRace']);
 $router->post('/community/publish-race', [CommunityController::class, 'publishRace']);
+$router->post('/community/delete-oc', [CommunityController::class, 'deleteCommunityOC']);
+$router->post('/community/delete-race', [CommunityController::class, 'deleteCommunityRace']);
+$router->post('/community/delete-comment', [CommunityController::class, 'deleteComment']);
 
 // Routes protégées
 $router->group(['middleware' => AuthMiddleware::class], function($router) {

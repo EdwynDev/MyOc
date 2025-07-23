@@ -228,8 +228,8 @@ ob_start();
         <?php endif; ?>
         
         <!-- Commentaires -->
-        <div class="glass-dark rounded-3xl p-12 border border-gray-800">
-            <h2 class="text-3xl font-bold text-white mb-8 neon-text flex items-center">
+        <div class="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl rounded-3xl border border-gray-700/50 p-12 mb-12 hover:border-gray-600/50 transition-all duration-500">
+            <h2 class="text-3xl font-bold text-white mb-8 flex items-center">
                 <svg class="w-8 h-8 mr-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                 </svg>
@@ -237,19 +237,29 @@ ob_start();
             </h2>
             
             <?php if (isset($_SESSION['community_user_id'])): ?>
-                <form class="comment-form mb-12" data-type="oc" data-item-id="<?= $oc['id'] ?>">
+                <form class="comment-form mb-12 bg-gray-800/30 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/30" data-type="oc" data-item-id="<?= $oc['id'] ?>">
                     <div class="flex space-x-6">
-                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-xl">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-xl border-2 border-white/10">
                             <?= strtoupper(substr($_SESSION['community_username'], 0, 1)) ?>
                         </div>
                         <div class="flex-1">
+                            <div class="mb-4">
+                                <span class="text-white font-medium"><?= htmlspecialchars($_SESSION['community_username']) ?></span>
+                                <span class="text-gray-400 text-sm ml-2">Ajouter un commentaire</span>
+                            </div>
                             <textarea name="content" rows="4" placeholder="Ajoutez un commentaire..." 
-                                      class="w-full px-6 py-4 bg-gray-900/50 border border-gray-700 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm resize-none" required></textarea>
+                                      class="w-full px-6 py-4 bg-gray-800/50 border border-gray-600/50 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm resize-none" required></textarea>
                             <input type="hidden" name="type" value="oc">
                             <input type="hidden" name="item_id" value="<?= $oc['id'] ?>">
-                            <div class="mt-4 flex justify-end">
-                                <button type="submit" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-xl font-bold">
+                            <div class="mt-6 flex justify-end">
+                                <button type="submit" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-xl font-bold relative overflow-hidden group">
+                                    <span class="relative z-10 flex items-center">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                        </svg>
+                                    </span>
                                     Publier le commentaire
+                                    <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                                 </button>
                             </div>
                         </div>
@@ -259,28 +269,39 @@ ob_start();
             
             <div class="comments-list space-y-6">
                 <?php if (empty($comments)): ?>
-                    <div class="text-center py-16">
-                        <div class="w-20 h-20 bg-gradient-to-br from-gray-700 to-gray-800 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                    <div class="text-center py-20">
+                        <div class="w-24 h-24 bg-gray-800/50 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-8 border border-gray-700/30">
                             <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Aucun commentaire</h3>
-                        <p class="text-gray-400">Soyez le premier à commenter cet OC !</p>
+                        <h3 class="text-2xl font-bold text-white mb-4">Aucun commentaire</h3>
+                        <p class="text-gray-400 text-lg">Soyez le premier à commenter cet OC !</p>
                     </div>
                 <?php else: ?>
                     <?php foreach ($comments as $comment): ?>
-                        <div class="glass rounded-2xl p-8 hover-lift">
+                        <div class="bg-gray-800/30 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/30 hover:border-gray-600/30 transition-all duration-300">
                             <div class="flex items-start space-x-6">
-                                <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-white font-bold shadow-lg">
+                                <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold shadow-xl border-2 border-white/10 flex-shrink-0">
                                     <?= strtoupper(substr($comment['username'], 0, 1)) ?>
                                 </div>
                                 <div class="flex-1">
-                                    <div class="flex items-center space-x-4 mb-3">
-                                        <span class="font-bold text-white text-lg"><?= htmlspecialchars($comment['username']) ?></span>
-                                        <span class="text-gray-400 text-sm"><?= date('d/m/Y à H:i', strtotime($comment['created_at'])) ?></span>
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div class="flex items-center space-x-4">
+                                            <a href="/community/profile/<?= htmlspecialchars($comment['username']) ?>" class="font-bold text-white text-lg hover:text-blue-400 transition-colors">
+                                                <?= htmlspecialchars($comment['username']) ?>
+                                            </a>
+                                            <span class="text-gray-400 text-sm"><?= date('d/m/Y à H:i', strtotime($comment['created_at'])) ?></span>
+                                        </div>
+                                        <?php if (isset($_SESSION['community_user_id']) && $_SESSION['community_user_id'] == $comment['user_id']): ?>
+                                            <button onclick="deleteComment('<?= $comment['id'] ?>', 'oc')" class="text-red-400 hover:text-red-300 transition-colors p-2 rounded-lg hover:bg-red-900/20">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                </svg>
+                                            </button>
+                                        <?php endif; ?>
                                     </div>
-                                    <p class="text-gray-300 leading-relaxed"><?= nl2br(htmlspecialchars($comment['content'])) ?></p>
+                                    <p class="text-gray-300 leading-relaxed text-lg"><?= nl2br(htmlspecialchars($comment['content'])) ?></p>
                                 </div>
                             </div>
                         </div>
@@ -288,6 +309,56 @@ ob_start();
                 <?php endif; ?>
             </div>
         </div>
+        
+        <!-- Actions pour le propriétaire -->
+        <?php if (isset($_SESSION['community_user_id']) && $_SESSION['community_user_id'] == $oc['user_id']): ?>
+            <div class="bg-gradient-to-br from-red-900/20 to-red-800/20 backdrop-blur-xl rounded-3xl border border-red-700/30 p-12 mb-12">
+                <h2 class="text-3xl font-bold text-white mb-8 flex items-center">
+                    <svg class="w-8 h-8 mr-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                    </svg>
+                    Gestion de votre OC
+                </h2>
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <button onclick="editCommunityOC('<?= $oc['id'] ?>')" class="px-8 py-4 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-all duration-300 font-bold">
+                        <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                        </svg>
+                        Modifier
+                    </button>
+                    <button onclick="deleteCommunityOC('<?= $oc['id'] ?>')" class="px-8 py-4 bg-red-600 text-white rounded-2xl hover:bg-red-700 transition-all duration-300 font-bold">
+                        <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                        Supprimer de la communauté
+                    </button>
+                </div>
+            </div>
+        <?php endif; ?>
+        
+        <!-- Actions DTIYS -->
+        <?php if (isset($_SESSION['community_user_id']) && $_SESSION['community_user_id'] != $oc['user_id']): ?>
+            <div class="bg-gradient-to-br from-purple-900/20 to-pink-800/20 backdrop-blur-xl rounded-3xl border border-purple-700/30 p-12 mb-12">
+                <h2 class="text-3xl font-bold text-white mb-8 flex items-center">
+                    <svg class="w-8 h-8 mr-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                    Inspiré par cet OC ?
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <button onclick="createBasedOnOC('<?= $oc['id'] ?>')" class="p-8 bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700/30 hover:border-purple-500/30 transition-all duration-300 text-left">
+                        <h3 class="text-xl font-bold text-white mb-4">Créer un OC de même race</h3>
+                        <p class="text-gray-400 mb-6">Utilisez la race "<?= htmlspecialchars($oc['race']) ?>" pour créer votre propre OC</p>
+                        <div class="text-purple-400 font-medium">→ Créer maintenant</div>
+                    </button>
+                    <button onclick="createDTIYS('<?= $oc['id'] ?>')" class="p-8 bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700/30 hover:border-pink-500/30 transition-all duration-300 text-left">
+                        <h3 class="text-xl font-bold text-white mb-4">DTIYS (Draw This In Your Style)</h3>
+                        <p class="text-gray-400 mb-6">Créez votre propre version de cet OC avec votre style</p>
+                        <div class="text-pink-400 font-medium">→ Commencer le DTIYS</div>
+                    </button>
+                </div>
+            </div>
+        <?php endif; ?>
         
         <!-- OCs liés -->
         <?php if (!empty($related_ocs)): ?>
