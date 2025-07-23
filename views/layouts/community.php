@@ -29,6 +29,9 @@
     </script>
 </head>
 <body class="h-full bg-gradient-to-br from-indigo-50 via-white to-cyan-50 font-electrolize">
+    <!-- Préchargement des scripts -->
+    <script src="../../assets/js/app.js"></script>
+    
     <div class="min-h-screen">
         <!-- Header communautaire -->
         <header class="bg-white shadow-sm border-b border-gray-200">
@@ -107,7 +110,6 @@
         </footer>
     </div>
     
-    <script src="../../assets/js/app.js"></script>
-    <script src="assets/js/community.js"></script>
+    <script src="../../assets/js/community.js"></script>
 </body>
 </html>

@@ -196,16 +196,13 @@ ob_start();
 
 <script>
     window.addEventListener('DOMContentLoaded', function() {
-        // Attendre que les fonctions globales soient disponibles
-        setTimeout(function() {
-            if (checkRacesExist()) {
-                loadRaces();
-                setupForm();
-                document.getElementById('oc-form').style.display = 'block';
-            } else {
-                showNoRacesWarning();
-            }
-        }, 200);
+        if (checkRacesExist()) {
+            loadRaces();
+            setupForm();
+            document.getElementById('oc-form').style.display = 'block';
+        } else {
+            showNoRacesWarning();
+        }
     });
     
     function checkRacesExist() {

@@ -28,6 +28,9 @@
     </script>
 </head>
 <body class="h-full bg-gradient-to-br from-indigo-50 via-white to-cyan-50 font-electrolize">
+    <!-- Préchargement d'ocManager -->
+    <script src="../../assets/js/app.js"></script>
+    
     <div class="min-h-screen">
         <?php if (isset($_SESSION['user_name'])): ?>
             <?php include __DIR__ . '/../partials/header.php'; ?>
@@ -46,91 +49,91 @@
     </div>
     
     <script>
-        // Fonctions globales définies immédiatement
-        // Attendre que app.js soit chargé avant de définir les fonctions globales
-        document.addEventListener('DOMContentLoaded', function() {
-            // Attendre un peu pour que app.js soit complètement chargé
-            setTimeout(function() {
-                window.exportData = function() {
-                    if (window.ocManager) {
-                        window.ocManager.exportData();
-                    }
-                };
-                
-                window.confirmDelete = function(message = 'Êtes-vous sûr de vouloir supprimer cet élément ?') {
-                    return confirm(message);
-                };
-                
-                window.createOC = function(ocData) {
-                    if (window.ocManager) {
-                        return window.ocManager.createOC(ocData);
-                    }
-                    console.error('ocManager not available');
-                    return null;
-                };
-                
-                window.createRace = function(raceData) {
-                    if (window.ocManager) {
-                        return window.ocManager.createRace(raceData);
-                    }
-                    console.error('ocManager not available');
-                    return null;
-                };
-                
-                window.updateOC = function(id, updates) {
-                    if (window.ocManager) {
-                        return window.ocManager.updateOC(id, updates);
-                    }
-                    console.error('ocManager not available');
-                    return null;
-                };
-                
-                window.updateRace = function(id, updates) {
-                    if (window.ocManager) {
-                        return window.ocManager.updateRace(id, updates);
-                    }
-                    return null;
-                };
-                
-                window.deleteOC = function(id) {
-                    if (window.ocManager) {
-                        return window.ocManager.deleteOC(id);
-                    }
-                    return null;
-                };
-                
-                window.deleteRace = function(id) {
-                    if (window.ocManager) {
-                        return window.ocManager.deleteRace(id);
-                    }
-                    return null;
-                };
-                
-                window.getOC = function(id) {
-                    if (window.ocManager) {
-                        return window.ocManager.getOC(id);
-                    }
-                    return null;
-                };
-                
-                window.getRace = function(id) {
-                    if (window.ocManager) {
-                        return window.ocManager.getRace(id);
-                    }
-                    return null;
-                };
-                
-                window.showNotification = function(message, type = 'info') {
-                    if (window.ocManager) {
-                        return window.ocManager.showNotification(message, type);
-                    } else {
-                        alert(message);
-                    }
-                };
-            }, 100);
-        });
+        // Fonctions globales définies immédiatement après le chargement d'app.js
+        window.exportData = function() {
+            if (window.ocManager) {
+                window.ocManager.exportData();
+            } else {
+                console.error('ocManager not available for export');
+            }
+        };
+        
+        window.confirmDelete = function(message = 'Êtes-vous sûr de vouloir supprimer cet élément ?') {
+            return confirm(message);
+        };
+        
+        window.createOC = function(ocData) {
+            if (window.ocManager) {
+                return window.ocManager.createOC(ocData);
+            }
+            console.error('ocManager not available for createOC');
+            return null;
+        };
+        
+        window.createRace = function(raceData) {
+            if (window.ocManager) {
+                return window.ocManager.createRace(raceData);
+            }
+            console.error('ocManager not available for createRace');
+            return null;
+        };
+        
+        window.updateOC = function(id, updates) {
+            if (window.ocManager) {
+                return window.ocManager.updateOC(id, updates);
+            }
+            console.error('ocManager not available for updateOC');
+            return null;
+        };
+        
+        window.updateRace = function(id, updates) {
+            if (window.ocManager) {
+                return window.ocManager.updateRace(id, updates);
+            }
+            console.error('ocManager not available for updateRace');
+            return null;
+        };
+        
+        window.deleteOC = function(id) {
+            if (window.ocManager) {
+                return window.ocManager.deleteOC(id);
+            }
+            console.error('ocManager not available for deleteOC');
+            return null;
+        };
+        
+        window.deleteRace = function(id) {
+            if (window.ocManager) {
+                return window.ocManager.deleteRace(id);
+            }
+            console.error('ocManager not available for deleteRace');
+            return null;
+        };
+        
+        window.getOC = function(id) {
+            if (window.ocManager) {
+                return window.ocManager.getOC(id);
+            }
+            console.error('ocManager not available for getOC');
+            return null;
+        };
+        
+        window.getRace = function(id) {
+            if (window.ocManager) {
+                return window.ocManager.getRace(id);
+            }
+            console.error('ocManager not available for getRace');
+            return null;
+        };
+        
+        window.showNotification = function(message, type = 'info') {
+            if (window.ocManager) {
+                return window.ocManager.showNotification(message, type);
+            } else {
+                alert(message);
+            }
+        };
     </script>
-    <script src="../../assets/js/app.js"></script>
     <?php if (isset($scripts)): ?>
         <?php foreach ($scripts as $script): ?>
             <script src="<?= $script ?>"></script>

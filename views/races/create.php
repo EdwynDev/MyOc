@@ -178,11 +178,8 @@ ob_start();
 
 <script>
     window.addEventListener('DOMContentLoaded', function() {
-        // Attendre que les fonctions globales soient disponibles
-        setTimeout(function() {
-            loadCustomFields();
-            setupForm();
-        }, 200);
+        loadCustomFields();
+        setupForm();
     });
     
     let imageCounter = 0;
