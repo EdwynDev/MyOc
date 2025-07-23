@@ -41,20 +41,6 @@ ob_start();
         
         <div class="bg-white p-6 rounded-lg shadow-lg border hover:shadow-xl transition-all duration-200">
             <div class="flex items-center">
-                <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg flex items-center justify-center">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
-                    </svg>
-                </div>
-                <div class="ml-4">
-                    <p class="text-sm font-medium text-gray-600">Champs personnalisés</p>
-                    <p id="custom-fields-count" class="text-2xl font-bold text-gray-900">0</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="bg-white p-6 rounded-lg shadow-lg border hover:shadow-xl transition-all duration-200">
-            <div class="flex items-center">
                 <div class="w-12 h-12 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-lg flex items-center justify-center">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -179,8 +165,6 @@ ob_start();
         
         document.getElementById('oc-count').textContent = (data.ocs || []).length;
         document.getElementById('race-count').textContent = (data.races || []).length;
-        document.getElementById('custom-fields-count').textContent = 
-            Object.keys(data.custom_fields || {}).length;
         
         const lastSave = localStorage.getItem('last_save');
         if (lastSave) {
