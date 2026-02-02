@@ -6,8 +6,8 @@ class Database {
     
     // Configuration de la base de données
     private $host = 'localhost';
-    private $dbname = 'u316670446_yoc';
-    private $username = 'u316670446_yoc';
+    private $dbname = 'u316670446_oc';
+    private $username = 'u316670446_oc';
     private $password = '6]ls4g8UAXT';
     private $charset = 'utf8mb4';
     
